@@ -2,16 +2,17 @@ name: Hexo Deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
  
 ​permissions​: 
  ​ ​contents​: ​write
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       ​- ​name​: ​Configure Git Credentials
