@@ -1,0 +1,34 @@
+name: Hexo Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v3
+    
+    - name: Setup pandoc
+      uses: nikeee/setup-pandoc@v1
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '>=18'
+
+    - name: Set Git
+      run: |
+        git config user.name github-actions[bot] 
+        git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+    - name: Setup Hexo and dependencies and Deploy
+      run: |
+        npm install hexo-cli -g
+        npm install
+        hexo clean
+        hexo d
