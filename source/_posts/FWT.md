@@ -1,7 +1,7 @@
 ---
 title: 快速沃尔什变换 (FWT)
 date: 2024-05-07 00:00:00
-thumbnail: https://znpdco.github.io/blogimage/2024-05-07-FWT/figure.jpeg
+thumbnail: https://cdn.luogu.com.cn/upload/image_hosting/zzhdk40u.png
 categories: [算法]
 tags: [算法, 原创, 多项式]
 mathjax: true

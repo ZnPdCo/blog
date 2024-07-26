@@ -3,7 +3,7 @@ layout: post
 title: 单纯形算法学习笔记
 categories: [算法]
 tags: [算法, 原创, 数学]
-thumbnail: https://znpdco.github.io/blogimage/2024-05-02-simplex/figure.png
+thumbnail: https://znpdco.github.io/blogimage/2024-05-02-simplex/thumbnail.webp
 date: 2024-05-02 00:00:00
 mathjax: true
 ---
@@ -14,7 +14,7 @@ mathjax: true
 >
 > 这篇文章在 [博客园](https://www.cnblogs.com/znpdco/p/18147653) 的地址。
 >
-> 转载请附上 [原文地址](https://znpdco.github.io/%E7%AE%97%E6%B3%95/2024/05/02/simplex.html)。
+> 转载请附上 [原文地址](https://znpdco.github.io/blog/2024/05/02/simplex/)。
 
 ## 阅读本文你将会知道
 

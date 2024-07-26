@@ -22,7 +22,7 @@ head:
   
   # 社交分享链接
   opengraph: 
-    enable: true
+    enable: false
     type: 
     twitter_card: summary_large_image
     twitter_id: 
@@ -56,10 +56,6 @@ navbar:
       url: /tags/
     - name: 归档
       url: /archives/
-    - name: 友链
-      url: /friends/
-    - name: Page
-      url: /page/
 
   # 导航栏永远显示在屏幕顶端
   # 仅当屏幕宽度不小于 1080 px 时生效
