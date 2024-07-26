@@ -157,7 +157,7 @@ meta:
   thumbnail: 
     enable: true
     relative: false
-    default: https://moe.anosu.top/img/?sort=pc  # 默认缩略图，当页面 `thumbnail` 字段为空时 fallback 至此参数
+    default: https://cdn.luogu.com.cn/upload/image_hosting/zflatz83.png  # 默认缩略图，当页面 `thumbnail` 字段为空时 fallback 至此参数
 
   # 文章过时提醒
   expire: 
@@ -189,7 +189,7 @@ meta:
 # 评论系统
 # ---------------------------------------------------------------
 comments:
-  use: # utterances |  disqus | disqusjs | valine | minivaline | gitalk | gitment | levere | changyan | wildfire
+  use: giscus # utterances |  disqus | disqusjs | valine | minivaline | gitalk | gitment | levere | changyan | wildfire
 
   # utterances
   # Docs: https://utteranc.es/
@@ -259,15 +259,15 @@ comments:
 
   # Giscus
   giscus:
-    repo: 
-    repoId: 
-    category: 
-    categoryId: 
-    mapping: 
-    strict: 
-    position: 
-    theme: 
-    lang: 
+    repo: ZnPdCo/blog
+    repoId: R_kgDOMa--Lg
+    category: Announcements
+    categoryId: DIC_kwDOMa--Ls4ChMbA
+    mapping: pathname
+    strict: 0
+    position: bottom
+    theme: light
+    lang: zh-CN
 
   # Gitalk
   gitalk:
@@ -333,7 +333,7 @@ comments:
 analytics:
   google_site_id:
   gtags_site_id:
-  baidu_site_id: 
+  baidu_site_id: 8c53e0f2b54686993b0e5d57bd182795
   cnzz_site_id: 
   cloudflare_site_id: 
   umami:
@@ -358,12 +358,12 @@ footer:
   statistics: 
 
     # 选择 LeanCloud/busuanzi 为网站计数。如果你完全不想启用，将 `use` 项留空即可
-    use:   # leancloud | busuanzi
+    use: leancloud  # leancloud | busuanzi
 
     # 如果选择使用 LeanCloud，则需完善下面的配置项
     leancloud: 
-      appId: 
-      appKey: 
+      appId: QGAAFBaahLaMvkUXbO64dyon-MdYXbMMI
+      appKey: v7wkDYJg1n8gZzbY9bYqV7W5
       serverURL:   # REST API 服务器地址，LeanCloud 国际版不填
 
     # 全站 UV（Unique Viewers）
@@ -371,7 +371,7 @@ footer:
       enable: true
       before_text: '' # 展示在数据前的内容，支持 HTML
       after_text: Viewers  # 展示在数据后的内容，支持 HTML
-      divider: '&nbsp;&nbsp;&nbsp;|' # 分隔符，HTML 语法支持
+      divider: '　|' # 分隔符，HTML 语法支持
     
     # 全站 PV（Page Views）
     site_pv:
@@ -388,7 +388,7 @@ footer:
 
   # 自定义页脚，支持 markdown
   custom_text: 
-    # - ''
+    - '<script src="/blog/js/switch-giscus-theme.js"></script>'
     # - ''
 
 
@@ -419,7 +419,7 @@ fold:
 
 # 图片点击放大插件
 fancybox: 
-  enable: false
+  enable: true
   auto: false
   
 # 返回顶部
