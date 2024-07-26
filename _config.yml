@@ -104,4 +104,5 @@ theme: cards
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: https://github.com/znpdco/blog.git
+  repo: https://github.com/ZnPdCo/blog.git
+  branch: gh-pages
