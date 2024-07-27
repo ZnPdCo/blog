@@ -1,18 +1,19 @@
 ---
-title: 使用 python 的 subprocess 模块实现多平台的 stdin 交互题对拍
+title: 使用 python 的 subprocess 模块实现多平台的 stdio 交互题对拍
 date: 2024-07-27 17:42:49
-tags: [python, OI]
+tags: [python, OI, 原创]
+thumbnail: https://znpdco.github.io/blogimage/interactive/thumbnail.webp
 categories: [OI, python]
 mathjax: true
 ---
 
-最近苦于 stdin 交互题的对拍，发现网上没有多少相关的文章。我自己处理的方法是把 stdin 交互题改造为函数式交互题。虽然解决了问题，但是还是比较繁琐。
+最近苦于 stdio 交互题的对拍，发现网上没有多少相关的文章。我自己处理的方法是把 stdio 交互题改造为函数式交互题。虽然解决了问题，但是还是比较繁琐。
 
 在此之后，我看到了一篇文章 [交互题本机评测器 - Sshwy's Notes](https://notes.sshwy.name/Interactive-Prob-Judger/)，这是在 linux 下的实现，虽然可以解决问题，但是还是不能在 Windows 下方便地使用。
 
 但是它使用管道通信的方法给了我很大的启发，而 python 的 subprocess 模块提供了一种多平台管道通信的实现方法。
 
-下面是我用 python 的 subprocess 模块实现的 stdin 交互题对拍器：
+下面是我用 python 的 subprocess 模块实现的 stdio 交互题对拍器：
 
 ```python
 import sys
