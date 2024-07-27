@@ -22,7 +22,7 @@ deploy:
 ssh-keygen -t rsa -b 4096 -C "your@email.com"
 ```
 
-把 `id_rsa.pub` 文件内容复制到 Github 项目的 Deploy keys 里，然后把 `id_rsa` 文件内容复制到仓库的的 Secrets 里，命名为 `DEPLOY_KEY`。
+把 `id_rsa.pub` 文件内容复制到 Github 项目的 Deploy keys 里，然后把 `id_rsa` 文件内容复制到仓库的 Secrets 里，命名为 `DEPLOY_KEY`。
 
 接下来在 `.github/workflows` 目录下新建 `deploy.yml` 文件，内容如下：
 
