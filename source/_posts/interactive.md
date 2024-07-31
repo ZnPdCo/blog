@@ -3,7 +3,7 @@ title: 使用 python 的 subprocess 模块实现多平台的 stdio 交互题对�
 date: 2024-07-27 17:42:49
 tags: [python, OI, 原创]
 thumbnail: https://znpdco.github.io/blogimage/interactive/thumbnail.webp
-categories: [OI, python]
+categories: [OI]
 mathjax: true
 ---
 
