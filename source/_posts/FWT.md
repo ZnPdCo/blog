@@ -1269,3 +1269,244 @@ int main() {
 }
 ```
 
+### [「洛谷 P10890」P10890 【烂题杯 Round 1】可持久化糖果树](https://www.luogu.com.cn/problem/P10890)
+
+> 给出 $n$ 个 $k$  维向量 $m$ 元组，$q$ 次询问，每次询问也给出一个 $k$ 维向量 $v$，求多少个 $m$ 元组满足其中任何一个向量与 $v$ 点积为 $0$，所有向量间的运算都在模 $3$ 意义下进行。
+>
+> - $1\le n\le 10^5$，$1\le m\le 4$，$1\le k\le 12$，$0\le q\le 10^6$
+
+所有 $a_{i,j,x}$ 和 $z$ 都可以对 $3$ 取模，所以可以将 $a_{i,j}$ 表示为 $k$ 位的三进制，为了方便，以下所有的运算都是在三进制下进行的。
+
+我们定义 $a\cap b$ 表示在三进制下不进位按位乘，$|x|$ 表示 $x$ 在三进制下的数位和，那么容易发现答案就是以下的式子：
+$$
+\frac{1}{(\omega_3^1-1)^m(\omega_3^2-1)^m}\sum_{i=1}^n\prod_{j=1}^m (\omega_3^1-\omega_3^{|a_{i,j}\cap x|})(\omega_3^2-\omega_3^{|a_{i,j}\cap x|})
+$$
+说明一下正确性，容易发现 $\omega_3$ 以 $3$ 为循环，那么当 $|a_{i,j}\cap x|$ 为 $1$ 或 $2$ 时，都会被 $\omega_3^1$ 或 $\omega_3^2$ 减去，只要这 $m$ 项中有任何一项 $|a_{i,j}\cap x|$ 为 $1$ 或 $2$，那么这个式子就是 $0$。当 $|a_{i,j}\cap x|=0$ 时，式子就是 $(\omega_3^1-1)^m(\omega_3^2-1)^m$，我们在前面除去就好了。
+
+我们推一下里面的式子：
+$$
+\begin{aligned}
+& \prod_{j=1}^m (\omega_3^1-\omega_3^{|a_{i,j}\cap x|})(\omega_3^2-\omega_3^{|a_{i,j}\cap x|}) \\
+=& (\omega_3^1-\omega_3^{|a_{i,1}\cap x|})\cdots(\omega_3^1-\omega_3^{|a_{i,m}\cap x|})(\omega_3^2-\omega_3^{|a_{i,1}\cap x|})\cdots(\omega_3^2-\omega_3^{|a_{i,m}\cap x|}) \\
+=& (\omega_3^1)^m-(\omega_3^1)^{m-1}\sum_{j=1}^m\omega_3^{|a_{i,j}\cap x|}+(\omega_3^1)^{m-2}\sum_{j=1}^m\sum_{k=j+1}^m\omega_3^{|a_{i,j}\cap x|+|a_{i,k}\cap x|}-\cdots+\\
+& (\omega_3^2)^m-(\omega_3^2)^{m-1}\sum_{j=1}^m\omega_3^{|a_{i,j}\cap x|}+ (\omega_3^2)^{m-2}\sum_{j=1}^m\sum_{k=j+1}^m\omega_3^{|a_{i,j}\cap x|+|a_{i,k}\cap x|}-\cdots \\
+\end{aligned}
+$$
+
+可以通过简单的分类讨论发现有：
+$$
+\large \omega_3^{\sum_{i=1}^n|a_i\cap x|}=\omega_3^{|(\oplus_{i=1}^na_i)\cap x|}
+$$
+
+这里我们不予证明。
+
+那么：
+$$
+\begin{aligned}
+& (\omega_3^1)^m-(\omega_3^1)^{m-1}\sum_{j=1}^m\omega_3^{|a_{i,j}\cap x|}+(\omega_3^1)^{m-2}\sum_{j=1}^m\sum_{k=j+1}^m\omega_3^{|a_{i,j}\cap x|+|a_{i,k}\cap x|}-\cdots+\\
+& (\omega_3^2)^m-(\omega_3^2)^{m-1}\sum_{j=1}^m\omega_3^{|a_{i,j}\cap x|}+ (\omega_3^2)^{m-2}\sum_{j=1}^m\sum_{k=j+1}^m\omega_3^{|a_{i,j}\cap x|+|a_{i,k}\cap x|}-\cdots \\
+&= (\omega_3^1)^m-(\omega_3^1)^{m-1}\sum_{j=1}^m\omega_3^{|a_{i,j}\cap x|}+(\omega_3^1)^{m-2}\sum_{j=1}^m\sum_{k=j+1}^m\omega_3^{|(a_{i,j}\oplus a_{i,k})\cap x|}-\cdots+\\
+& (\omega_3^2)^m-(\omega_3^2)^{m-1}\sum_{j=1}^m\omega_3^{|a_{i,j}\cap x|}+ (\omega_3^2)^{m-2}\sum_{j=1}^m\sum_{k=j+1}^m\omega_3^{|(a_{i,j}\oplus a_{i,k})\cap x|}-\cdots \\
+\end{aligned}
+$$
+我们对指数与 $sum$ 有关的式子进行容斥，设 $f_i$ 表示指数为 $|i\cap x|$ 的数的系数，那么容易有：
+$$
+\begin{aligned}
+& (\omega_3^1)^m-(\omega_3^1)^{m-1}\sum_{j=1}^m\omega_3^{|a_{i,j}\cap x|}+(\omega_3^1)^{m-2}\sum_{j=1}^m\sum_{k=j+1}^m\omega_3^{|(a_{i,j}\oplus a_{i,k})\cap x|}-\cdots+\\
+& (\omega_3^2)^m-(\omega_3^2)^{m-1}\sum_{j=1}^m\omega_3^{|a_{i,j}\cap x|}+ (\omega_3^2)^{m-2}\sum_{j=1}^m\sum_{k=j+1}^m\omega_3^{|(a_{i,j}\oplus a_{i,k})\cap x|}-\cdots \\
+=& \sum \omega_3^{|i\cap x|}f_{i} \\
+=& \sum_{|i\cap x|=0} f_{i}+\sum_{|i\cap x|=1} \omega_3^1f_{i}+\sum_{|i\cap x|=2} \omega_3^2f_{i}
+\end{aligned}
+$$
+现在发现它具有 FWT 的样子，我们考虑 3-FWT 的实际意义：
+
+定义 $A_i=\sum_{|i\cap j|=0} a_j+\sum_{|i\cap j|=1} \omega_3^1a_j+\sum_{|i\cap j|=2} \omega_3^2a_j$，容易证明 $A_iB_i=C_i$：
+$$
+\begin{aligned}
+A_iB_i&=(\sum_{|i\cap j|=0} a_j+\sum_{|i\cap j|=1} \omega_3^1a_j+\sum_{|i\cap j|=2} \omega_3^2a_j)(\sum_{|i\cap k|=0} b_k+\sum_{|i\cap k|=1} \omega_3^1b_k+\sum_{|i\cap k|=2} \omega_3^2b_k) \\
+&=(\sum_{|i\cap j|=0}\sum_{|i\cap k|=0} a_{j}b_{k}+\sum_{|i\cap j|=1}\sum_{|j\cap k|=2} a_jb_k+\sum_{|i\cap j|=2}\sum_{|j\cap k|=1} a_{j}b_k)+ \\
+& \omega_3^1(\sum_{|i\cap j|=0}\sum_{|i\cap k|=1} a_{j}b_{k}+\sum_{|i\cap j|=1}\sum_{|j\cap k|=0} a_jb_k+\sum_{|i\cap j|=2}\sum_{|j\cap k|=2} a_{j}b_k)+ \\
+& \omega_3^2(\sum_{|i\cap j|=0}\sum_{|i\cap k|=2} a_{j}b_{k}+\sum_{|i\cap j|=1}\sum_{|j\cap k|=1} a_jb_k+\sum_{|i\cap j|=2}\sum_{|j\cap k|=0} a_{j}b_k) \\
+&=\sum_{|(j\oplus k)\cap i|=0}a_jb_k+\sum_{|(j\oplus k)\cap i|=1}\omega_3^1a_jb_k+\sum_{|(j\oplus k)\cap i|=2}\omega_3^2a_jb_k \\
+&=C_i
+\end{aligned}
+$$
+考虑快速计算 $A_i$，使用分治，假设当前考虑到第 $x$ 位，如果这一位是 $0$，有 $0\cap0=0\cap1=0\cap2=0$；如果这一位是 $1$，有 $1\cap0=0，1\cap1=1，1\cap2=2$；如果这一位是 $2$，有 $2\cap0=0,2\cap1=2,2\cap2=1$。
+
+类似 FWT 地，有：
+$$
+A_i=merge(A_0+A_1+A_2,A_0+\omega_3^1A_1+\omega_3^2A_2,A_0+\omega_3^2A_1+\omega_3^1A_2)
+$$
+同理地得出位矩阵：
+$$
+\begin{bmatrix}
+1 & 1 & 1 \\
+1 & \omega_{3}^1 & \omega_{3}^2 \\
+1 & \omega_{3}^2 & \omega_{3}^4 \\
+\end{bmatrix}
+$$
+这就是 3-FWT 的转移位矩阵，所以我们只需要对容斥后的 $f$ 计算一次 3-FWT 就可以得出答案了。
+
+可持久化容易实现，这里不予说明。
+
+注意到在 $10^9+9$ 下 $3$ 具有单位根，所以我们在 $10^9+9$ 意义下计算就好了。
+
+时间复杂度由容斥与 3-FWT 组合，瓶颈在于容斥。
+
+复杂度：$O(2^{2m}nk+3^{k}\log 3^k)$。
+
+可以做到 $O(3^mn)$，这里不予说明，详见：https://www.luogu.com.cn/article/1d7aiemo。
+
+```cpp
+#include <bits/stdc++.h>
+#define ll long long
+using namespace std;
+namespace IO{
+	const int sz=1<<22;
+	char a[sz+5],b[sz+5],*p1=a,*p2=a,*t=b,p[105];
+	inline char gc(){
+		return p1==p2?(p2=(p1=a)+fread(a,1,sz,stdin),p1==p2?EOF:*p1++):*p1++;
+	}
+	template<class T> void read(T& x){
+		x=0; char c=gc();
+		for(;c<'0'||c>'9';c=gc());
+		for(;c>='0'&&c<='9';c=gc())
+			x=x*10+(c-'0');
+	}
+	inline void flush(){fwrite(b,1,t-b,stdout),t=b; }
+	inline void pc(char x){*t++=x; if(t-b==sz) flush(); }
+	template<class T> void write(T x,char c='\n'){
+		if(x<0) pc('-'), x=-x;
+		if(x==0) pc('0'); int t=0;
+		for(;x;x/=10) p[++t]=x%10+'0';
+		for(;t;--t) pc(p[t]); pc(c);
+	}
+	struct F{~F(){flush();}}f;
+}
+using IO::read;
+using IO::write;
+const ll P = 1e9 + 9;
+const ll N = 1e5 + 10;
+const ll M = 6;
+const ll K = 21;
+ll qpow(ll x, ll y) {
+	if(y == 0) return 1;
+	if(y % 2 == 1) return x * qpow(x, y - 1) % P;
+	ll tmp = qpow(x, y / 2);
+	return tmp * tmp % P;
+}
+const ll G = 13;
+const ll w1 = qpow(G, (P - 1) / 3);
+const ll w2 = qpow(G, (P - 1) / 3 * 2);
+const ll inv3 = qpow(3, P - 2);
+ll tmp1[3], tmp2[3], pw3[K];
+ll num1[K], num2[K];
+ll n, m, k, q, X;
+ll f[1000010];
+ll a[N][M];
+ll ver[1000010];
+ll root;
+struct base3 {
+	int num[K];
+	base3(int x = 0) {
+		memset(num, 0, sizeof num);
+		int len = 0;
+		while(x) {
+			num[++ len] = x % 3;
+			x /= 3;
+		}
+	}
+	friend base3 operator ^(const base3 &x, const base3 &y) {
+		base3 z;
+		for(int i = 1; i < K; i ++) {
+			z.num[i] = (x.num[i] + y.num[i]) % 3;
+		}
+		return z;
+	}
+	int to_int() {
+		int x = 0;
+		for(ll i = 1; i < K; i ++) {
+			x += pw3[i - 1] * num[i];
+		}
+		return x;
+	}
+} b[M];
+ll Change(ll x, ll y, ll z) {
+	ll len = 0;
+	while(x) {
+		num1[++ len] = x % 3;
+		x /= 3;
+	}
+	for(ll i = 1; i <= len; i ++) {
+		if(i == y) num1[i] = (num1[i] * z) % 3;
+		x += pw3[i - 1] * num1[i];
+		num1[i] = 0;
+	}
+	return x;
+}
+void dfs(ll num, base3 x, ll mu) {
+	if(num > 2 * m) {
+		(f[x.to_int()] += mu) %= P;
+		return;
+	}
+	if(num <= m) {
+		dfs(num + 1, x, (mu * w1) % P);
+		dfs(num + 1, x ^ b[num], (P - mu) % P);
+	} else {
+		dfs(num + 1, x, (mu * w2) % P);
+		dfs(num + 1, x ^ b[num - m], (P - mu) % P);
+	}
+}
+void FWT(ll *a, ll type, ll len) {
+	for (ll x = 3; x <= len; x *= 3) {
+		ll k = x / 3;
+		for (ll i = 0; i < len; i += x) {
+			for (ll j = 0; j < k; j ++) {
+				for (ll l = 0; l < 3; l++) tmp1[l] = a[i + j + l * k];
+				if (type == 1) {
+					tmp2[0] = (tmp1[0] + tmp1[1] + tmp1[2]) % P;
+					tmp2[1] = (tmp1[0] + tmp1[1] * w1 + tmp1[2] * w2) % P;
+					tmp2[2] = (tmp1[0] + tmp1[1] * w2 + tmp1[2] * w1) % P;
+				} else {
+					tmp2[0] = (tmp1[0] + tmp1[1] + tmp1[2]) % P;
+					tmp2[1] = (tmp1[0] + tmp1[1] * w2 + tmp1[2] * w1) % P;
+					tmp2[2] = (tmp1[0] + tmp1[1] * w1 + tmp1[2] * w2) % P;
+					for (ll l = 0; l < 3; l++) (tmp2[l] *= inv3) %= P;
+				}
+				for (ll l = 0; l < 3; l++) a[i + j + l * k] = tmp2[l];
+			}
+		}
+	}
+}
+int main() {
+	read(n), read(m), read(k), read(X);
+	pw3[0] = 1;
+	for(int i = 1; i <= k; i ++) {
+		root = root * 3 + 1;
+		pw3[i] = pw3[i - 1] * 3;
+	}
+	for(int i = 1; i <= n; i ++) {
+		for(int j = 1; j <= m; j ++) {
+			for(int x = 1; x <= k; x ++) {
+				ll tmp = (X + X * i + (X ^ (j * x))) % 1000000000;
+				tmp %= 3;
+				a[i][j] += pw3[x - 1] * tmp;
+			}
+			b[j] = base3(a[i][j]);
+		}
+		dfs(1, base3(), 1);
+	}
+	ll inv = qpow(qpow(w1 - 1, m), P - 2) * qpow(qpow(w2 - 1, m), P - 2) % P;
+	FWT(f, 1, pw3[k]);
+	ver[0] = root;
+	ll ans = f[ver[0]] * inv % P;
+	read(q);
+	for(int i = 1; i <= q; i ++) {
+		int x = (X ^ i) % i, y = (X ^ i) % k + 1, z = (X + (X ^ i)) % 3;
+		ver[i] = Change(ver[x], y, z);
+		ans ^= (f[ver[i]] * inv % P);
+	}
+	write(ans);
+}
+```
+
