@@ -47,7 +47,7 @@ $$
 c_i=\sum_{j\cup k=i} a_jb_k
 $$
 
-我们可以构造 $A_i=\sum_{i\cup j=i} a_i$。看看为什么需要这么构造。
+我们可以构造 $A_i=\sum_{i\cup j=i} a_j$。看看为什么需要这么构造。
 
 首先，它满足 $C_i=A_iB_i$：
 
@@ -100,7 +100,7 @@ $$
 c_i=\sum_{j\cap k=i} a_jb_k
 $$
 
-同理构造 $A_i=\sum_{i\cap j=i} a_i$。$C_i=A_iB_i$ 的正确性不证了。
+同理构造 $A_i=\sum_{i\cap j=i} a_j$。$C_i=A_iB_i$ 的正确性不证了。
 
 容易发现，$A_0$ 恰好是当前处理到的二进制位为 $0$ 的子数列，$A_1$ 则是当前处理到的二进制位为 $1$ 的子数列。若当前位为 $1$，则只能取二进制位为 $1$ 的子数列 $A_0$ 才能使得 $i\cap j=i$。而若当前位为 $0$，则两种序列都能取。
 
@@ -615,12 +615,12 @@ $$
 所以我们可以构造：
 
 $$
-A_{i,j}=\sum_{\substack{ {i\cup k=i}\\{\text{popcnt}(j)=k}}} a_i
+A_{i,k}=\sum_{\substack{ {i\cup j=i}\\{\text{popcnt}(j)=k}}} a_j
 $$
 
 可以枚举 $\text{popcnt}$ 的值，分开考虑。
 
-那么求 $C$ 的时候有 $C_{i,j}=\sum_{j=0}^n A_{i,k}B_{i,j-k}$。
+那么求 $C$ 的时候有 $C_{i,k}=\sum_{j=0}^n A_{i,j}B_{i,k-j}$。
 
 然后就可以做了。
 
@@ -1269,7 +1269,7 @@ int main() {
 }
 ```
 
-### [「洛谷 P10890」P10890 【烂题杯 Round 1】可持久化糖果树](https://www.luogu.com.cn/problem/P10890)
+### [「洛谷 P10890」【烂题杯 Round 1】可持久化糖果树](https://www.luogu.com.cn/problem/P10890)
 
 > 给出 $n$ 个 $k$  维向量 $m$ 元组，$q$ 次询问，每次询问也给出一个 $k$ 维向量 $v$，求多少个 $m$ 元组满足其中任何一个向量与 $v$ 点积为 $0$，所有向量间的运算都在模 $3$ 意义下进行。
 >
