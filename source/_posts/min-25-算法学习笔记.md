@@ -1,7 +1,9 @@
 ---
 title: min_25 算法学习笔记
 date: 2024-09-13 16:21:25
-tags: 
+categories: [算法]
+tags: [算法, 原创, 数论]
+mathjax: true
 ---
 
 ## 前言
