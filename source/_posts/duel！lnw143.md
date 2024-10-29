@@ -2,6 +2,7 @@
 title: duel！lnw143
 date: 2024-10-29 21:27:41
 tags: 
+mathjax: true
 ---
 
 Z 为我胜，L 为 lnw 胜。
