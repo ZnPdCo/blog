@@ -1,5 +1,5 @@
 ---
-title: [1 级置顶]duel！
+title: 【1 级置顶】duel！
 date: 2024-10-29 21:27:41
 tags: 
 mathjax: true

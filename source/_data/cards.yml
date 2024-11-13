@@ -153,7 +153,7 @@ meta:
 
   # 文章缩略图
   thumbnail: 
-    enable: true
+    enable: false
     relative: false
     default: https://cdn.luogu.com.cn/upload/image_hosting/zflatz83.png  # 默认缩略图，当页面 `thumbnail` 字段为空时 fallback 至此参数
 
