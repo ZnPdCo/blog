@@ -1,8 +1,9 @@
 ---
-title: duel！
+title: [1 级置顶]duel！
 date: 2024-10-29 21:27:41
 tags: 
 mathjax: true
+top: 1
 ---
 
 Z 为我胜，L 为 lnw 胜。
@@ -418,6 +419,113 @@ int main() {
     solve(1, n, -1);
     for(ull i = 1; i <= n; i ++) {
         printf("%d ", ans[i]);
+    }
+}
+```
+
+## 第 6 场 [Problem - 785E - Codeforces](https://codeforces.com/problemset/problem/785/E) [Z](http://www.ealex.top/duel/duel/8871/)  $\textcolor{green}{2200}$
+
+还是和陌生人打了一把 duel。
+
+可以考虑分块，每个块用树状数组维护权值。然后交换两个数相当于先把它们删掉再添加，互相计算即可。
+
+```
+#include <bits/stdc++.h>
+#define N 200010
+#define ll long long
+using namespace std;
+int n, q, b;
+ll ans;
+int a[N], idx[N];
+int t[500][N];
+int L[500], R[500];
+void upd(int t[], int x, int v) {
+    for(int i = x; i <= n; i += i & -i) t[i] += v;
+}
+int qry(int t[], int x) {
+    int res = 0;
+    for(int i = x; i > 0; i -= i & -i) res += t[i];
+    return res;
+}
+int main() {
+    scanf("%d%d", &n, &q);
+    b = sqrt(n * 17);
+    for(int i = 1; i <= n; i ++) {
+        a[i] = i;
+        idx[i] = (i - 1) / b + 1;
+        if(!L[idx[i]]) L[idx[i]] = i;
+        R[idx[i]] = i;
+    }
+    for(int i = 1; i <= n; i ++) {
+        upd(t[idx[i]], i, 1);
+    }
+    for(int i = 1; i <= q; i ++) {
+        int l, r;
+        scanf("%d%d", &l, &r);
+        if(l == r) {
+            printf("%lld\n", ans);
+            continue;
+        }
+        if(l > r) swap(l, r);
+        for(int j = 1; j < idx[l]; j ++) {
+            ans -= qry(t[j], n) - qry(t[j], a[l]);
+        }
+        for(int j = idx[l] + 1; j <= idx[n]; j ++) {
+            ans -= qry(t[j], a[l]);
+        }
+        for(int j = L[idx[l]]; j < l; j ++) {
+            ans -= (a[j] > a[l]);
+        }
+        for(int j = l + 1; j <= R[idx[l]]; j ++) {
+            ans -= (a[j] < a[l]);
+        }
+        for(int j = 1; j < idx[r]; j ++) {
+            ans -= qry(t[j], n) - qry(t[j], a[r]);
+        }
+        for(int j = idx[r] + 1; j <= idx[n]; j ++) {
+            ans -= qry(t[j], a[r]);
+        }
+        for(int j = L[idx[r]]; j < r; j ++) {
+            ans -= (a[j] > a[r]);
+        }
+        for(int j = r + 1; j <= R[idx[r]]; j ++) {
+            ans -= (a[j] < a[r]);
+        }
+        ans += (a[l] > a[r]);
+
+        upd(t[idx[l]], a[l], -1);
+        upd(t[idx[r]], a[r], -1);
+        swap(a[l], a[r]);
+        upd(t[idx[l]], a[l], 1);
+        upd(t[idx[r]], a[r], 1);
+
+        for(int j = 1; j < idx[l]; j ++) {
+            ans += qry(t[j], n) - qry(t[j], a[l]);
+        }
+        for(int j = idx[l] + 1; j <= idx[n]; j ++) {
+            ans += qry(t[j], a[l]);
+        }
+        for(int j = L[idx[l]]; j < l; j ++) {
+            ans += (a[j] > a[l]);
+        }
+        for(int j = l + 1; j <= R[idx[l]]; j ++) {
+            ans += (a[j] < a[l]);
+        }
+        for(int j = 1; j < idx[r]; j ++) {
+            ans += qry(t[j], n) - qry(t[j], a[r]);
+        }
+        for(int j = idx[r] + 1; j <= idx[n]; j ++) {
+            ans += qry(t[j], a[r]);
+        }
+        for(int j = L[idx[r]]; j < r; j ++) {
+            ans += (a[j] > a[r]);
+        }
+        for(int j = r + 1; j <= R[idx[r]]; j ++) {
+            ans += (a[j] < a[r]);
+        }
+        ans -= (a[l] > a[r]);
+
+        printf("%lld\n", ans);
     }
 }
 ```
