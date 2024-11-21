@@ -530,3 +530,79 @@ int main() {
 }
 ```
 
+## 第 6 场 [Problem - 1765F - Codeforces](https://codeforces.com/problemset/problem/1765/F) [都不会](http://www.ealex.top/duel/duel/9360/)  $\textcolor{red}{2200}$
+
+我填 2000~2200，lnw 填 2200~2500，于是生成了一道 2200 的题。
+
+结果感觉应该有 2700 吧。好难想。
+
+首先考虑恰好选两个的时候 $(x_1,c_1),(x_2,c_2)$，设两个分别取了 $(a_1,a_2)$，希望浓度为 $x$，解一个方程：
+
+$$
+\begin{cases}
+a_1+a_2=1 \\
+x_1a_1+x_2a_2=x
+\end{cases}
+$$
+
+那么发现当 $x=x_1$ 时 $a_1=1,a_2=0$，代价为 $c_1$，当 $x=x_2$ 时 $a_1=0,a_2=1$，代价为 $c_2$。
+
+其实发现代价就是连接 $(x_1,c_1)$ 和 $(x_2,c_2)$ 两个点的一个一次函数。
+
+那么期望值就是这个这个一次函数，与 $x=x_1$ 和 $x=x_2$ 两条直线和 $x$ 轴围成的梯形积起来，也就是：
+
+$$
+\dfrac{(c_1+c_2)(x_1-x_2)}{2}
+$$
+
+![](https://cdn.luogu.com.cn/upload/image_hosting/w0tw7f5a.png)
+
+考虑更多点时，代价就是这些点围成的凸包，那么期望值也是这个凸包与两端垂直于 $x$ 轴的直线与 $x$ 轴围成的图形的面积了。
+
+![](https://cdn.luogu.com.cn/upload/image_hosting/34rnbh39.png)
+
+那么我们可以用 $O(n^3)$ 维护这个凸包。考虑瓶颈是什么，就是我们要记录上一条线的斜率。但是实际上我们发现当有下面这种非凸包的情况时，一定不优（面积不比凸包大）：
+
+![](https://cdn.luogu.com.cn/upload/image_hosting/4xn4tlx8.png)
+
+所以不需要记录上一条线的斜率，dp 最优时就是凸包。
+
+所以有：
+
+$$
+f_i=-w_i+f_j+g(j,i)
+$$
+
+其中 $g(j,i)$ 是 $j$ 到 $i$ 围成的面积。
+
+时间复杂度 $O(n^2)$。
+
+```cpp
+#include <bits/stdc++.h>
+#define int long long
+#define N 5010
+#define db long double
+using namespace std;
+int n, k;
+db f[N], ans;
+struct node {
+    int x, w, c;
+} a[N];
+signed main() {
+    cin >> n >> k;
+    for(int i = 1; i <= n; i ++) {
+        cin >> a[i].x >> a[i].w >> a[i].c;
+    }
+    sort(a + 1, a + n + 1, [](node a, node b) {
+        return a.x < b.x;
+    });
+    for(int i = 1; i <= n; i ++) {
+        f[i] = -a[i].w;
+        for(int j = 1; j < i; j ++) {
+            f[i] = max(f[i], - a[i].w + f[j] + 1.0 * (a[i].x - a[j].x) * (a[i].c + a[j].c) / 200 * k);
+        }
+        ans = max(ans, f[i]);
+    }
+    cout << fixed << setprecision(10) << ans << endl;
+}
+```
