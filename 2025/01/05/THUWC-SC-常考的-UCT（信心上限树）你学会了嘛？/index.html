@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="mask-icon" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>THUWC/SC 常考的 UCT（信心上限树）你学会了嘛？ | ZnPdCo</title>
+
+
+    <meta name="keywords" content="ZnPdCo">
+
+
+
+
+    <!-- OpenGraph -->
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/hljs.css" media="none" >
+        
+    
+
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">ZnPdCo</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/friend/" class="navbar-menu button">友链</a>
+                
+                    <a target="_blank" rel="noopener" href="https://hydro.ac/d/ltoi/" class="navbar-menu button">💩🏆烂题杯</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/friend/" class="dropdown-menu button">友链</a>
+                
+                    <a target="_blank" rel="noopener" href="https://hydro.ac/d/ltoi/" class="dropdown-menu button">💩🏆烂题杯</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        THUWC/SC 常考的 UCT（信心上限树）你学会了嘛？
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2025/01/" class="post-meta__date button">2025-01-05</a>
+        
+ 
+        
+     
+    <span id="leancloud_container_page_pv" hidden>
+        <span class="separate-dot"></span>
+        <span></span>
+        <span id="leancloud_value_page_pv"></span>
+        <span>Views</span>
+    </span>
+
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">免责声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%BC%9A%E4%BA%86%E8%BF%99%E4%B8%AA%E6%88%91%E8%83%BD%E8%8E%B7%E5%BE%97%E4%BB%80%E4%B9%88"><span class="toc-number">2.</span> <span class="toc-text">学会了这个，我能获得什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%BC%88%E9%97%AE%E9%A2%98%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.</span> <span class="toc-text">博弈问题的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alpha-beta-%E6%90%9C%E7%B4%A2"><span class="toc-number">4.</span> <span class="toc-text">alpha-beta 搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alpha-beta-%E5%89%AA%E6%9E%9D%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text">alpha-beta 剪枝的局限性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">蒙特卡洛方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%A0%91%E6%90%9C%E7%B4%A2%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7%E4%B8%8E%E4%BF%A1%E5%BF%83%E4%B8%8A%E9%99%90"><span class="toc-number">7.</span> <span class="toc-text">蒙特卡洛树搜索的局限性与信心上限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%BF%83%E4%B8%8A%E9%99%90%E6%A0%91"><span class="toc-number">8.</span> <span class="toc-text">信心上限树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">9.</span> <span class="toc-text">参考资料</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">文章目录</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">免责声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%A6%E4%BC%9A%E4%BA%86%E8%BF%99%E4%B8%AA%E6%88%91%E8%83%BD%E8%8E%B7%E5%BE%97%E4%BB%80%E4%B9%88"><span class="toc-number">2.</span> <span class="toc-text">学会了这个，我能获得什么？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%9A%E5%BC%88%E9%97%AE%E9%A2%98%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">3.</span> <span class="toc-text">博弈问题的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alpha-beta-%E6%90%9C%E7%B4%A2"><span class="toc-number">4.</span> <span class="toc-text">alpha-beta 搜索</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#alpha-beta-%E5%89%AA%E6%9E%9D%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-number">5.</span> <span class="toc-text">alpha-beta 剪枝的局限性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%96%B9%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">蒙特卡洛方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E6%A0%91%E6%90%9C%E7%B4%A2%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7%E4%B8%8E%E4%BF%A1%E5%BF%83%E4%B8%8A%E9%99%90"><span class="toc-number">7.</span> <span class="toc-text">蒙特卡洛树搜索的局限性与信心上限</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%BF%83%E4%B8%8A%E9%99%90%E6%A0%91"><span class="toc-number">8.</span> <span class="toc-text">信心上限树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">9.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2 id="免责声明">免责声明</h2>
+<ol type="1">
+<li>本文标题仅为形式上的表述，不具有任何实质性含义。无论清华大学（THU）今年是否举行相关考试，均与本文作者无关，作者对此不承担任何责任。</li>
+<li>本文内容仅代表作者个人观点，不代表任何组织、机构或个人的立场。</li>
+<li>本文旨在对
+UCT（信心上限树）算法进行解释与说明，仅供读者参考。文中所述内容不构成任何形式的建议或承诺，读者应自行判断并承担相应的风险。</li>
+<li>作者不对因使用本文内容而产生的任何直接或间接损失承担责任。</li>
+</ol>
+<p>特此声明。</p>
+<h2 id="学会了这个我能获得什么">学会了这个，我能获得什么？</h2>
+<p>你能够通过 THUWC 2024 的 Day2 工程题：<a
+target="_blank" rel="noopener" href="https://www.saiblo.net/game/3">四子棋</a>，</p>
+<p>以及 THUSC 2024 的 Day2 工程题：<a
+target="_blank" rel="noopener" href="https://qoj.ac/problem/2409">wordle</a>。</p>
+<p>UCT 均为这两题的官方正解（讲题人说的），可见近几次来 THU
+非常喜欢在他的营中放 UCT。</p>
+<p><strong>或许</strong>过几周之后这个列表又会更新？</p>
+<h2 id="博弈问题的定义">博弈问题的定义</h2>
+<p>在下文中我们所要解决的博弈问题定义如下：</p>
+<ul>
+<li><strong>双人</strong></li>
+<li><strong>一人一步</strong></li>
+<li><strong>双方信息完备</strong>（博弈双方所得到的信息是一样的，不存在一方能看到，而另一方看不到的情况。）</li>
+<li><strong>零和</strong>（属非合作博弈。
+它是指参与博弈的各方，在严格竞争下，一方的收益必然意味着另一方的
+损失，博弈各方的收益和损失相加总和永远为“零”，故双方不存在合作的可能。
+零和博弈的结果是一方获利而另一方损失，且一方的所得正是另一方的所失，整个社会的利益并不会因此而增加一分。）</li>
+</ul>
+<h2 id="alpha-beta-搜索">alpha-beta 搜索</h2>
+<p>博弈问题可以贪心嘛？</p>
+<p>如何贪心？——极大-极小模型。</p>
+<p>由于博弈是零和的，所以我们建出一颗价值树，树上的节点储存这个点对于我方的价值，有利则非常大，无利则非常小。</p>
+<p>那么每一次则为先选择价值最大的，然后选择价值最小的，然后选择价值最大的，然后选择价值最小的……</p>
+<p>这样显然不对，因为有可能某一步暂时对我方不利的，里面可以走向对我方非常有利的。</p>
+<p>结论：不能贪心。</p>
+<p>博弈问题可以穷举嘛？</p>
+<p>以中国象棋为例：</p>
+<p>时间：总状态数约为<span class="math inline">\(10^{150}\)</span>，假设
+<span class="math inline">\(1\)</span> 微毫秒走一步，约需要 <span
+class="math inline">\(10^{134}\)</span> 年。而宇宙年龄 <span
+class="math inline">\(1.38\times 10^{10}\)</span> 年。</p>
+<p>空间：如果一个原子储存一个状态，需要 <span
+class="math inline">\(10^{100}\)</span> 个地球。</p>
+<p>结论：不可能。</p>
+<p>可以在有限步数内穷举嘛？</p>
+<p>深蓝走一步需要搜索 <span class="math inline">\(12\)</span>
+步，如果全部搜完，时间确实短了很多——需要 <span
+class="math inline">\(17\)</span> 年。</p>
+<p>结论：不可能。</p>
+<p>alpha-beta
+剪枝则为综合了上述两种算法，对于明确无利的一种状态不去选择的算法。</p>
+<p>由于这不是这篇文章的重点，所以一笔带过。</p>
+<h2 id="alpha-beta-剪枝的局限性">alpha-beta 剪枝的局限性</h2>
+<p>alpha-beta 剪枝在围棋上会失效？</p>
+<p>是因为状态多嘛？不是本质原因。</p>
+<p>本质原因是，我们需要对于局面进行估价。</p>
+<p>估价需要：大量的专家知识；知识的统一性问题（围棋怎么走才算好，目前没有定论）；人工整理（人力物力财力）。</p>
+<h2 id="蒙特卡洛方法">蒙特卡洛方法</h2>
+<p><strong>蒲丰投针问题</strong>：设我们有一个以平行且等距木纹铺成的地板（如概述图），随意抛一支长度比木纹之间距离小的针，求针和其中一条木纹相交的概率。
+并以此概率，蒲丰提出的一种计算圆周率的方法——随机投针法。
+这就是<strong>蒲丰投针问题</strong>。</p>
+<p>我们同样可以用在博弈上：</p>
+<ul>
+<li><p>从当前局面的所有可落子点中随机选择一个点落子</p></li>
+<li><p>重复以上过程</p></li>
+<li><p>直到胜负可判断为止</p></li>
+<li><p>经多次模拟后，选择胜率最大的点落子</p></li>
+</ul>
+<p>蒙特卡洛树搜索：</p>
+<ul>
+<li>建出搜索树</li>
+<li>选择：随机选择一个已经搜索过的节点进行搜索</li>
+<li>拓展：随机选择这个节点的下一步</li>
+<li>估价：计算这个节点的权值（随机模拟向下走直到胜负可判断为止），计算收益</li>
+<li>回传：回传收益（每次回传一个节点要将收益乘以 <span
+class="math inline">\(-1\)</span>，因为对后手有利的局面则对于先手无利）</li>
+<li>重复若干次后选择最有利的节点走</li>
+</ul>
+<h2
+id="蒙特卡洛树搜索的局限性与信心上限">蒙特卡洛树搜索的局限性与信心上限</h2>
+<ul>
+<li><p>对尚未充分了解的节点的探索</p></li>
+<li><p>对当前具有较大希望节点的利用</p></li>
+</ul>
+<p>我们可以引入信心上限（UCB，Upper Confidence Bound）一概念来处理。</p>
+<p>定义一个节点的信心上限为： <span class="math display">\[
+I_v=\overline{X_v}+\sqrt{\dfrac{2\ln(T_u)}{T_v}}
+\]</span> 其中 <span class="math inline">\(\overline{X_v}\)</span>
+为节点 <span class="math inline">\(v\)</span> 所有收益的平均值，而 <span
+class="math inline">\(T_v\)</span> 则表示这个节点的访问次数。</p>
+<h2 id="信心上限树">信心上限树</h2>
+<p>将 UCB 算法应用于蒙特卡洛树搜索中，用于选择可落子点：</p>
+<ul>
+<li><p>在选择操作时，节点不是随机选择，而是根据 UCB
+选择信心上限值最大的节点</p></li>
+<li><p>一般使用时，我们会加入一个参数 <span
+class="math inline">\(c\)</span>，调节算法选择探索需求还是选择利用需求：</p></li>
+</ul>
+<p><span class="math display">\[
+I_v=\overline{X_v}+c\sqrt{\dfrac{2\ln(T_u)}{T_v}}
+\]</span></p>
+<p><img
+src="https://cdn.luogu.com.cn/upload/image_hosting/3f7xzd21.png" /></p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li>AdversarialSearch.pdf（THUWC 2024 Day2
+工程题下发文件，很遗憾，我暂时不能将其上传）</li>
+<li>https://blog.csdn.net/u014397729/article/details/27366363</li>
+</ul>
+
+    </div>
+    
+    <div class="post__license">
+        <p>
+            <strong>本文作者：</strong>ZnPdCo
+        </p>
+        <p>
+            <strong>
+                本文链接：
+            </strong>
+            <a href="https://znpdco.fun/2025/01/05/THUWC-SC-%E5%B8%B8%E8%80%83%E7%9A%84-UCT%EF%BC%88%E4%BF%A1%E5%BF%83%E4%B8%8A%E9%99%90%E6%A0%91%EF%BC%89%E4%BD%A0%E5%AD%A6%E4%BC%9A%E4%BA%86%E5%98%9B%EF%BC%9F/">https://znpdco.fun/2025/01/05/THUWC-SC-%E5%B8%B8%E8%80%83%E7%9A%84-UCT%EF%BC%88%E4%BF%A1%E5%BF%83%E4%B8%8A%E9%99%90%E6%A0%91%EF%BC%89%E4%BD%A0%E5%AD%A6%E4%BC%9A%E4%BA%86%E5%98%9B%EF%BC%9F/</a>
+        </p>
+        
+            <strong>
+                <p>本页面的全部内容在 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA
+4.0</a> 和 <a target="_blank" rel="noopener" href="https://github.com/zTrix/sata-license">SATA</a>
+协议之条款下提供，附加条款亦可能应用</p>
+
+            </strong>
+        
+    </div>
+ 
+    <div class="post-footer__meta"><p>更新于 2025-02-11</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2025/01/19/%E6%A0%87%E6%97%A5%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            上一篇
+                        </div>
+                        <div class="nav__title">
+                            【1 级置顶】标日学习笔记
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2025/01/02/2025%E8%AE%AD%E7%BB%83%E8%AE%B0%E5%BD%95/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            下一篇
+                        </div>
+                        <div class="nav__title">
+                            2025训练记录
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+    <div class="post__comments post__with-toc content-card" id="comment">
+        
+    <h4>评论</h4>
+    
+    
+    
+    
+    
+    <div id="giscus_container">
+        <script src="https://giscus.app/client.js"
+                data-repo="ZnPdCo/blog"
+                data-repo-id="R_kgDOMa--Lg"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMa--Ls4ChMbA"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-CN"
+                data-loading="lazy"
+                crossorigin="anonymous" async></script>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    </div>
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="回到顶部" title="回到顶部">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+    
+        <span id="leancloud_container_site_uv" hidden>
+            <span></span>
+            <span id="leancloud_value_site_uv"></span>
+            <span>Viewers</span>
+            
+                <span>　|</span>
+            
+        </span>
+    
+    
+        <span id="leancloud_container_site_pv" hidden>
+            <span></span>
+            <span id="leancloud_value_site_pv"></span>
+            <span>Views</span>
+            
+        </span>
+    
+
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2024&nbsp;-&nbsp;2025 <a href="/">ZnPdCo</a>
+        </p>
+    
+    
+        
+            <script src="/js/switch-giscus-theme.js"></script>
+
+        
+            <script src="/js/domain-name-expired.js"></script>
+
+        
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8c53e0f2b54686993b0e5d57bd182795';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+    <script>
+        (function () {
+            function getRecord(Counter, target) {
+                return new Promise(function (resolve, reject) {
+                    Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+                        .then(response => response.json())
+                        .then(({results}) => {
+                            if (results && results.length > 0) {
+                                var record = results[0];
+                                resolve(record);
+                            } else {
+                                Counter('post', '/classes/Counter', {
+                                        target, time: 0
+                                    })
+                                    .then(response => response.json())
+                                    .then(record => {
+                                        resolve(record);
+                                    }).catch(error => {
+                                        console.error('Failed to create', error);
+                                        reject(error);
+                                    });
+                            }
+                        }).catch(error => {
+                            console.error('LeanCloud Counter Error', error);
+                            reject(error);
+                        });
+                })
+            }
+        
+            function buildIncrement(objectId) {
+                return {
+                    "method": "PUT",
+                    "path": `/1.1/classes/Counter/${ objectId }`,
+                    "body": {
+                        "time": {
+                            '__op': 'Increment',
+                            'amount': 1
+                        }
+                    }
+                }
+            }
+        
+            function increment(Counter, incrArr) {
+                return new Promise(function (resolve, reject) {
+                    Counter('post', '/batch', {
+                        "requests": incrArr
+                    }).then((res) => {
+                        resolve(res);
+                    }).catch(error => {
+                        console.error('Failed to save visitor count', error);
+                        reject(error);
+                    });
+                });
+            }
+        
+            function validUV() {
+                var key = 'LeanCloud_UV_Flag';
+                var flag = localStorage.getItem(key);
+                if (flag) {
+                    if (new Date().getTime() - parseInt(flag) <= 86400000) {
+                        return false;
+                    }
+                }
+                localStorage.setItem(key, new Date().getTime().toString());
+                return true;
+            }
+        
+            function addCount(Counter) {
+                var enableIncr = 'leancloud' === 'leancloud';
+                var getterArr = [];
+                var incrArr = [];
+                var pvCtn = document.querySelector('#leancloud_container_site_pv');
+                if (pvCtn || enableIncr) {
+                    var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+                        incrArr.push(buildIncrement(record.objectId))
+                        var ele = document.querySelector('#leancloud_value_site_pv');
+                        if (ele) {
+                            ele.innerText = record.time + 1;
+                            if (pvCtn) {
+                                pvCtn.style.display = 'inline';
+                            }
+                        }
+                    });
+                    getterArr.push(pvGetter);
+                }
+                var uvCtn = document.querySelector('#leancloud_container_site_uv');
+                if (uvCtn || enableIncr) {
+                    var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+                        var vuv = validUV();
+                        vuv && incrArr.push(buildIncrement(record.objectId))
+                        var ele = document.querySelector('#leancloud_value_site_uv');
+                        if (ele) {
+                            ele.innerText = record.time + (vuv ? 1 : 0);
+                            if (uvCtn) {
+                                uvCtn.style.display = 'inline';
+                            }
+                        }
+                    });
+                    getterArr.push(uvGetter);
+                }
+                if ('true' === 'true') {
+                    var viewCtn = document.querySelector('#leancloud_container_page_pv');
+                    if (viewCtn || enableIncr) {
+                        var target = decodeURI('/2025/01/05/THUWC-SC-%E5%B8%B8%E8%80%83%E7%9A%84-UCT%EF%BC%88%E4%BF%A1%E5%BF%83%E4%B8%8A%E9%99%90%E6%A0%91%EF%BC%89%E4%BD%A0%E5%AD%A6%E4%BC%9A%E4%BA%86%E5%98%9B%EF%BC%9F/');
+                        var viewGetter = getRecord(Counter, target).then((record) => {
+                            incrArr.push(buildIncrement(record.objectId))
+                            if (viewCtn) {
+                                var ele = document.querySelector('#leancloud_value_page_pv');
+                                if (ele) {
+                                    ele.innerText = (record.time || 0) + 1;
+                                    viewCtn.style.display = 'inline';
+                                }
+                            }
+                        });
+                        getterArr.push(viewGetter);
+                    }
+                }
+                if (enableIncr) {
+                    Promise.all(getterArr).then(() => {
+                        incrArr.length > 0 && increment(Counter, incrArr);
+                    })
+                }
+            }
+        
+            var app_id = 'QGAAFBaahLaMvkUXbO64dyon-MdYXbMMI';
+            var app_key = 'v7wkDYJg1n8gZzbY9bYqV7W5';
+            var server_url = '';
+        
+            function fetchData(api_server) {
+                var Counter = (method, url, data) => {
+                    return fetch(`${ api_server }/1.1${ url }`, {
+                        method,
+                        headers: {
+                                'X-LC-Id': app_id,
+                                'X-LC-Key': app_key,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data)
+                    });
+                };
+                addCount(Counter);
+            }
+            var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+            if (api_server) {
+                fetchData(api_server);
+            } else {
+                fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+                    .then(response => response.json())
+                    .then(({api_server}) => {
+                        fetchData('https://' + api_server);
+                    });
+            }
+        })();
+    </script>
+
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('false')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+    
+
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+
+    </body>
+</html>

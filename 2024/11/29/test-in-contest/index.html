@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="mask-icon" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>考场上自测与快速配置Arbiter | ZnPdCo</title>
+
+
+    <meta name="keywords" content="ZnPdCo">
+
+
+
+
+    <!-- OpenGraph -->
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/hljs.css" media="none" >
+        
+    
+
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">ZnPdCo</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/friend/" class="navbar-menu button">友链</a>
+                
+                    <a target="_blank" rel="noopener" href="https://hydro.ac/d/ltoi/" class="navbar-menu button">💩🏆烂题杯</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/friend/" class="dropdown-menu button">友链</a>
+                
+                    <a target="_blank" rel="noopener" href="https://hydro.ac/d/ltoi/" class="dropdown-menu button">💩🏆烂题杯</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        考场上自测与快速配置Arbiter
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2024/11/" class="post-meta__date button">2024-11-29</a>
+        
+ 
+        
+     
+    <span id="leancloud_container_page_pv" hidden>
+        <span class="separate-dot"></span>
+        <span></span>
+        <span id="leancloud_value_page_pv"></span>
+        <span>Views</span>
+    </span>
+
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8B%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E6%89%80%E6%9C%89%E7%A8%8B%E5%BA%8F%E5%BF%85%E9%80%89"><span class="toc-number">1.</span> <span class="toc-text">1.在虚拟机下编译运行所有程序（必选）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-sanitize-%E6%B5%8B-ub%E5%B0%BD%E9%87%8F%E9%80%89"><span class="toc-number">2.</span> <span class="toc-text">使用 sanitize 测 ub（尽量选）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-arbiter-%E6%B5%8B%E8%AF%95%E5%8F%AF%E9%80%89"><span class="toc-number">3.</span> <span class="toc-text">使用 arbiter 测试（可选）</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">文章目录</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8B%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C%E6%89%80%E6%9C%89%E7%A8%8B%E5%BA%8F%E5%BF%85%E9%80%89"><span class="toc-number">1.</span> <span class="toc-text">1.在虚拟机下编译运行所有程序（必选）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-sanitize-%E6%B5%8B-ub%E5%B0%BD%E9%87%8F%E9%80%89"><span class="toc-number">2.</span> <span class="toc-text">使用 sanitize 测 ub（尽量选）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-arbiter-%E6%B5%8B%E8%AF%95%E5%8F%AF%E9%80%89"><span class="toc-number">3.</span> <span class="toc-text">使用 arbiter 测试（可选）</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <h2
+id="在虚拟机下编译运行所有程序必选">1.在虚拟机下编译运行所有程序（必选）</h2>
+<p>在比赛还剩1小时到半小时时，停止写代码（按照规划，应该在前面就把暴力写完了），打开虚拟机进行自测。</p>
+<p>虚拟机打开方式因考场而异，大部分考场配置了拖放功能。但拖放有要领：</p>
+<ol type="1">
+<li><strong>不能拖放到桌面！</strong>会失败。</li>
+<li>打开一个文件夹，<strong>保证这个文件夹窗口置于虚拟机的最上方！</strong>，将整个文件夹拖入虚拟机。</li>
+</ol>
+<p>如果无法拖放，可以尝试将文件复制进去。</p>
+<p>打开终端进行操作。</p>
+<p>使用编译指令（一般来说，是
+<code>g++ ***.cpp -o *** -std=c++14 -O2 -static</code>）将每个文件编译。</p>
+<p>将输入文件重命名为
+<code>***.in</code>（<code>cp ex_***1.in ***.in</code>）。</p>
+<p>运行程序。这里需要测时空的话，可以：</p>
+<pre><code class="hljs plaintext">/bin/time -p -v ./***</code></pre>
+<p><code>Maximum resident set size (kbytes)</code>
+的值就是空间的字节数。</p>
+<p><strong>注意</strong>：这个值是你用多少测多少，不是你开多少测多少，小心！！</p>
+<p>如果你想要测你开多少测多少，可以在码代码时在开头添加
+<code>bool ST;</code> 结尾添加 <code>bool ED;</code>，然后
+<code>cerr &lt;&lt; (&amp;ST-&amp;ED)/1024.0/1024.0 &lt;&lt; endl;</code>。</p>
+<h2 id="使用-sanitize-测-ub尽量选">使用 sanitize 测 ub（尽量选）</h2>
+<p>使用 <code>-fsanitize=undefined,address</code>（开了就不能开
+<code>-static</code>）编译（记不住没关系，打个类似的会提示你的：<code>g++: error: unrecognized command line option ‘-fsaniti’; did you mean ‘-fsanitize=’?</code>）然后运行程序，如果出现越界访问之类的会报错：</p>
+<pre><font color="#CC0000"><b>==6840==ERROR: AddressSanitizer: global-buffer-overflow on address 0x5625875f49f0 at pc 0x5625875eb455 bp 0x7ffd33f7dbf0 sp 0x7ffd33f7dbe0</b></font>
+<font color="#3465A4"><b>WRITE of size 8 at 0x5625875f49f0 thread T0</b></font>
+    #0 0x5625875eb454 in main (/home/noi/players/day1/GD-0001/mod/mod+0x3454)
+    #1 0x7f8187c45082 in __libc_start_main ../csu/libc-start.c:308
+    #2 0x5625875eb2cd in _start (/home/noi/players/day1/GD-0001/mod/mod+0x32cd)
+Address 0x5625875f49f0 is a wild pointer.
+SUMMARY: AddressSanitizer: global-buffer-overflow (/home/noi/players/day1/GD-0001/mod/mod+0x3454) in main
+Shadow bytes around the buggy address:
+  0x0ac530eb68e0: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>
+  0x0ac530eb68f0: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>
+  0x0ac530eb6900: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>
+  0x0ac530eb6910: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>
+  0x0ac530eb6920: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>
+=&gt;0x0ac530eb6930: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>[<font color="#CC0000"><b>f9</b></font>]<font color="#CC0000"><b>f9</b></font>
+  0x0ac530eb6940: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>
+  0x0ac530eb6950: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>
+  0x0ac530eb6960: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>
+  0x0ac530eb6970: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>
+  0x0ac530eb6980: <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font> <font color="#CC0000"><b>f9</b></font>
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       <font color="#CC0000"><b>fa</b></font>
+  Freed heap region:       <font color="#75507B"><b>fd</b></font>
+  Stack left redzone:      <font color="#CC0000"><b>f1</b></font>
+  Stack mid redzone:       <font color="#CC0000"><b>f2</b></font>
+  Stack right redzone:     <font color="#CC0000"><b>f3</b></font>
+  Stack after return:      <font color="#75507B"><b>f5</b></font>
+  Stack use after scope:   <font color="#75507B"><b>f8</b></font>
+  Global redzone:          <font color="#CC0000"><b>f9</b></font>
+  Global init order:       <font color="#06989A"><b>f6</b></font>
+  Poisoned by user:        <font color="#3465A4"><b>f7</b></font>
+  Container overflow:      <font color="#3465A4"><b>fc</b></font>
+  Array cookie:            <font color="#CC0000"><b>ac</b></font>
+  Intra object redzone:    <font color="#C4A000"><b>bb</b></font>
+  ASan internal:           <font color="#C4A000"><b>fe</b></font>
+  Left alloca redzone:     <font color="#3465A4"><b>ca</b></font>
+  Right alloca redzone:    <font color="#3465A4"><b>cb</b></font>
+  Shadow gap:              cc
+==6840==ABORTING
+</pre>
+<h2 id="使用-arbiter-测试可选">使用 arbiter 测试（可选）</h2>
+<p>这个是最后一步，应当在考前熟悉，最后20分钟进行测试。</p>
+<p>arbiter 有几个注意点：</p>
+<ol type="1">
+<li>不会告诉你有什么问题，要自己找；</li>
+<li>不断按保存！</li>
+<li>比较方式不要选择全文比较，按照题目输出来比较，不然有bug；</li>
+<li>你勾选选手的时候要点那个编号不是那个复选框！不然勾不到！</li>
+</ol>
+
+    </div>
+    
+    <div class="post__license">
+        <p>
+            <strong>本文作者：</strong>ZnPdCo
+        </p>
+        <p>
+            <strong>
+                本文链接：
+            </strong>
+            <a href="https://znpdco.fun/2024/11/29/test-in-contest/">https://znpdco.fun/2024/11/29/test-in-contest/</a>
+        </p>
+        
+            <strong>
+                <p>本页面的全部内容在 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA
+4.0</a> 和 <a target="_blank" rel="noopener" href="https://github.com/zTrix/sata-license">SATA</a>
+协议之条款下提供，附加条款亦可能应用</p>
+
+            </strong>
+        
+    </div>
+ 
+    <div class="post-footer__meta"><p>更新于 2025-01-03</p></div> 
+    <div class="post-entry__tags"></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2024/12/21/%E5%BC%80%E5%8F%91%EF%BC%9A%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%B1%A1%E6%9F%93%E8%AF%84%E8%AE%BA%EF%BC%88%E9%99%84%E5%8A%A0%E5%AD%97%E7%AC%A6%EF%BC%8C%E8%B6%85%E5%A4%9A%E6%8D%A2%E8%A1%8C%EF%BC%8C%E8%83%BD%E7%88%AC%E5%88%B0%E6%96%87%E5%AD%97%E4%B8%8A%E7%9A%84%E7%AC%A6%E5%8F%B7%EF%BC%89/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            上一篇
+                        </div>
+                        <div class="nav__title">
+                            开发：如何处理污染评论（附加字符，能爬到文字上的符号）
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2024/10/29/duel%EF%BC%81/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            下一篇
+                        </div>
+                        <div class="nav__title">
+                            【1 级置顶】duel！
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+    <div class="post__comments post__with-toc content-card" id="comment">
+        
+    <h4>评论</h4>
+    
+    
+    
+    
+    
+    <div id="giscus_container">
+        <script src="https://giscus.app/client.js"
+                data-repo="ZnPdCo/blog"
+                data-repo-id="R_kgDOMa--Lg"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMa--Ls4ChMbA"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-CN"
+                data-loading="lazy"
+                crossorigin="anonymous" async></script>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    </div>
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="回到顶部" title="回到顶部">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+    
+        <span id="leancloud_container_site_uv" hidden>
+            <span></span>
+            <span id="leancloud_value_site_uv"></span>
+            <span>Viewers</span>
+            
+                <span>　|</span>
+            
+        </span>
+    
+    
+        <span id="leancloud_container_site_pv" hidden>
+            <span></span>
+            <span id="leancloud_value_site_pv"></span>
+            <span>Views</span>
+            
+        </span>
+    
+
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2024&nbsp;-&nbsp;2025 <a href="/">ZnPdCo</a>
+        </p>
+    
+    
+        
+            <script src="/js/switch-giscus-theme.js"></script>
+
+        
+            <script src="/js/domain-name-expired.js"></script>
+
+        
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8c53e0f2b54686993b0e5d57bd182795';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+    <script>
+        (function () {
+            function getRecord(Counter, target) {
+                return new Promise(function (resolve, reject) {
+                    Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+                        .then(response => response.json())
+                        .then(({results}) => {
+                            if (results && results.length > 0) {
+                                var record = results[0];
+                                resolve(record);
+                            } else {
+                                Counter('post', '/classes/Counter', {
+                                        target, time: 0
+                                    })
+                                    .then(response => response.json())
+                                    .then(record => {
+                                        resolve(record);
+                                    }).catch(error => {
+                                        console.error('Failed to create', error);
+                                        reject(error);
+                                    });
+                            }
+                        }).catch(error => {
+                            console.error('LeanCloud Counter Error', error);
+                            reject(error);
+                        });
+                })
+            }
+        
+            function buildIncrement(objectId) {
+                return {
+                    "method": "PUT",
+                    "path": `/1.1/classes/Counter/${ objectId }`,
+                    "body": {
+                        "time": {
+                            '__op': 'Increment',
+                            'amount': 1
+                        }
+                    }
+                }
+            }
+        
+            function increment(Counter, incrArr) {
+                return new Promise(function (resolve, reject) {
+                    Counter('post', '/batch', {
+                        "requests": incrArr
+                    }).then((res) => {
+                        resolve(res);
+                    }).catch(error => {
+                        console.error('Failed to save visitor count', error);
+                        reject(error);
+                    });
+                });
+            }
+        
+            function validUV() {
+                var key = 'LeanCloud_UV_Flag';
+                var flag = localStorage.getItem(key);
+                if (flag) {
+                    if (new Date().getTime() - parseInt(flag) <= 86400000) {
+                        return false;
+                    }
+                }
+                localStorage.setItem(key, new Date().getTime().toString());
+                return true;
+            }
+        
+            function addCount(Counter) {
+                var enableIncr = 'leancloud' === 'leancloud';
+                var getterArr = [];
+                var incrArr = [];
+                var pvCtn = document.querySelector('#leancloud_container_site_pv');
+                if (pvCtn || enableIncr) {
+                    var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+                        incrArr.push(buildIncrement(record.objectId))
+                        var ele = document.querySelector('#leancloud_value_site_pv');
+                        if (ele) {
+                            ele.innerText = record.time + 1;
+                            if (pvCtn) {
+                                pvCtn.style.display = 'inline';
+                            }
+                        }
+                    });
+                    getterArr.push(pvGetter);
+                }
+                var uvCtn = document.querySelector('#leancloud_container_site_uv');
+                if (uvCtn || enableIncr) {
+                    var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+                        var vuv = validUV();
+                        vuv && incrArr.push(buildIncrement(record.objectId))
+                        var ele = document.querySelector('#leancloud_value_site_uv');
+                        if (ele) {
+                            ele.innerText = record.time + (vuv ? 1 : 0);
+                            if (uvCtn) {
+                                uvCtn.style.display = 'inline';
+                            }
+                        }
+                    });
+                    getterArr.push(uvGetter);
+                }
+                if ('true' === 'true') {
+                    var viewCtn = document.querySelector('#leancloud_container_page_pv');
+                    if (viewCtn || enableIncr) {
+                        var target = decodeURI('/2024/11/29/test-in-contest/');
+                        var viewGetter = getRecord(Counter, target).then((record) => {
+                            incrArr.push(buildIncrement(record.objectId))
+                            if (viewCtn) {
+                                var ele = document.querySelector('#leancloud_value_page_pv');
+                                if (ele) {
+                                    ele.innerText = (record.time || 0) + 1;
+                                    viewCtn.style.display = 'inline';
+                                }
+                            }
+                        });
+                        getterArr.push(viewGetter);
+                    }
+                }
+                if (enableIncr) {
+                    Promise.all(getterArr).then(() => {
+                        incrArr.length > 0 && increment(Counter, incrArr);
+                    })
+                }
+            }
+        
+            var app_id = 'QGAAFBaahLaMvkUXbO64dyon-MdYXbMMI';
+            var app_key = 'v7wkDYJg1n8gZzbY9bYqV7W5';
+            var server_url = '';
+        
+            function fetchData(api_server) {
+                var Counter = (method, url, data) => {
+                    return fetch(`${ api_server }/1.1${ url }`, {
+                        method,
+                        headers: {
+                                'X-LC-Id': app_id,
+                                'X-LC-Key': app_key,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data)
+                    });
+                };
+                addCount(Counter);
+            }
+            var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+            if (api_server) {
+                fetchData(api_server);
+            } else {
+                fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+                    .then(response => response.json())
+                    .then(({api_server}) => {
+                        fetchData('https://' + api_server);
+                    });
+            }
+        })();
+    </script>
+
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('false')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+    
+
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+
+    </body>
+</html>
