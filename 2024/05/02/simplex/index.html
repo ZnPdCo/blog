@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="mask-icon" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>单纯形算法学习笔记 | ZnPdCo</title>
+
+
+    <meta name="keywords" content="算法, 原创, 数学, ZnPdCo">
+
+
+
+
+    <!-- OpenGraph -->
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/hljs.css" media="none" >
+        
+    
+
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">ZnPdCo</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/friend/" class="navbar-menu button">友链</a>
+                
+                    <a target="_blank" rel="noopener" href="https://hydro.ac/d/ltoi/" class="navbar-menu button">💩🏆烂题杯</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/friend/" class="dropdown-menu button">友链</a>
+                
+                    <a target="_blank" rel="noopener" href="https://hydro.ac/d/ltoi/" class="dropdown-menu button">💩🏆烂题杯</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        单纯形算法学习笔记
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2024/05/" class="post-meta__date button">2024-05-02</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E7%AE%97%E6%B3%95/" class="button">算法</a>
+
+ 
+        
+     
+    <span id="leancloud_container_page_pv" hidden>
+        <span class="separate-dot"></span>
+        <span></span>
+        <span id="leancloud_value_page_pv"></span>
+        <span>Views</span>
+    </span>
+
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E6%9C%AC%E6%96%87%E4%BD%A0%E5%B0%86%E4%BC%9A%E7%9F%A5%E9%81%93"><span class="toc-number">1.</span> <span class="toc-text">阅读本文你将会知道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text">线性规划简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%9A%84%E6%A0%87%E5%87%86%E5%BD%A2"><span class="toc-number">2.1.</span> <span class="toc-text">线性规划的标准形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E5%9E%8B%E8%BD%AC%E6%A0%87%E5%87%86%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">一般型转标准型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E"><span class="toc-number">2.3.</span> <span class="toc-text">&lt; 与 ≤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%9A%84%E6%9D%BE%E5%BC%9B%E5%BD%A2"><span class="toc-number">2.4.</span> <span class="toc-text">线性规划的松弛形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%9E%8B%E8%BD%AC%E6%9D%BE%E5%BC%9B%E5%BD%A2"><span class="toc-number">2.5.</span> <span class="toc-text">标准型转松弛形</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%BA%AF%E5%BD%A2%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">单纯形算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8F%AF%E8%A1%8C%E8%A7%A3"><span class="toc-number">3.1.</span> <span class="toc-text">基本可行解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%80%E4%BC%98"><span class="toc-number">3.2.</span> <span class="toc-text">如何判断最优</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">旋转操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%97%8B%E8%BD%AC%E6%9B%B4%E6%96%B0%E8%A7%A3"><span class="toc-number">3.4.</span> <span class="toc-text">如何通过旋转更新解？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%80%E5%8C%96%E4%B8%8E%E5%B8%83%E5%85%B0%E5%BE%B7%E8%A7%84%E5%88%99"><span class="toc-number">3.5.</span> <span class="toc-text">退化与布兰德规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%B8%8D%E5%8F%AF%E8%A1%8C%E8%A7%A3"><span class="toc-number">3.6.</span> <span class="toc-text">基本不可行解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%BA%AF%E5%BD%A2%E7%AE%97%E6%B3%95%E7%9A%84%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89"><span class="toc-number">4.</span> <span class="toc-text">单纯形算法的几何意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%BA%AF%E5%BD%A2%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">单纯形算法的时间复杂度分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98%E6%9C%89%E6%9B%B4%E4%BC%98%E7%9A%84%E5%81%9A%E6%B3%95%E5%90%97"><span class="toc-number">5.1.</span> <span class="toc-text">线性规划问题有更优的做法吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E5%AE%9A%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">对偶定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B9%BA%E6%A8%A1%E7%9F%A9%E9%98%B5"><span class="toc-number">7.</span> <span class="toc-text">全幺模矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">8.</span> <span class="toc-text">例题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#uoj-179%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92"><span class="toc-number">8.1.</span> <span class="toc-text">「UOJ
+#179」线性规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#noi2008%E5%BF%97%E6%84%BF%E8%80%85%E6%8B%9B%E5%8B%9F"><span class="toc-number">8.2.</span> <span class="toc-text">「NOI2008」志愿者招募</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#abc231hminimum-coloring"><span class="toc-number">8.3.</span> <span class="toc-text">「ABC231H」Minimum
+Coloring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shoi2004%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">8.4.</span> <span class="toc-text">「SHOI2004」最小生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cf1430gyet-another-dag-problem"><span class="toc-number">8.5.</span> <span class="toc-text">「CF1430G」Yet
+Another DAG Problem</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">9.</span> <span class="toc-text">参考资料</span></a></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">文章目录</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E6%9C%AC%E6%96%87%E4%BD%A0%E5%B0%86%E4%BC%9A%E7%9F%A5%E9%81%93"><span class="toc-number">1.</span> <span class="toc-text">阅读本文你将会知道</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%AE%80%E4%BB%8B"><span class="toc-number">2.</span> <span class="toc-text">线性规划简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%9A%84%E6%A0%87%E5%87%86%E5%BD%A2"><span class="toc-number">2.1.</span> <span class="toc-text">线性规划的标准形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E8%88%AC%E5%9E%8B%E8%BD%AC%E6%A0%87%E5%87%86%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">一般型转标准型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8E"><span class="toc-number">2.3.</span> <span class="toc-text">&lt; 与 ≤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E7%9A%84%E6%9D%BE%E5%BC%9B%E5%BD%A2"><span class="toc-number">2.4.</span> <span class="toc-text">线性规划的松弛形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E5%9E%8B%E8%BD%AC%E6%9D%BE%E5%BC%9B%E5%BD%A2"><span class="toc-number">2.5.</span> <span class="toc-text">标准型转松弛形</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%BA%AF%E5%BD%A2%E7%AE%97%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">单纯形算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%8F%AF%E8%A1%8C%E8%A7%A3"><span class="toc-number">3.1.</span> <span class="toc-text">基本可行解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E6%9C%80%E4%BC%98"><span class="toc-number">3.2.</span> <span class="toc-text">如何判断最优</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%8B%E8%BD%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">3.3.</span> <span class="toc-text">旋转操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87%E6%97%8B%E8%BD%AC%E6%9B%B4%E6%96%B0%E8%A7%A3"><span class="toc-number">3.4.</span> <span class="toc-text">如何通过旋转更新解？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%80%E5%8C%96%E4%B8%8E%E5%B8%83%E5%85%B0%E5%BE%B7%E8%A7%84%E5%88%99"><span class="toc-number">3.5.</span> <span class="toc-text">退化与布兰德规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E4%B8%8D%E5%8F%AF%E8%A1%8C%E8%A7%A3"><span class="toc-number">3.6.</span> <span class="toc-text">基本不可行解</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%BA%AF%E5%BD%A2%E7%AE%97%E6%B3%95%E7%9A%84%E5%87%A0%E4%BD%95%E6%84%8F%E4%B9%89"><span class="toc-number">4.</span> <span class="toc-text">单纯形算法的几何意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%95%E7%BA%AF%E5%BD%A2%E7%AE%97%E6%B3%95%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-number">5.</span> <span class="toc-text">单纯形算法的时间复杂度分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92%E9%97%AE%E9%A2%98%E6%9C%89%E6%9B%B4%E4%BC%98%E7%9A%84%E5%81%9A%E6%B3%95%E5%90%97"><span class="toc-number">5.1.</span> <span class="toc-text">线性规划问题有更优的做法吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%81%B6%E5%AE%9A%E7%90%86"><span class="toc-number">6.</span> <span class="toc-text">对偶定理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B9%BA%E6%A8%A1%E7%9F%A9%E9%98%B5"><span class="toc-number">7.</span> <span class="toc-text">全幺模矩阵</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">8.</span> <span class="toc-text">例题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#uoj-179%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92"><span class="toc-number">8.1.</span> <span class="toc-text">「UOJ
+#179」线性规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#noi2008%E5%BF%97%E6%84%BF%E8%80%85%E6%8B%9B%E5%8B%9F"><span class="toc-number">8.2.</span> <span class="toc-text">「NOI2008」志愿者招募</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#abc231hminimum-coloring"><span class="toc-number">8.3.</span> <span class="toc-text">「ABC231H」Minimum
+Coloring</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#shoi2004%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-number">8.4.</span> <span class="toc-text">「SHOI2004」最小生成树</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cf1430gyet-another-dag-problem"><span class="toc-number">8.5.</span> <span class="toc-text">「CF1430G」Yet
+Another DAG Problem</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">9.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <blockquote>
+<p>开始前的一点碎碎念：这篇文章原本是在 4 月 20 日写的，然后就经历了
+gitee 爆炸导致博客园样式不能用，我就在 github
+上建立了这个博客，把它转存到这里了。</p>
+<p>由于这里的 markdown 较为严格，应该不会把博客园搬过来了……</p>
+<p>这篇文章在 <a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/znpdco/p/18147653">博客园</a> 的地址。</p>
+<p>转载请附上 <a
+target="_blank" rel="noopener" href="https://znpdco.github.io/blog/2024/05/02/simplex/">原文地址</a>。</p>
+</blockquote>
+<h2 id="阅读本文你将会知道">阅读本文你将会知道</h2>
+<ul>
+<li>线性规划与单纯形算法</li>
+<li>单纯形算法时间复杂度分析</li>
+<li>单纯形 C++ 代码实现</li>
+<li>单纯形算法在算法题目中的运用</li>
+</ul>
+<h2 id="线性规划简介">线性规划简介</h2>
+<p>首先引入机床厂问题：</p>
+<blockquote>
+<p>某机床厂生产甲、乙两种机床，每台销售后的利润分别为 <span
+class="math inline">\(4000\)</span> 元与 <span
+class="math inline">\(3000\)</span> 元。 生产甲机床需用 <span
+class="math inline">\(A\)</span>、<span class="math inline">\(B\)</span>
+机器加工，加工时间分别为每台 <span class="math inline">\(2\)</span>
+小时和 <span class="math inline">\(1\)</span> 小时；生产乙机床需用 <span
+class="math inline">\(A\)</span>、<span
+class="math inline">\(B\)</span>、<span class="math inline">\(C\)</span>
+三种机器加工，加工时间为每台各一小时。若每天可用于加工的机器时数分别为
+<span class="math inline">\(A\)</span> 机器 <span
+class="math inline">\(10\)</span> 小时、<span
+class="math inline">\(B\)</span> 机器 <span
+class="math inline">\(8\)</span> 小时和 <span
+class="math inline">\(C\)</span> 机器 <span
+class="math inline">\(7\)</span>
+小时，问该厂每天应生产甲、乙机床各几台，才能使该天的总利润最大？</p>
+</blockquote>
+<p>上述问题的数学模型：设该厂生产 <span
+class="math inline">\(x_1\)</span> 台甲机床和 <span
+class="math inline">\(x_2\)</span> 台乙机床时总利润最大，则 <span
+class="math inline">\(x_1\)</span>、<span
+class="math inline">\(x_2\)</span> 应满足：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max z=4x_1+3x_2 \\
+&amp; \text{s.t.}\begin{cases}
+2x_1+x_2\le10 &amp; (A\ 机器)\\
+x_1+x_2\le8 &amp; (B\ 机器)\\
+x_2\le7 &amp; (C\ 机器)\\
+x_1,x_2\ge0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>这里变量 <span class="math inline">\(x_1\)</span>、<span
+class="math inline">\(x_2\)</span>
+称之为<strong>决策变量</strong>，上面的最大式被称为问题的<strong>目标函数</strong>，下面约束条件中的几个不等式是问题的<strong>约束条件</strong>，记为
+<span class="math inline">\(\text{s.t.}\)</span>（即 subject
+to）。由于上面的目标函数及约束条件均为线性函数，故被称为线性规划问题。</p>
+<h3 id="线性规划的标准形">线性规划的标准形</h3>
+<p>线性规划的标准形式如下：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max z = \sum_{j = 1}^{n}c_jx_j \\
+&amp; \text{s.t}\begin{cases}  
+\displaystyle \sum_{j = 1}^{n}a_{ij}x_j \le b_i\\
+x_j\ge0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<h3 id="一般型转标准型">一般型转标准型</h3>
+<ul>
+<li>如果题目要求最小值，那么可以把目标函数的系数均乘上 <span
+class="math inline">\(-1\)</span> 转换为最大值；</li>
+<li>如果约束为 <span class="math inline">\(ax=b\)</span>，那么转换为
+<span class="math inline">\(ax\le b\)</span> 和 <span
+class="math inline">\(ax\ge b\)</span> 两个约束；</li>
+<li>如果约束为 <span class="math inline">\(ax\ge
+b\)</span>，该约束的系数均乘上 <span class="math inline">\(-1\)</span>
+就可以变成 <span class="math inline">\(-ax\le-b\)</span>；</li>
+<li>如果对 <span class="math inline">\(x\)</span>
+的值域没有要求，那么可以用 <span
+class="math inline">\(x&#39;-x&#39;&#39;\)</span> 替代 <span
+class="math inline">\(x\)</span>，其中 <span
+class="math inline">\(x&#39;,x&#39;&#39;\ge0\)</span>；</li>
+<li>其它情况读者可以自行尝试。</li>
+</ul>
+<h3 id="与">&lt; 与 ≤</h3>
+<p>那么有人可能要问了，为什么不能将 <span
+class="math inline">\(x&lt;1\)</span> 的一般型转换为标准型呢？</p>
+<p>举个例子：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max z = x_1 \\
+&amp; x_1&lt;1
+\end{aligned}
+\]</span></p>
+<p>发现是无解的。</p>
+<h3 id="线性规划的松弛形">线性规划的松弛形</h3>
+<p>因为不等式处理起来不如等式方便，所以我们定义松弛型：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max z = \sum_{j = 1}^{n}c_jx_j \\
+&amp; \text{s.t}\begin{cases}  
+\displaystyle \sum_{j = 1}^{n}a_{ij}x_j \textcolor{red}{=} b_i\\
+x_j\ge0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<h3 id="标准型转松弛形">标准型转松弛形</h3>
+<p>考虑加入辅助变量 <span class="math inline">\(x_{n+1}\sim
+x_{n+m}\)</span>，如下：</p>
+<p><span class="math display">\[
+\sum_{j = 1}^{n}a_{ij}x_j \le b_i \Rightarrow x_{n+i}+\sum_{j =
+1}^{n}a_{ij}x_j = b_i\ (x_{n+i}\ge0)
+\]</span></p>
+<p>那么就有：</p>
+<p><span class="math display">\[
+\sum_{j = 1}^{n}a_{ij}x_j \le b_i \Rightarrow x_{n+i} = b_i-(\sum_{j =
+1}^{n}a_{ij}x_j)
+\]</span></p>
+<p>以机床厂问题为例：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max z=4x_1+3x_2 \\
+&amp; \text{s.t.}\begin{cases}
+2x_1+x_2\le10 \\
+x_1+x_2\le8 \\
+x_2\le7 \\
+x_1,x_2\ge0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>可以被转换成：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max -z=0-(4x_1+3x_2) \\
+&amp; \text{s.t.}\begin{cases}
+x_3=10-(2x_1+x_2) \\
+x_4=8-(x_1+x_2) \\
+x_5=7-(x_2) \\
+x_1,x_2,x_3,x_4,x_5\ge0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>其中，<span class="math inline">\(x_3\sim x_5\)</span>
+是辅助变量。我们给它们起一个名字，叫做<strong>基本变量</strong>。同理，<span
+class="math inline">\(x_1\sim x_2\)</span>
+就是<strong>非基本变量</strong>。</p>
+<p>也就是说，<span class="math inline">\(x_{1}\sim x_n\)</span>
+为非基本变量，<span class="math inline">\(x_{n+1}\sim x_{n+m}\)</span>
+为基本变量。</p>
+<h2 id="单纯形算法">单纯形算法</h2>
+<p>我们接下来就会介绍单纯形算法——一个求解线性规划的经典方法。</p>
+<p>它有三步：</p>
+<ol type="1">
+<li>找到一个初始的基本可行解；</li>
+<li>不断的进行旋转（pivot）操作；</li>
+<li>重复 2 直到结果最优。</li>
+</ol>
+<p>我们以上面的线性规划松弛型为例子（此后，我们会省略变量均大于等于
+<span class="math inline">\(0\)</span> 这一要求，请读者自行理解）：</p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; 0 &amp; - &amp; ( &amp; 4x_1 &amp; + &amp; 3x_2 &amp; )
+\\
+x_3 &amp; = &amp; 10 &amp; - &amp; ( &amp; 2x_1 &amp; + &amp; x_2 &amp;
+) \\
+x_4 &amp; = &amp; 8 &amp; - &amp; ( &amp; x_1 &amp; + &amp; x_2 &amp; )
+\\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp;  &amp;  &amp; x_2 &amp; ) \\
+\end{array}
+\]</span></p>
+<h3 id="基本可行解">基本可行解</h3>
+<p>此时我们要进行第一步，找到一个<strong>基本可行解</strong>。</p>
+<p>所谓基本可行解，就是找到一组<strong>基本变量的取值</strong>，使得其满足题目要求。</p>
+<p>我们假设非基本变量取值都是 <span
+class="math inline">\(0\)</span>，以此得到基本变量的取值，然后容易发现，<span
+class="math inline">\(x_1=0,x_2=0,x_3=10,x_4=8,x_5=7,-z=0\)</span>。</p>
+<p>发现它们都是满足 <span
+class="math inline">\(x_1,x_2,x_3,x_4,x_5\ge0\)</span>
+的要求的。所以这是基本可行解。</p>
+<p>当然，也存在不合法的初始情况，称为基本不可行解，这一点我们后面再说。</p>
+<h3 id="如何判断最优">如何判断最优</h3>
+<p>我们知道，目标函数可以由非基本变量得出：</p>
+<p><span class="math display">\[
+z=\sum_{j = 1}^{n}c_jx_j
+\]</span></p>
+<p>当达到最优解时，我们发现 <span class="math inline">\(c_j\)</span>
+必定都小于等于 <span class="math inline">\(0\)</span>。</p>
+<p>为什么，因为若 <span class="math inline">\(c_j\)</span> 大于 <span
+class="math inline">\(0\)</span>，那么 <span
+class="math inline">\(z\)</span> 的值则会与 <span
+class="math inline">\(x_j\)</span> 成正比例关系，若 <span
+class="math inline">\(x_j\)</span> 变大，<span
+class="math inline">\(z\)</span> 也会变大，所以当前并不是最优解。</p>
+<p>我们发现，当前的 <span
+class="math inline">\(z=4x_1+3x_2\)</span>，都是大于 <span
+class="math inline">\(0\)</span> 的系数，不是最优值。</p>
+<p>所以，当我们发现 <span class="math inline">\(z\)</span>
+的系数全部都小于等于 <span class="math inline">\(0\)</span>
+时，此时答案最优！</p>
+<p>如何修改目标函数的系数呢？我们可以通过<strong>旋转操作</strong>。</p>
+<h3 id="旋转操作">旋转操作</h3>
+<p>所谓旋转操作，就是<strong>将非基本变量与基本变量交换</strong>的操作。</p>
+<p>可能有点拗口，举个例子：</p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; 0 &amp; - &amp; ( &amp; 4x_1 &amp; + &amp; 3x_2 &amp; )
+\\
+x_3 &amp; = &amp; 10 &amp; - &amp; ( &amp; 2x_1 &amp; + &amp; x_2 &amp;
+) \\
+x_4 &amp; = &amp; 8 &amp; - &amp; ( &amp; x_1 &amp; + &amp; x_2 &amp; )
+\\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp;  &amp;  &amp; x_2 &amp; ) \\
+\end{array}
+\]</span></p>
+<p>将 <span class="math inline">\(x_1\)</span> 与 <span
+class="math inline">\(x_3\)</span> 交换，我们就用 <span
+class="math inline">\(x_3\)</span> 来表示 <span
+class="math inline">\(x_1\)</span>：</p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; 0 &amp; - &amp; ( &amp; 4x_1 &amp; + &amp; 3x_2 &amp; )
+\\
+\frac{1}{2}x_3 &amp; = &amp; 5 &amp; - &amp; ( &amp; x_1 &amp; + &amp;
+\frac{1}{2}x_2 &amp; ) \\
+x_4 &amp; = &amp; 8 &amp; - &amp; ( &amp; x_1 &amp; + &amp; x_2 &amp; )
+\\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp;  &amp;  &amp; x_2 &amp; ) \\
+\end{array}
+\]</span></p>
+<p><span class="math display">\[
+\Downarrow
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; 0 &amp; - &amp; ( &amp; 4x_1 &amp; + &amp; 3x_2 &amp; )
+\\
+x_1 &amp; = &amp; 5 &amp; - &amp; ( &amp;  &amp;  &amp; \frac{1}{2}x_2
+&amp; + &amp; \frac{1}{2}x_3 &amp; ) \\
+x_4 &amp; = &amp; 8 &amp; - &amp; ( &amp; x_1 &amp; + &amp; x_2 &amp; )
+\\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp;  &amp;  &amp; x_2 &amp; ) \\
+\end{array}
+\]</span></p>
+<p>然后把 <span class="math inline">\(x_1\)</span> 当作基本变量，将
+<span class="math inline">\(x_3\)</span> 当作非基本变量，把 <span
+class="math inline">\(x_1\)</span> 代入其它式子：</p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; 0 &amp; - &amp; ( &amp;
+4(5-\frac{1}{2}x_2-\frac{1}{2}x_3) &amp; + &amp; 3x_2 &amp; ) \\
+x_1 &amp; = &amp; 5 &amp; - &amp; ( &amp;  &amp;  &amp; \frac{1}{2}x_2
+&amp; + &amp; \frac{1}{2}x_3 &amp; ) \\
+x_4 &amp; = &amp; 8 &amp; - &amp; ( &amp;
+(5-\frac{1}{2}x_2-\frac{1}{2}x_3) &amp; + &amp; x_2 &amp; ) \\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp;  &amp;  &amp; x_2 &amp; ) \\
+\end{array}
+\]</span></p>
+<p><span class="math display">\[
+\Downarrow
+\]</span></p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; -20 &amp; - &amp; ( &amp; x_2 &amp; + &amp; -2x_3 &amp;
+) \\
+x_1 &amp; = &amp; 5 &amp; - &amp; ( &amp; \frac{1}{2}x_2 &amp; + &amp;
+\frac{1}{2}x_3 &amp; ) \\
+x_4 &amp; = &amp; 3 &amp; - &amp; ( &amp; \frac{1}{2}x_2 &amp; + &amp;
+-\frac{1}{2}x_3 &amp; ) \\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp; x_2 &amp; ) \\
+\end{array}
+\]</span></p>
+<p>因为交换了，我们把 <span class="math inline">\(x_3\)</span> 移动到
+<span class="math inline">\(x_1\)</span>
+原本那一列，看看和原式子有什么不同：</p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; -20 &amp; - &amp; ( &amp; -2x_3 &amp; + &amp; x_2 &amp;
+) \\
+x_1 &amp; = &amp; 5 &amp; - &amp; ( &amp; \frac{1}{2}x_3 &amp; + &amp;
+\frac{1}{2}x_2 &amp; ) \\
+x_4 &amp; = &amp; 3 &amp; - &amp; ( &amp; -\frac{1}{2}x_3 &amp; + &amp;
+\frac{1}{2}x_2 &amp; ) \\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp; &amp; &amp; x_2 &amp; ) \\
+\end{array}
+\]</span></p>
+<p>比较一下：</p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; 0 &amp; - &amp; ( &amp; 4x_1 &amp; + &amp; 3x_2 &amp; )
+\\
+x_3 &amp; = &amp; 10 &amp; - &amp; ( &amp; 2x_1 &amp; + &amp; x_2 &amp;
+) \\
+x_4 &amp; = &amp; 8 &amp; - &amp; ( &amp; x_1 &amp; + &amp; x_2 &amp; )
+\\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp;  &amp;  &amp; x_2 &amp; ) \\
+\end{array}
+\quad\Rightarrow\quad
+\begin{array}{}
+-z &amp; = &amp; -20 &amp; - &amp; ( &amp; -2x_3 &amp; + &amp; x_2 &amp;
+) \\
+x_1 &amp; = &amp; 5 &amp; - &amp; ( &amp; \frac{1}{2}x_3 &amp; + &amp;
+\frac{1}{2}x_2 &amp; ) \\
+x_4 &amp; = &amp; 3 &amp; - &amp; ( &amp; -\frac{1}{2}x_3 &amp; + &amp;
+\frac{1}{2}x_2 &amp; ) \\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp; &amp; &amp; x_2 &amp; ) \\
+\end{array}
+\]</span></p>
+<p>我们发现，对于将基本变量 <span class="math inline">\(x_3\)</span>
+与非基本变量 <span class="math inline">\(x_1\)</span>
+交换的操作，<strong>原本</strong>的 <span
+class="math inline">\(x_3\)</span> 这一行（第二行）除去 <span
+class="math inline">\(x_1\)</span> 自己，其它的系数都除以了 <span
+class="math inline">\(x_1\)</span> 的系数 <span
+class="math inline">\(2\)</span>，而 <span
+class="math inline">\(x_1\)</span> 自己则是因为与 <span
+class="math inline">\(x_3\)</span> 交换变成了 <span
+class="math inline">\(x_3\)</span> 的系数（也就是 <span
+class="math inline">\(1\)</span>）之后才除以了 <span
+class="math inline">\(x_1\)</span> 原本的系数。</p>
+<p>仔细观察其它列的变换，我们发现它们都减去了自己原本 <span
+class="math inline">\(x_1\)</span> 系数倍的 <span
+class="math inline">\(x_3\)</span>
+这一行的值，比如对于第一行的第一项，它减去了原本 <span
+class="math inline">\(x_1\)</span> 的系数（也就是 <span
+class="math inline">\(4\)</span>）乘以第二行的第一项 <span
+class="math inline">\(5\)</span>（注意是更新后的）也就是减去了 <span
+class="math inline">\(20\)</span>；比如对于第一行的第二项，它自己先是变成了
+<span class="math inline">\(x_3\)</span> 的系数 <span
+class="math inline">\(0\)</span>，再减去了原本 <span
+class="math inline">\(x_1\)</span> 的系数（也就是 <span
+class="math inline">\(4\)</span>）乘以第二行的第二项 <span
+class="math inline">\(\frac{1}{2}\)</span>（注意也是更新后的）也就是减去了
+<span class="math inline">\(2\)</span>。</p>
+<hr />
+<p>没有理解没有关系，我们换个角度：</p>
+<p>我们以矩阵的形式观察，首先可以将这原本的松弛型式子的系数转换为矩阵（定义矩阵下标从
+<span class="math inline">\(0\)</span>
+开始，矩阵右边多出来的三列就是基本变量的系数，我们将基本变量标红）：</p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; 0 &amp; - &amp; ( &amp; 4x_1 &amp; + &amp; 3x_2 &amp; )
+\\
+x_3 &amp; = &amp; 10 &amp; - &amp; ( &amp; 2x_1 &amp; + &amp; x_2 &amp;
+) \\
+x_4 &amp; = &amp; 8 &amp; - &amp; ( &amp; x_1 &amp; + &amp; x_2 &amp; )
+\\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp;  &amp;  &amp; x_2 &amp; ) \\
+\end{array}
+\quad\Rightarrow\quad
+\begin{pmatrix}
+\text{常数} &amp; x_1 &amp; x_2 &amp; \textcolor{red}{x_3} &amp;
+\textcolor{red}{x_4} &amp; \textcolor{red}{x_5} \\
+0 &amp; 4 &amp; 3 &amp; 0 &amp; 0 &amp; 0 \\
+10 &amp; 2 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+8 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+7 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>我们进行换元操作时把 <span class="math inline">\(x_1\)</span> 与
+<span class="math inline">\(x_3\)</span> 交换，<span
+class="math inline">\(x_1\)</span> 变成基本变量，<span
+class="math inline">\(x_3\)</span> 变成非基本变量：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+\text{常数} &amp; \textcolor{red}{x_1} &amp; x_2 &amp; x_3 &amp;
+\textcolor{red}{x_4} &amp; \textcolor{red}{x_5} \\
+0 &amp; 4 &amp; 3 &amp; 0 &amp; 0 &amp; 0 \\
+10 &amp; 2 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+8 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+7 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>同时我们对第二行进行处理以保证基本变量系数均为 <span
+class="math inline">\(1\)</span>：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+\text{常数} &amp; \textcolor{red}{x_1} &amp; x_2 &amp; x_3 &amp;
+\textcolor{red}{x_4} &amp; \textcolor{red}{x_5} \\
+0 &amp; 4 &amp; 3 &amp; 0 &amp; 0 &amp; 0 \\
+5 &amp; 1 &amp; \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; 0 \\
+8 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+7 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>我们此时需要将其他行原本的 <span class="math inline">\(x_1\)</span>
+系数化为 <span
+class="math inline">\(0\)</span>，实际上就是将每一项都减去这一行原本
+<span class="math inline">\(x_1\)</span>
+系数倍的第二行，同时因为其他行的 <span
+class="math inline">\(x_3\)</span> 系数都是 <span
+class="math inline">\(0\)</span>，所以需要替换：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+\text{常数} &amp; \textcolor{red}{x_1} &amp; x_2 &amp; x_3 &amp;
+\textcolor{red}{x_4} &amp; \textcolor{red}{x_5} \\
+0-4\times5 &amp; 0 &amp; 3-4\times\frac{1}{2} &amp; 0-4\times\frac{1}{2}
+&amp; 0 &amp; 0 \\
+5 &amp; 1 &amp; \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; 0 \\
+8-1\times5 &amp; 0 &amp; 1-1\times\frac{1}{2} &amp; 0-1\times\frac{1}{2}
+&amp; 1 &amp; 0 \\
+7-0\times5 &amp; 0 &amp; 1-0\times\frac{1}{2} &amp; 0-0\times\frac{1}{2}
+&amp; 0 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>得到：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+\text{常数} &amp; \textcolor{red}{x_1} &amp; x_2 &amp; x_3 &amp;
+\textcolor{red}{x_4} &amp; \textcolor{red}{x_5} \\
+-20 &amp; 0 &amp; 1 &amp; -2 &amp; 0 &amp; 0 \\
+5 &amp; 1 &amp; \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; 0 \\
+3 &amp; 0 &amp; \frac{1}{2} &amp; -\frac{1}{2} &amp; 1 &amp; 0 \\
+7 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1\\
+\end{pmatrix}
+\]</span></p>
+<hr />
+<p>发现实际上三个基本变量都是 <span class="math inline">\(1\)</span>
+或者 <span
+class="math inline">\(0\)</span>，所以我们将它们省略，得到一个更简略的矩阵：</p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; 0 &amp; - &amp; ( &amp; 4x_1 &amp; + &amp; 3x_2 &amp; )
+\\
+x_3 &amp; = &amp; 10 &amp; - &amp; ( &amp; 2x_1 &amp; + &amp; x_2 &amp;
+) \\
+x_4 &amp; = &amp; 8 &amp; - &amp; ( &amp; x_1 &amp; + &amp; x_2 &amp; )
+\\
+x_5 &amp; = &amp; 7 &amp; - &amp; ( &amp;  &amp;  &amp; x_2 &amp; ) \\
+\end{array}
+\quad\Rightarrow\quad
+\begin{pmatrix}
+0 &amp; 4 &amp; 3 \\
+10 &amp; 2 &amp; 1 \\
+8 &amp; 1 &amp; 1 \\
+7 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>同理的变换方法，交换系数（左边是包含那三个基本变量的过程，右边是<strong>省略三个基本变量</strong>（注意，是基本变量，不一定是
+<span
+class="math inline">\(x_3,x_4,x_5\)</span>）的过程，对照着看更清晰）：</p>
+<p><span class="math display">\[
+\left.\begin{pmatrix}
+\text{常数} &amp; \textcolor{red}{x_1} &amp; x_2 &amp; x_3 &amp;
+\textcolor{red}{x_4} &amp; \textcolor{red}{x_5} \\
+0 &amp; 4 &amp; 3 &amp; 0 &amp; 0 &amp; 0 \\
+5 &amp; 1 &amp; \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; 0 \\
+8 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+7 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+\end{pmatrix}\right|\begin{pmatrix}
+0 &amp; 4 &amp; 3 \\
+5 &amp; \frac{1}{2} &amp; \frac{1}{2} \\
+8 &amp; 1 &amp; 1 \\
+7 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>将其它行的 <span class="math inline">\(x_1\)</span> 都消掉：</p>
+<p><span class="math display">\[
+\left.\begin{pmatrix}
+\text{常数} &amp; \textcolor{red}{x_1} &amp; x_2 &amp; x_3 &amp;
+\textcolor{red}{x_4} &amp; \textcolor{red}{x_5} \\
+-20 &amp; 0 &amp; 1 &amp; -2 &amp; 0 &amp; 0 \\
+5 &amp; 1 &amp; \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; 0 \\
+3 &amp; 0 &amp; \frac{1}{2} &amp; -\frac{1}{2} &amp; 1 &amp; 0 \\
+7 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1\\
+\end{pmatrix}\right|
+\begin{pmatrix}
+-20 &amp; -2 &amp; 1 \\
+5  &amp; \frac{1}{2} &amp; \frac{1}{2} \\
+3 &amp; -\frac{1}{2} &amp; \frac{1}{2} \\
+7 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>在代码实现上，明显省略三个基本变量会更加好写。</p>
+<p>对于将基本变量 <span class="math inline">\(x_{n+l}\)</span>
+与非基本变量 <span class="math inline">\(x_e\)</span>
+交换，有以下代码：</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pivot</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> e)</span> </span>&#123;
+	<span class="hljs-type">double</span> t = a[l][e];
+	a[l][e] = <span class="hljs-number">1</span>;	<span class="hljs-comment">// 变成 x_n+l 的系数 1</span>
+	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= n; i ++) a[l][i] /= t;
+	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= m; i ++) <span class="hljs-keyword">if</span>(i != l &amp;&amp; <span class="hljs-built_in">abs</span>(a[i][e]) &gt; eps) &#123;
+		t = a[i][e]; a[i][e] = <span class="hljs-number">0</span>;	<span class="hljs-comment">// 变成 x_n+l 在这一行的系数 0</span>
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt;= n; j ++) &#123;
+			a[i][j] -= a[l][j] * t;
+		&#125;
+	&#125;
+&#125;</code></pre>
+<h3 id="如何通过旋转更新解">如何通过旋转更新解？</h3>
+<p>我们的目标是将第一行目标函数的系数都变成小于等于 <span
+class="math inline">\(0\)</span> 的，而我们发现将在目标函数中系数大于
+<span class="math inline">\(0\)</span> 的非基本变量 <span
+class="math inline">\(x_1\)</span> 与在这列系数同样大于 <span
+class="math inline">\(0\)</span> 的非基本变量 <span
+class="math inline">\(x_3\)</span>
+交换时，可以使得这一个目标函数的系数变得小于等于 <span
+class="math inline">\(0\)</span>。</p>
+<p>原理是在交换时 <code>a[i][e] = 0</code> 又会
+<code>a[i][j] -= a[l][j] * t</code>，所以当 <span
+class="math inline">\(i=0,j=e\)</span> 时，这一个系数将会变得小于等于
+<span class="math inline">\(0\)</span>。</p>
+<p>所以我们考虑找到一个 <span class="math inline">\(a_{0,e}&gt;0(1\le
+e\le n)\)</span>，如果没有，那么就满足目标函数的系数全部都小于等于 <span
+class="math inline">\(0\)</span>，当前就是最优解。</p>
+<p>否则我们就再一次找到一个 <span
+class="math inline">\(a_{l,e}&gt;0(1\le l\le
+m)\)</span>，如果没有，说明当前 <span class="math inline">\(e\)</span>
+无法变成非正系数，就说明解可以无穷大（unbounded）。</p>
+<p>然后，我们旋转 <span class="math inline">\(l\)</span> 与 <span
+class="math inline">\(e\)</span>。</p>
+<p>重复这个操作就可以了。</p>
+<h3 id="退化与布兰德规则">退化与布兰德规则</h3>
+<p>在进行上述过程中，我们可能会进入一个死循环，目标值不变，我们称当前遇到了退化（degeneracy），退化可能会导致死循环。而应对它的方法就是<a
+target="_blank" rel="noopener" href="https://personal.math.ubc.ca/~anstee/math340/340blandsrule.pdf">布兰德规则</a>（bland），我们可以根据如下法则选择
+<span class="math inline">\(l\)</span> 与 <span
+class="math inline">\(e\)</span>：</p>
+<ul>
+<li>在选择 <span class="math inline">\(e\)</span>
+时，选择下标最小的那个；</li>
+<li>在选择 <span class="math inline">\(l\)</span>
+时，选择约束最紧的那个（也就是 <span
+class="math inline">\(\frac{a_{l,0}}{a_{l,e}}\)</span>
+最小的那个，它限制了取值范围）。</li>
+</ul>
+<p>根据布兰德规则，我们可以写出如下代码：</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">simplex</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		ll l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		ld mn = inf;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>][i] &gt; eps) &#123;
+				e = i;
+				<span class="hljs-keyword">break</span>;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!e) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[i][e] &gt; eps &amp;&amp; a[i][<span class="hljs-number">0</span>] / a[i][e] &lt; mn) &#123;
+				l = i;
+				mn = a[i][<span class="hljs-number">0</span>] / a[i][e];
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!l) &#123;
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Unbounded&quot;</span>);
+			<span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;</code></pre>
+<h3 id="基本不可行解">基本不可行解</h3>
+<p>我们发现，在求解基本可行解中，如果出现某一个基本变量小于 <span
+class="math inline">\(0\)</span> 的情况，是不可行的。</p>
+<p>比如：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max z=x_1+x_2 \\
+&amp; \text{s.t.}\begin{cases}
+x_1+x_2\ge10 \\
+2x_1+3x_2\le-3 \\
+x_1,x_2\ge0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>那么转换为标准型：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max z=x_1+x_2 \\
+&amp; \text{s.t.}\begin{cases}
+-x_1-x_2\le-10 \\
+2x_1+3x_2\le-3 \\
+x_1,x_2\ge0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>转换为松弛型：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max z=x_1+x_2 \\
+&amp; \text{s.t.}\begin{cases}
+x_3=-10-(-x_1-x_2) \\
+x_4=-3-(2x_1+3x_2) \\
+x_1,x_2,x_3,x_4\ge0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>我们发现，当 <span class="math inline">\(x_1=0,x_2=0\)</span>
+时，<span class="math inline">\(x_3=-10,x_4=-3\)</span>，它是不满足
+<span class="math inline">\(x_3\ge0,x_4\ge0\)</span>
+的要求的，所以我们认为它不合法。</p>
+<p>我们观察以下基本不可行解有什么特点，我们将上面的松弛型整理一下：</p>
+<p><span class="math display">\[
+\begin{array}{}
+-z &amp; = &amp; 0 &amp; - &amp; ( &amp; x_1 &amp; + &amp; x_2 &amp; )
+\\
+x_3 &amp; = &amp; -10 &amp; - &amp; ( &amp; -x_1 &amp; + &amp; -x_2
+&amp; ) \\
+x_4 &amp; = &amp; -3 &amp; - &amp; ( &amp; 2x_1 &amp; + &amp; 3x_2 &amp;
+) \\
+\end{array}
+\]</span></p>
+<p>我们发现，当我们将这些非基本变量都取为 <span
+class="math inline">\(0\)</span> 时，因为 <span
+class="math inline">\(a_{1,0}=-10\)</span>，所以导致 <span
+class="math inline">\(x_3=-10\)</span>。同理因为 <span
+class="math inline">\(a_{2,0}=-8\)</span>，所以 <span
+class="math inline">\(x_4=-8\)</span>。</p>
+<p>也就是说，一个初始解可行当且仅当对于任意的 <span
+class="math inline">\(i\)</span> 都满足 <span
+class="math inline">\(a_{i,0}\ge0\)</span>。</p>
+<hr />
+<p>生成一个初始可行解有几种方法：一种是创建一个辅助线性规划（auxiliary
+linear program），但在算法竞赛中我们常用的是第二种方法，随机选择法：</p>
+<p>我们先随机找到一个 <span
+class="math inline">\(a_{l,0}&lt;0\)</span>，我们希望能将其变为大于等于
+<span class="math inline">\(0\)</span> 的。如果没有这样的 <span
+class="math inline">\(l\)</span>，说明当前已经是初始可行解。</p>
+<p>否则再随机找到一个 <span
+class="math inline">\(a_{l,e}&lt;0\)</span>，根据上面的经验，我们将
+<span class="math inline">\(l\)</span> 与 <span
+class="math inline">\(e\)</span> 旋转之后就可以把 <span
+class="math inline">\(a_{l,0}\)</span> 变为大于等于 <span
+class="math inline">\(0\)</span> 的。如果不存在这样的 <span
+class="math inline">\(e\)</span> 说明当前这个位置不能变成大于等于 <span
+class="math inline">\(0\)</span> 的，那么无解（infeasible）。</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		ll l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[i][<span class="hljs-number">0</span>] &lt; -eps &amp;&amp; (!l || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)) &#123;
+				l = i;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!l) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[l][i] &lt; -eps &amp;&amp; (!e || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)) &#123;
+				e = i;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!e) &#123;
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Infeasible&quot;</span>);
+			<span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;</code></pre>
+<h2 id="单纯形算法的几何意义">单纯形算法的几何意义</h2>
+<p>我们换一个角度来看线性规划：通过图的视角。考虑以下问题：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max x + y \\
+&amp; \text{s.t.}\begin{cases}
+5x-2y\le-2 \\
+4x-y\ge8 \\
+2x+y\ge10 \\
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>我们可以画出以下图表：</p>
+<p><img
+src="https://znpdco.github.io/blogimage/2024-05-02-simplex/simplex-1.png" /></p>
+<p>容易发现，最优解必定在顶点上，不需要考虑内部点。（因为围成的可行域一定是凸的）</p>
+<hr />
+<p>同时，因为可行域是凸的，我们可以求每个顶点的高度，找出其中最高的一个，肯定就是最优点。</p>
+<p>但是我们还有个更简单的方法：</p>
+<p>先找到一个顶点，然后从这个顶点，沿着某条边线，走到下一个顶点，直到最优。方向的选择可以有很多种，最多使用的是比较短视的方法：沿着最陡峭的那一条，追求当前步上升最快。</p>
+<p><img
+src="https://znpdco.github.io/blogimage/2024-05-02-simplex/simplex-2.png" /></p>
+<p>因为可行域它是凸的，就保证了要么解无穷大要么只有一个极值。</p>
+<p>当我们进行一次旋转操作时，相当于沿着一条边移动到另一个顶点上，所以进行若干次操作后必定可以移动到最值上。</p>
+<p>我们设移动的方向是 <span
+class="math inline">\(\lambda\)</span>，距离是 <span
+class="math inline">\(\theta\)</span>，我们进行旋转操作相当于走 <span
+class="math inline">\(x&#39;=x-\theta\lambda\)</span>。</p>
+<p>对应到单纯形中的矩阵，例如还是机床厂问题：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+-z\text{ or 常数} &amp; x_1 &amp; x_2 &amp; \textcolor{red}{x_3} &amp;
+\textcolor{red}{x_4} &amp; \textcolor{red}{x_5} \\
+0 &amp; 4 &amp; 3 &amp; 0 &amp; 0 &amp; 0 \\
+10 &amp; 2 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+8 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 0 \\
+7 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>我们的方向 <span class="math inline">\(\lambda\)</span>
+就相当与某一个非基本变量的那一列，比如此处我们选择第一列，可以发现 <span
+class="math inline">\(4(-z)+-x_1+0x_2+2x_3+1x_4+0x_5=0\)</span>，那么就是
+<span class="math inline">\(\lambda=(4,-1,0,2,1,0)\)</span>。</p>
+<p>我们走多少呢？走过多会超出区域，过少会达不到顶点。可以发现最多只能是
+<span
+class="math inline">\(\theta=5\)</span>，也就是限制最紧的那一个：<span
+class="math inline">\(10\div2=5\)</span>，我们就可以得到解：</p>
+<p><span
+class="math inline">\(x&#39;=(0,0,0,10,8,7)-(4,-1,0,2,1,0)\times5=(-20,5,0,0,3,7)\)</span>，发现是对应的：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+-z\text{ or 常数} &amp; \textcolor{red}{x_1} &amp; x_2 &amp; x_3 &amp;
+\textcolor{red}{x_4} &amp; \textcolor{red}{x_5} \\
+-20 &amp; 0 &amp; 1 &amp; -2 &amp; 0 &amp; 0 \\
+5 &amp; 1 &amp; \frac{1}{2} &amp; \frac{1}{2} &amp; 0 &amp; 0 \\
+3 &amp; 0 &amp; \frac{1}{2} &amp; -\frac{1}{2} &amp; 1 &amp; 0 \\
+7 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 1\\
+\end{pmatrix}
+\]</span></p>
+<hr />
+<p>同时，如果可行域不包括原点，那么我们也是需要建立一个初始可行解的，否则我们就没有在顶点上跑，矛盾。</p>
+<p><img
+src="https://znpdco.github.io/blogimage/2024-05-02-simplex/simplex-3.png" /></p>
+<h2 id="单纯形算法的时间复杂度分析">单纯形算法的时间复杂度分析</h2>
+<p>我们发现，旋转一次的时间复杂度为 <span
+class="math inline">\(O(nm)\)</span>。假设旋转 <span
+class="math inline">\(k\)</span> 次，那么时间复杂度就是 <span
+class="math inline">\(O(knm)\)</span>。</p>
+<p>在很长一段时间内，人们认为单纯形是多项式时间复杂度的。直到 V. Klee
+and G. L. Minty[1972] 构造了一个例子，我们称它为 Klee–Minty 问题：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max x_n \\
+&amp; \text{s.t.}\begin{cases}
+0\le x_1\le 1 \\
+\delta x_{j-1}\le x_j\le1-\delta x_{j-1} &amp; \text{for }
+j=2,3,\cdots,n
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>其中，<span
+class="math inline">\(0&lt;\delta\le\frac{1}{3}\)</span>。</p>
+<p>该问题的时间复杂度是质数级别的。该问题的可行域是顶点被扰动了的单位超立方体（unit
+hypercube），如果选择全零作为初始可行解进行单纯形算法，在几何意义下，单纯形算法将会遍历每一个顶点，进行
+<span class="math inline">\(2^n-1\)</span>
+次转动操作，才可以得到最优解。</p>
+<p><img
+src="https://znpdco.github.io/blogimage/2024-05-02-simplex/simplex-4.png" /></p>
+<p>但是，Borgwardt (1982)
+证明单纯形算法的平均复杂度是多项式时间的；Haimovich (1983)
+证明了迭代次数的数学期望实际上是线性的；Spielman and Teng (2004)
+引入了平滑型复杂度理论（smoothed analysis）。Spielman &amp; Teng
+定理断言：<strong>在线性规划问题上加入随机高斯扰动，单纯形算法期望用多项式步数求解</strong>。</p>
+<p>所以我们在最开始时进行若干次随机扰动可以使得单纯形算法期望可以在多项式时间复杂度内求解。一般来说，旋转的次数是在
+<span class="math inline">\(2(n+m)\)</span> 左右的。</p>
+<h3 id="线性规划问题有更优的做法吗">线性规划问题有更优的做法吗？</h3>
+<p>答案是有的。尽管单纯形是指数时间复杂度，但是 L. G. Khachiyan
+提出的椭球法与 N. Karmarkar
+提出的内点法具有多项式时间复杂度。这里由于篇幅问题不展开。</p>
+<p>而在一般的算法竞赛中，单纯形更为常用且表现更好。</p>
+<h2 id="对偶定理">对偶定理</h2>
+<p>当我们的线性规划是求<strong>最小值</strong>的同时约束也都是<strong>大于等于</strong>时，我们不仅可以通过将系数都乘以
+<span class="math inline">\(-1\)</span>
+以转换为一般型，也可以通过对偶定理实现。</p>
+<p>我们称原问题为 LP，对偶问题为 DP。</p>
+<p>原问题有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \max z=CX \\
+&amp; \text{s.t.}\begin{cases}
+AX\le b \\
+X\ge 0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>对偶问题有：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp; \min w=b^TX \\
+&amp; \text{s.t.}\begin{cases}
+A^TY\ge C^T \\
+X\ge 0
+\end{cases}
+\end{aligned}
+\]</span></p>
+<p>简单来说，我们将单纯形矩阵进行矩阵转置后再进行朴素单纯形即可。还是以机床厂问题为例：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+0 &amp; 4 &amp; 3 \\
+10 &amp; 2 &amp; 1 \\
+8 &amp; 1 &amp; 1 \\
+7 &amp; 0 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>它的 DP 是：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+0 &amp; 10 &amp; 8 &amp; 7 \\
+4 &amp; 2 &amp; 1 &amp; 0 \\
+3 &amp; 1 &amp; 1 &amp; 1 \\
+\end{pmatrix}
+\]</span></p>
+<p>即原矩阵的转置。</p>
+<table>
+<thead>
+<tr>
+<th>对偶问题（下）\原问题（右）</th>
+<th>最优解</th>
+<th>无界解</th>
+<th>无可行解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最优解</td>
+<td><span class="math inline">\(x\)</span></td>
+<td>\</td>
+<td>\</td>
+</tr>
+<tr>
+<td>无界解</td>
+<td>\</td>
+<td>\</td>
+<td><span class="math inline">\(x\)</span></td>
+</tr>
+<tr>
+<td>无可行解</td>
+<td>\</td>
+<td><span class="math inline">\(x\)</span></td>
+<td>无法判断</td>
+</tr>
+</tbody>
+</table>
+<p>所以部分问题可以通过转换为对偶问题以省略初始找可行解的过程。</p>
+<h2 id="全幺模矩阵">全幺模矩阵</h2>
+<p>若矩阵满足任意一个子方阵的行列式为 <span
+class="math inline">\(0,-1,1\)</span>，那么我们称这个矩阵为全幺模矩阵（totally
+unimodular matrix）。</p>
+<p>若矩阵是全幺模矩阵，该线性规划最优解为整数。</p>
+<p><img
+src="https://znpdco.github.io/blogimage/2024-05-02-simplex/simplex-5.png" /></p>
+<p>我们观察后可以发现，如果一个规划问题它的可行域多面体的所有顶点都是整数点的话（例如图中
+<span class="math inline">\(P\)</span> 就满足这个条件，而 <span
+class="math inline">\(P1\)</span> 和 <span
+class="math inline">\(P2\)</span>
+都不满足这个条件），那就可以满足线性规划最优解为整数了。</p>
+<p>证明全幺模矩阵可行域的顶点都在整点上：一个顶点无非是将一些线性无关的不等式改成等式后的线性方程组的解。如果矩阵
+<span class="math inline">\(A\)</span> 是全幺模的，若满足 <span
+class="math inline">\(A_S\)</span> 是 <span
+class="math inline">\(A\)</span> 的<a
+target="_blank" rel="noopener" href="https://baike.baidu.com/item/奇异矩阵/9658459">非奇异方阵</a>，那么就有
+<span class="math inline">\(\det A_S=\pm1\)</span>（因为全幺模矩阵保证了
+<span class="math inline">\(\det A_S=0\text{ or
+}\pm1\)</span>，而非奇异方阵保证了 <span class="math inline">\(\det
+A_S\neq0\)</span>）。若 <span class="math inline">\(\det
+A_S^{(i)}\|b_S\)</span> 是将方阵 <span
+class="math inline">\(A_S\)</span> 的第 <span
+class="math inline">\(i\)</span> 列替换为 <span
+class="math inline">\(b\)</span> 得到的矩阵，那么依<a
+target="_blank" rel="noopener" href="https://baike.baidu.com/item/克莱姆法则/7211518">克莱姆法则</a>（Cramer's
+Rule）可知：</p>
+<p><span class="math display">\[
+x_i=\dfrac{\det A_S^{(i)}|b_S}{\det A_S}
+\]</span></p>
+<p>因为 <span class="math inline">\(A_S^{(i)}\|b_S\)</span>
+方阵中的每一个数均为整数，所以 <span class="math inline">\(\det
+A_S^{(i)}\|b_S\)</span> 为整数。同时因为 <span
+class="math inline">\(\det A_S=\pm1\)</span>，所以 <span
+class="math inline">\(x_i\)</span>
+必定为整数。以此类推，所以顶点均为整点。</p>
+<hr />
+<p>以下命题中的矩阵是全幺模矩阵：</p>
+<ul>
+<li>无向二分图的关联矩阵是全幺模矩阵（无向二分图的关联矩阵为行表示结点，列表示边，如果结点和边关联，则单元格值为
+<span class="math inline">\(1\)</span>，否则为 <span
+class="math inline">\(0\)</span>）；</li>
+<li>有向图的关联矩阵是全幺模矩阵（有向图的关联矩阵为行表示结点，列表示边，每条边与入点的单元格值为
+<span class="math inline">\(1\)</span>，与出点的单元格值为 <span
+class="math inline">\(-1\)</span>，否则为 <span
+class="math inline">\(0\)</span>）；</li>
+<li>任何最大流、最小费用最大流的线性规划都是全幺模矩阵。</li>
+</ul>
+<p>具体证明可以查看参考资料。</p>
+<hr />
+<p>证明一个矩阵是全幺模其实还有一个骚操作：我们随机造若干数据，如果这些数据的结果都是整数，那么这个矩阵八成是全幺模的。</p>
+<h2 id="例题">例题</h2>
+<h3 id="uoj-179线性规划"><a target="_blank" rel="noopener" href="https://uoj.ac/problem/179">「UOJ
+#179」线性规划</a></h3>
+<blockquote>
+<p>求解一个 <span class="math inline">\(n\)</span> 个变量与 <span
+class="math inline">\(m\)</span> 条约束的标准型线性规划。</p>
+<p><span class="math inline">\(n,m\le20\)</span>。</p>
+</blockquote>
+<p>如果你实现朴素的单纯形，你就会发现没有通过 hack 数据，<a
+target="_blank" rel="noopener" href="https://uoj.ac/submission/685493">提交记录</a>。实际上我们可以在开头进行若干次的随机扰动以实现期望线性。</p>
+<p>可惜的是依旧没过（我太菜了），这次是被卡精度了，实现一下高精度浮点数或许能过。</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> N 100</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ld long double</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> eps 1e-8</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> inf 1e15</span>
+ll n, m, t;
+ld a[N][N];
+ll r[N];
+ld ans[N];
+<span class="hljs-function">std::mt19937 <span class="hljs-title">rnd</span><span class="hljs-params">(time(<span class="hljs-number">0</span>))</span></span>;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pivot</span><span class="hljs-params">(ll l, ll e)</span> </span>&#123;
+	<span class="hljs-built_in">swap</span>(r[n + l], r[e]);
+	ld t = a[l][e];
+	a[l][e] = <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= n; i ++) a[l][i] /= t;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= m; i ++) <span class="hljs-keyword">if</span>(i != l &amp;&amp; <span class="hljs-built_in">abs</span>(a[i][e]) &gt; eps) &#123;
+		t = a[i][e]; a[i][e] = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt;= n; j ++) &#123;
+			a[i][j] -= a[l][j] * t;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">noise</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">10</span>; i ++) &#123;
+		ll l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(<span class="hljs-built_in">abs</span>(a[i][<span class="hljs-number">0</span>]) &gt; eps &amp;&amp; (!l || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)) &#123;
+				l = i;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!l) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">if</span>(<span class="hljs-built_in">abs</span>(a[l][i]) &gt; eps &amp;&amp; (!e || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)) &#123;
+				e = i;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!e) <span class="hljs-keyword">continue</span>;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		ll l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[i][<span class="hljs-number">0</span>] &lt; -eps &amp;&amp; (!l || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)) &#123;
+				l = i;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!l) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[l][i] &lt; -eps &amp;&amp; (!e || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)) &#123;
+				e = i;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!e) &#123;
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Infeasible&quot;</span>);
+			<span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">simplex</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		ll l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		ld mn = inf;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>][i] &gt; eps) &#123;
+				e = i;
+				<span class="hljs-keyword">break</span>;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!e) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[i][e] &gt; eps &amp;&amp; a[i][<span class="hljs-number">0</span>] / a[i][e] &lt; mn) &#123;
+				l = i;
+				mn = a[i][<span class="hljs-number">0</span>] / a[i][e];
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!l) &#123;
+			<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Unbounded&quot;</span>);
+			<span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld %lld&quot;</span>, &amp;n, &amp;m, &amp;t);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%Lf&quot;</span>, &amp;a[<span class="hljs-number">0</span>][i]);
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+		<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">1</span>; j &lt;= n; j ++) &#123;
+			<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%Lf&quot;</span>, &amp;a[i][j]);
+		&#125;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%Lf&quot;</span>, &amp;a[i][<span class="hljs-number">0</span>]);
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) r[i] = i;
+	<span class="hljs-built_in">noise</span>();
+	<span class="hljs-built_in">init</span>();
+	<span class="hljs-built_in">simplex</span>();
+	<span class="hljs-keyword">if</span>(<span class="hljs-built_in">abs</span>(a[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]) &lt; eps) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;0\n&quot;</span>);
+	<span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.10Lf\n&quot;</span>, -a[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]);
+	<span class="hljs-keyword">if</span>(t) &#123;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) ans[r[n + i]] = a[i][<span class="hljs-number">0</span>];
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.10Lf &quot;</span>, ans[i]);
+	&#125;
+&#125;</code></pre>
+<h3 id="noi2008志愿者招募"><a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P3980">「NOI2008」志愿者招募</a></h3>
+<blockquote>
+<p><span class="math inline">\(n\)</span> 天，每天需要 <span
+class="math inline">\(a_i\)</span> 个人。有 <span
+class="math inline">\(m\)</span> 种人，每种人可以从 <span
+class="math inline">\(s_i\)</span> 工作到 <span
+class="math inline">\(t_i\)</span>，费用为 <span
+class="math inline">\(c_i\)</span>，求最小费用。</p>
+<p><span class="math inline">\(1\le n\le1000,1\le
+m\le10000\)</span>。</p>
+</blockquote>
+<p>单纯形板题，设变量 <span class="math inline">\(x_1\sim x_m\)</span>
+表示每种志愿者招募多少个，第 <span class="math inline">\(i\)</span>
+条约束是第 <span class="math inline">\(i\)</span>
+天可以工作志愿者的和大于等于 <span
+class="math inline">\(a_i\)</span>。最小化 <span
+class="math inline">\(x_ic_i\)</span> 的和。</p>
+<p>发现既是求最小值又是大于等于的约束，所以可以通过对偶实现。</p>
+<p>我们发现志愿者都要求是正数的，所以需要证明这个矩阵是全幺模矩阵。</p>
+<p>但是我们发现矩阵比较特殊，都是 <span class="math inline">\(0\)</span>
+和 <span class="math inline">\(1\)</span>，且每一列的 <span
+class="math inline">\(1\)</span> 有且仅有连续的一段。</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+\end{pmatrix}
+\]</span> 我们可以将这个矩阵的每一列乘上 <span
+class="math inline">\(-1\)</span>
+再累加到后一列，我们发现这些操作对矩阵的行列式是没有影响的：</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; -1 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 0 &amp; 0 &amp;  0 &amp; 0 &amp;-1 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp;  0 &amp;-1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 &amp;  0 &amp; 0 &amp; 0 &amp;-1 \\
+0 &amp; 0 &amp; 1 &amp;  0 &amp; 0 &amp;-1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp;  1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp;  0 &amp; 1 &amp;-1 &amp; 0 \\
+\end{pmatrix}
+\]</span>
+此时该矩阵属于有向图的关联矩阵，是全幺模矩阵，所以可以得到最优整数解。</p>
+<p>同理，我们可以在开头进行若干次的随机扰动以实现期望线性。</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ld double</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> N 1010</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> M 10010</span>
+<span class="hljs-type">const</span> ld eps = <span class="hljs-number">1e-8</span>, inf = <span class="hljs-number">1e9</span>;
+<span class="hljs-type">int</span> n, m;
+ld a[M][N];
+<span class="hljs-function">std::mt19937 <span class="hljs-title">rnd</span><span class="hljs-params">(time(<span class="hljs-number">0</span>))</span></span>;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pivot</span><span class="hljs-params">(<span class="hljs-type">int</span> l, <span class="hljs-type">int</span> e)</span> </span>&#123;
+	ld t = a[l][e];
+	a[l][e] = <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= n; i ++) &#123;
+		a[l][i] /= t;
+	&#125;
+	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt;= m; i ++) <span class="hljs-keyword">if</span>(i != l &amp;&amp; <span class="hljs-built_in">abs</span>(a[i][e]) &gt; eps)&#123;
+		t = a[i][e];
+		a[i][e] = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt;= n; j ++) &#123;
+			a[i][j] -= a[l][j] * t;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">noise</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i ++) &#123;
+		<span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>((a[i][<span class="hljs-number">0</span>] &gt; eps || a[i][<span class="hljs-number">0</span>] &lt; -eps) &amp;&amp; (!l || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)) &#123;
+				l = i;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!l) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">if</span>((a[l][i] &gt; eps || a[l][i] &lt; -eps) &amp;&amp; (!e || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)) &#123;
+				e = i;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!e) <span class="hljs-keyword">continue</span>;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		<span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[i][<span class="hljs-number">0</span>] &lt; -eps &amp;&amp; (!l || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span>)) l = i;
+		&#125;
+		<span class="hljs-keyword">if</span>(!l) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[l][i] &lt; -eps &amp;&amp; (!e || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span>)) e = i;
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">simplex</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		<span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		ld mn = inf;
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>][i] &gt; eps) &#123;
+				e = i;
+				<span class="hljs-keyword">break</span>;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!e) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[i][e] &gt; eps &amp;&amp; a[i][<span class="hljs-number">0</span>] / a[i][e] &lt; mn) &#123;
+				l = i;
+				mn = a[i][<span class="hljs-number">0</span>] / a[i][e];
+			&#125;
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d&quot;</span>, &amp;n, &amp;m);
+	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lf&quot;</span>, &amp;a[<span class="hljs-number">0</span>][i]);
+	&#125;
+	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+		<span class="hljs-type">int</span> s, t;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d %lf&quot;</span>, &amp;s, &amp;t, &amp;a[i][<span class="hljs-number">0</span>]);
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = s; j &lt;= t; j ++) &#123;
+			a[i][j] = <span class="hljs-number">1.0</span>;
+		&#125;
+	&#125;
+	<span class="hljs-built_in">noise</span>();
+	<span class="hljs-built_in">init</span>();
+	<span class="hljs-built_in">simplex</span>();
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.lf&quot;</span>, -a[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]);
+&#125;</code></pre>
+<h3 id="abc231hminimum-coloring"><a
+target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc231/tasks/abc231_h">「ABC231H」Minimum
+Coloring</a></h3>
+<blockquote>
+<p>一个 <span class="math inline">\(H \times W\)</span>
+的网格图，初始所有点都是白色的。</p>
+<p>有 <span class="math inline">\(N\)</span> 个点可以被改变成黑色，这
+<span class="math inline">\(N\)</span> 个点的坐标是 <span
+class="math inline">\(a_i,b_i\)</span>，改变颜色的代价是 <span
+class="math inline">\(c_i\)</span>。</p>
+<p>你需要找到最小代价使得每行每列都至少有一个黑色节点。</p>
+<p>数据保证有解。</p>
+<p><span class="math inline">\(1\leq N,H,W\leq10^3\)</span></p>
+</blockquote>
+<p>首先，我们设 <span class="math inline">\(x_i=0/1\)</span> 表示第
+<span class="math inline">\(i\)</span>
+个涂不涂。然后为了保证每一行都有，前 <span
+class="math inline">\(h\)</span> 个约束为第 <span
+class="math inline">\(i\)</span> 行所有的 <span
+class="math inline">\(x\)</span> 加起来大于等于 <span
+class="math inline">\(1\)</span>；为了保证每一列都有，后 <span
+class="math inline">\(w\)</span> 个约束为第 <span
+class="math inline">\(i-h\)</span> 列所有的 <span
+class="math inline">\(x\)</span> 加起来大于等于 <span
+class="math inline">\(1\)</span>。目标就是要求 <span
+class="math inline">\(\sum x_ic_i\)</span> 尽可能小。</p>
+<p>对偶一下就可以了。</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> N 2010</span>
+<span class="hljs-type">double</span> eps = <span class="hljs-number">1e-8</span>, inf = <span class="hljs-number">1e15</span>;
+ll h, w, n, m;
+<span class="hljs-type">double</span> a[N][N];
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pivot</span><span class="hljs-params">(ll l, ll e)</span> </span>&#123;
+	<span class="hljs-type">double</span> t = a[l][e];
+	a[l][e] = <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123;
+		a[l][e] /= t;
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= n; i ++) <span class="hljs-keyword">if</span>(i != l &amp;&amp; <span class="hljs-built_in">abs</span>(a[l][e]) &gt; eps) &#123;
+		t = a[i][e], a[i][e] = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt;= m; j ++) &#123;
+			a[i][j] -= t * a[l][j];
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">simplex</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		ll l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		<span class="hljs-type">double</span> mn = inf;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) <span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>][i] &gt; eps) &#123;
+			e = i;
+			<span class="hljs-keyword">break</span>;
+		&#125;
+		<span class="hljs-keyword">if</span>(!e) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) <span class="hljs-keyword">if</span>(a[i][e] &gt; eps &amp;&amp; a[i][<span class="hljs-number">0</span>] / a[i][e] &lt; mn) &#123;
+			l = i;
+			mn = a[i][<span class="hljs-number">0</span>] / a[i][e];
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld %lld&quot;</span>, &amp;h, &amp;w, &amp;n);
+	m = h + w;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+		ll x, y, c;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld %lld&quot;</span>, &amp;x, &amp;y, &amp;c);
+		a[i][<span class="hljs-number">0</span>] = c;
+		a[i][x] = <span class="hljs-number">1</span>;
+		a[i][h + y] = <span class="hljs-number">1</span>;
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+		a[<span class="hljs-number">0</span>][i] = <span class="hljs-number">1</span>;
+	&#125;
+	<span class="hljs-built_in">simplex</span>();
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.lf&quot;</span>, -a[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]);
+&#125;</code></pre>
+<h3 id="shoi2004最小生成树"><a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4412">「SHOI2004」最小生成树</a></h3>
+<blockquote>
+<p>给定一个 <span class="math inline">\(n\)</span> 点 <span
+class="math inline">\(m\)</span> 边的简单图，每条边将边权修改为 <span
+class="math inline">\(w_i&#39;\gets w_i+c\)</span> 具有代价 <span
+class="math inline">\(\|c\|\)</span>，给定简单图上的一棵生成树 <span
+class="math inline">\(T\)</span>，要求最小的代价修改简单图上的每一个边权使得这颗生成树
+<span class="math inline">\(T\)</span> 变为最小生成树。</p>
+<p><span class="math inline">\(1\le n\le 50,1\le m\le 1500\)</span></p>
+</blockquote>
+<p>对于一条非树边 <span
+class="math inline">\(j\)</span>，它肯定跟若干条树边构成了一个环，那么这个非树边权值一定要大于等于环上的所有边。设其中一条是
+<span class="math inline">\(i\)</span>，我们有一个贪心的策略——减小 <span
+class="math inline">\(i\)</span> 的边权，增加 <span
+class="math inline">\(j\)</span> 的边权。</p>
+<p>所以有：<span class="math inline">\(w_i-x_i\le w_j+x_j\)</span>。</p>
+<p>也就是 <span class="math inline">\(w_i-w_j\le
+x_i+x_j\)</span>。目标是最小化 <span class="math inline">\(x\)</span>
+的和。</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> N 60</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> M 1510</span>
+<span class="hljs-type">const</span> <span class="hljs-type">double</span> eps = <span class="hljs-number">1e-8</span>, inf = <span class="hljs-number">1e9</span>;
+<span class="hljs-function">mt19937 <span class="hljs-title">rnd</span><span class="hljs-params">(time(<span class="hljs-number">0</span>))</span></span>;
+ll n, m;
+<span class="hljs-type">bool</span> vis[N];
+ll head[N], nxt[M * <span class="hljs-number">2</span>], to[M * <span class="hljs-number">2</span>], cnt;
+ll road[N][N];
+ll U[M], V[M], W[M];
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">addEdge</span><span class="hljs-params">(ll u, ll v)</span> </span>&#123;
+	cnt ++;
+	to[cnt] = v;
+	nxt[cnt] = head[u];
+	head[u] = cnt;
+&#125;
+ll fa[N], dep[N];
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(ll u)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll i = head[u]; i; i = nxt[i]) &#123;
+		ll v = to[i];
+		<span class="hljs-keyword">if</span>(v == fa[u]) <span class="hljs-keyword">continue</span>;
+		fa[v] = u;
+		dep[v] = dep[u] + <span class="hljs-number">1</span>;
+		<span class="hljs-built_in">dfs</span>(v);
+	&#125;
+&#125;
+<span class="hljs-type">double</span> a[M][M];
+ll tot;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pivot</span><span class="hljs-params">(ll l, ll e)</span> </span>&#123;
+	<span class="hljs-type">double</span> t = a[l][e]; a[l][e] = <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= tot; i ++) &#123;
+		a[l][i] /= t;
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= m; i ++) <span class="hljs-keyword">if</span>(i != l &amp;&amp; <span class="hljs-built_in">abs</span>(a[i][e]) &gt; eps) &#123;
+		t = a[i][e]; a[i][e] = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt;= tot; j ++) &#123;
+			a[i][j] -= t * a[l][j];
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		ll l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[i][<span class="hljs-number">0</span>] &lt; -eps &amp;&amp; (!l || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)) &#123;
+				l = i;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!l) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= tot; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[l][i] &lt; -eps &amp;&amp; (!e || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>)) &#123;
+				e = i;
+			&#125;
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">simplex</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		ll l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		<span class="hljs-type">double</span> mn = inf;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= tot; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>][i] &gt; eps) &#123;
+				e = i;
+				<span class="hljs-keyword">break</span>;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!e) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[i][e] &gt; eps &amp;&amp; a[i][<span class="hljs-number">0</span>] / a[i][e] &lt; mn) &#123;
+				l = i;
+				mn = a[i][<span class="hljs-number">0</span>] / a[i][e];
+			&#125;
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld&quot;</span>, &amp;n, &amp;m);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld %lld&quot;</span>, &amp;U[i], &amp;V[i], &amp;W[i]);
+		road[U[i]][V[i]] = road[V[i]][U[i]] = i;
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt; n; i ++) &#123;
+		ll u, v;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld&quot;</span>, &amp;u, &amp;v);
+		<span class="hljs-built_in">addEdge</span>(u, v);
+		<span class="hljs-built_in">addEdge</span>(v, u);
+	&#125;
+	<span class="hljs-built_in">dfs</span>(<span class="hljs-number">1</span>);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+		ll u = U[i], v = V[i];
+		a[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">while</span>(u != v) &#123;
+			<span class="hljs-keyword">if</span>(dep[u] &lt; dep[v]) <span class="hljs-built_in">swap</span>(u, v);
+			ll x = u;
+			u = fa[u];
+			<span class="hljs-keyword">if</span>(W[road[x][u]] &gt; W[i]) &#123;
+				<span class="hljs-comment">// W[road[x][u]] - x[road[x][u]] &lt;= W[i] + x[i]</span>
+				<span class="hljs-comment">// x[i] + x[road[x][u]] &gt;= W[road[x][u]] - W[i]</span>
+				a[<span class="hljs-number">0</span>][++ tot] = W[road[x][u]] - W[i];
+				a[i][tot] = <span class="hljs-number">1</span>;
+				a[road[x][u]][tot] = <span class="hljs-number">1</span>;
+			&#125;
+		&#125;
+	&#125;
+	<span class="hljs-built_in">init</span>();
+	<span class="hljs-built_in">simplex</span>();
+	<span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] &gt; -eps &amp;&amp; a[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] &lt; eps) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;0&quot;</span>);
+	<span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.lf&quot;</span>, -a[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]);
+&#125;</code></pre>
+<h3 id="cf1430gyet-another-dag-problem"><a
+target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1430/G">「CF1430G」Yet
+Another DAG Problem</a></h3>
+<blockquote>
+<p>给定一个 <span class="math inline">\(n\)</span> 点 <span
+class="math inline">\(m\)</span> 边的有向无环图，每条边都有 <span
+class="math inline">\(w_i\)</span> 的权重，给每个点分配权值 <span
+class="math inline">\(a_i\)</span>，对于每条连接 <span
+class="math inline">\((u,v)\)</span> 的边，定义其权值为 <span
+class="math inline">\(b_i=a_u-a_v\)</span>，要求：</p>
+<ol type="1">
+<li><p><span class="math inline">\(b_i&gt;0\)</span></p></li>
+<li><p><span class="math inline">\(\sum w_ib_i\)</span> 最小</p></li>
+</ol>
+<p>请输出一种分配方案。</p>
+<p><span class="math inline">\(1\le n\le 18,1\le m\le
+n(n-1)/2\)</span></p>
+</blockquote>
+<p>这里 <span class="math inline">\(b_i&gt;0\)</span>
+看似不是线性规划，实际上因为 <span class="math inline">\(b\)</span>
+为整数，所以同等于 <span class="math inline">\(b_i\ge
+1\)</span>。每条边可以被描述为限制 <span
+class="math inline">\(1a_u+-1a_v\ge1\)</span>。<span
+class="math inline">\(\min \sum w_ib_i\)</span> 可以被拆分为 <span
+class="math inline">\(\min\sum(w_i a_u+-w_i
+a_v)\)</span>，然后单纯形做就好了。</p>
+<p>因为要求每一个点的取值，所以我不用对偶，直接将每一项系数乘以 <span
+class="math inline">\(-1\)</span> 也可以达到同样的效果。</p>
+<p>有向图的关联矩阵是全幺模矩阵，所以最优解是整数的。</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> db long double</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> N 20</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> M 400</span>
+<span class="hljs-type">const</span> db inf = <span class="hljs-number">1e9</span>, eps = <span class="hljs-number">1e-8</span>;
+ll n, m;
+db a[M][N], ans[N];
+ll r[N + M];
+<span class="hljs-function">mt19937 <span class="hljs-title">rnd</span><span class="hljs-params">(<span class="hljs-number">114514191</span>)</span></span>;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">pivot</span><span class="hljs-params">(ll l, ll e)</span> </span>&#123;
+	<span class="hljs-built_in">swap</span>(r[n + l], r[e]);
+	db t = a[l][e];
+	a[l][e] = <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= n; i ++) &#123;
+		a[l][i] /= t;
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= m; i ++) <span class="hljs-keyword">if</span>(i != l &amp;&amp; <span class="hljs-built_in">abs</span>(a[i][e]) &gt; eps) &#123;
+		t = a[i][e]; a[i][e] = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt;= n; j ++) &#123;
+			a[i][j] -= t * a[l][j];
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		ll l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[i][<span class="hljs-number">0</span>] &lt; -eps &amp;&amp; (!l || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span>)) &#123;
+				l = i;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!l) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[l][i] &lt; -eps &amp;&amp; (!e || <span class="hljs-built_in">rnd</span>() % <span class="hljs-number">2</span>)) &#123;
+				e = i;
+			&#125;
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">simplex</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>) &#123;
+		ll l = <span class="hljs-number">0</span>, e = <span class="hljs-number">0</span>;
+		db mn = inf;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[<span class="hljs-number">0</span>][i] &gt; eps) &#123;
+				e = i;
+				<span class="hljs-keyword">break</span>;
+			&#125;
+		&#125;
+		<span class="hljs-keyword">if</span>(!e) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+			<span class="hljs-keyword">if</span>(a[i][e] &gt; eps &amp;&amp; a[i][<span class="hljs-number">0</span>] / a[i][e] &lt; mn) &#123;
+				l = i;
+				mn = a[i][<span class="hljs-number">0</span>] / a[i][e];
+			&#125;
+		&#125;
+		<span class="hljs-built_in">pivot</span>(l, e);
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld&quot;</span>, &amp;n, &amp;m);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+		ll u, v, w;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld %lld&quot;</span>, &amp;u, &amp;v, &amp;w);
+		a[i][u] = <span class="hljs-number">-1</span>;
+		a[i][v] = <span class="hljs-number">1</span>;
+		a[i][<span class="hljs-number">0</span>] = <span class="hljs-number">-1</span>;
+		a[<span class="hljs-number">0</span>][u] -= w;
+		a[<span class="hljs-number">0</span>][v] += w;
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+		r[i] = i;
+	&#125;
+	<span class="hljs-built_in">init</span>();
+	<span class="hljs-built_in">simplex</span>();
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) &#123;
+		ans[r[n + i]] = a[i][<span class="hljs-number">0</span>];
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%.Lf &quot;</span>, ans[i]);
+	&#125;
+&#125;</code></pre>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://www.hrwhisper.me/introduction-to-simplex-algorithm/">线性规划-单纯形算法详解
+| 细语呢喃</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/680244753">数学规划（3）单纯形法的进一步讨论</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://taodaling.github.io/blog/2019/06/27/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/">线性规划
+| Daltao's blog!</a></li>
+</ul>
+
+    </div>
+    
+    <div class="post__license">
+        <p>
+            <strong>本文作者：</strong>ZnPdCo
+        </p>
+        <p>
+            <strong>
+                本文链接：
+            </strong>
+            <a href="https://znpdco.fun/2024/05/02/simplex/">https://znpdco.fun/2024/05/02/simplex/</a>
+        </p>
+        
+            <strong>
+                <p>本页面的全部内容在 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA
+4.0</a> 和 <a target="_blank" rel="noopener" href="https://github.com/zTrix/sata-license">SATA</a>
+协议之条款下提供，附加条款亦可能应用</p>
+
+            </strong>
+        
+    </div>
+ 
+    <div class="post-footer__meta"><p>更新于 2025-01-03</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E7%AE%97%E6%B3%95/" class="post-tags__link button"># 算法</a><a href="/tags/%E5%8E%9F%E5%88%9B/" class="post-tags__link button"># 原创</a><a href="/tags/%E6%95%B0%E5%AD%A6/" class="post-tags__link button"># 数学</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2024/05/07/FWT/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            上一篇
+                        </div>
+                        <div class="nav__title">
+                            快速沃尔什变换 (FWT)
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+        </div>
+    </div>
+
+
+
+    <div class="post__comments post__with-toc content-card" id="comment">
+        
+    <h4>评论</h4>
+    
+    
+    
+    
+    
+    <div id="giscus_container">
+        <script src="https://giscus.app/client.js"
+                data-repo="ZnPdCo/blog"
+                data-repo-id="R_kgDOMa--Lg"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMa--Ls4ChMbA"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-CN"
+                data-loading="lazy"
+                crossorigin="anonymous" async></script>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    </div>
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="回到顶部" title="回到顶部">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+    
+        <span id="leancloud_container_site_uv" hidden>
+            <span></span>
+            <span id="leancloud_value_site_uv"></span>
+            <span>Viewers</span>
+            
+                <span>　|</span>
+            
+        </span>
+    
+    
+        <span id="leancloud_container_site_pv" hidden>
+            <span></span>
+            <span id="leancloud_value_site_pv"></span>
+            <span>Views</span>
+            
+        </span>
+    
+
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2024&nbsp;-&nbsp;2025 <a href="/">ZnPdCo</a>
+        </p>
+    
+    
+        
+            <script src="/js/switch-giscus-theme.js"></script>
+
+        
+            <script src="/js/domain-name-expired.js"></script>
+
+        
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8c53e0f2b54686993b0e5d57bd182795';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+    <script>
+        (function () {
+            function getRecord(Counter, target) {
+                return new Promise(function (resolve, reject) {
+                    Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+                        .then(response => response.json())
+                        .then(({results}) => {
+                            if (results && results.length > 0) {
+                                var record = results[0];
+                                resolve(record);
+                            } else {
+                                Counter('post', '/classes/Counter', {
+                                        target, time: 0
+                                    })
+                                    .then(response => response.json())
+                                    .then(record => {
+                                        resolve(record);
+                                    }).catch(error => {
+                                        console.error('Failed to create', error);
+                                        reject(error);
+                                    });
+                            }
+                        }).catch(error => {
+                            console.error('LeanCloud Counter Error', error);
+                            reject(error);
+                        });
+                })
+            }
+        
+            function buildIncrement(objectId) {
+                return {
+                    "method": "PUT",
+                    "path": `/1.1/classes/Counter/${ objectId }`,
+                    "body": {
+                        "time": {
+                            '__op': 'Increment',
+                            'amount': 1
+                        }
+                    }
+                }
+            }
+        
+            function increment(Counter, incrArr) {
+                return new Promise(function (resolve, reject) {
+                    Counter('post', '/batch', {
+                        "requests": incrArr
+                    }).then((res) => {
+                        resolve(res);
+                    }).catch(error => {
+                        console.error('Failed to save visitor count', error);
+                        reject(error);
+                    });
+                });
+            }
+        
+            function validUV() {
+                var key = 'LeanCloud_UV_Flag';
+                var flag = localStorage.getItem(key);
+                if (flag) {
+                    if (new Date().getTime() - parseInt(flag) <= 86400000) {
+                        return false;
+                    }
+                }
+                localStorage.setItem(key, new Date().getTime().toString());
+                return true;
+            }
+        
+            function addCount(Counter) {
+                var enableIncr = 'leancloud' === 'leancloud';
+                var getterArr = [];
+                var incrArr = [];
+                var pvCtn = document.querySelector('#leancloud_container_site_pv');
+                if (pvCtn || enableIncr) {
+                    var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+                        incrArr.push(buildIncrement(record.objectId))
+                        var ele = document.querySelector('#leancloud_value_site_pv');
+                        if (ele) {
+                            ele.innerText = record.time + 1;
+                            if (pvCtn) {
+                                pvCtn.style.display = 'inline';
+                            }
+                        }
+                    });
+                    getterArr.push(pvGetter);
+                }
+                var uvCtn = document.querySelector('#leancloud_container_site_uv');
+                if (uvCtn || enableIncr) {
+                    var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+                        var vuv = validUV();
+                        vuv && incrArr.push(buildIncrement(record.objectId))
+                        var ele = document.querySelector('#leancloud_value_site_uv');
+                        if (ele) {
+                            ele.innerText = record.time + (vuv ? 1 : 0);
+                            if (uvCtn) {
+                                uvCtn.style.display = 'inline';
+                            }
+                        }
+                    });
+                    getterArr.push(uvGetter);
+                }
+                if ('true' === 'true') {
+                    var viewCtn = document.querySelector('#leancloud_container_page_pv');
+                    if (viewCtn || enableIncr) {
+                        var target = decodeURI('/2024/05/02/simplex/');
+                        var viewGetter = getRecord(Counter, target).then((record) => {
+                            incrArr.push(buildIncrement(record.objectId))
+                            if (viewCtn) {
+                                var ele = document.querySelector('#leancloud_value_page_pv');
+                                if (ele) {
+                                    ele.innerText = (record.time || 0) + 1;
+                                    viewCtn.style.display = 'inline';
+                                }
+                            }
+                        });
+                        getterArr.push(viewGetter);
+                    }
+                }
+                if (enableIncr) {
+                    Promise.all(getterArr).then(() => {
+                        incrArr.length > 0 && increment(Counter, incrArr);
+                    })
+                }
+            }
+        
+            var app_id = 'QGAAFBaahLaMvkUXbO64dyon-MdYXbMMI';
+            var app_key = 'v7wkDYJg1n8gZzbY9bYqV7W5';
+            var server_url = '';
+        
+            function fetchData(api_server) {
+                var Counter = (method, url, data) => {
+                    return fetch(`${ api_server }/1.1${ url }`, {
+                        method,
+                        headers: {
+                                'X-LC-Id': app_id,
+                                'X-LC-Key': app_key,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data)
+                    });
+                };
+                addCount(Counter);
+            }
+            var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+            if (api_server) {
+                fetchData(api_server);
+            } else {
+                fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+                    .then(response => response.json())
+                    .then(({api_server}) => {
+                        fetchData('https://' + api_server);
+                    });
+            }
+        })();
+    </script>
+
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('false')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+    
+
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+
+    </body>
+</html>

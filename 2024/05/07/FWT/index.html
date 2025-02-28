@@ -1,0 +1,2248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+
+    
+
+    <!-- 渲染优化 -->
+    <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!--icon-->
+
+    
+        <link rel="shortcut icon" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="icon" type="image/png" sizes="16x16" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+    
+        <link rel="mask-icon" href="https://cdn.luogu.com.cn/upload/usericon/560700.png">
+    
+
+
+    <!-- meta -->
+
+
+<title>快速沃尔什变换 (FWT) | ZnPdCo</title>
+
+
+    <meta name="keywords" content="算法, 原创, 多项式, ZnPdCo">
+
+
+
+
+    <!-- OpenGraph -->
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/hljs.css" media="none" >
+        
+    
+
+    
+
+    
+    
+<link rel="stylesheet" href="/css/style/dark.css">
+
+    
+<script src="/js/darkmode.js"></script>
+
+
+
+     
+
+    <!-- custom head -->
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+    <body>
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">ZnPdCo</span>
+        </a>
+    </div>
+    <div class="header__right">
+        
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/friend/" class="navbar-menu button">友链</a>
+                
+                    <a target="_blank" rel="noopener" href="https://hydro.ac/d/ltoi/" class="navbar-menu button">💩🏆烂题杯</a>
+                
+            </div>
+        
+        
+        
+    <a href="/search/" id="btn-search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="24" height="24" fill="currentColor" stroke="currentColor" stroke-width="32"><path d="M192 448c0-141.152 114.848-256 256-256s256 114.848 256 256-114.848 256-256 256-256-114.848-256-256z m710.624 409.376l-206.88-206.88A318.784 318.784 0 0 0 768 448c0-176.736-143.264-320-320-320S128 271.264 128 448s143.264 320 320 320a318.784 318.784 0 0 0 202.496-72.256l206.88 206.88 45.248-45.248z"></path></svg>
+    </a>
+
+
+        
+        
+    <a href="javaScript:void(0);" id="btn-toggle-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+    </a>
+
+
+        
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/friend/" class="dropdown-menu button">友链</a>
+                
+                    <a target="_blank" rel="noopener" href="https://hydro.ac/d/ltoi/" class="dropdown-menu button">💩🏆烂题杯</a>
+                
+            </div>
+        
+    </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        快速沃尔什变换 (FWT)
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2024/05/" class="post-meta__date button">2024-05-07</a>
+        
+    <span class="separate-dot"></span><a href="/categories/%E7%AE%97%E6%B3%95/" class="button">算法</a>
+
+ 
+        
+     
+    <span id="leancloud_container_page_pv" hidden>
+        <span class="separate-dot"></span>
+        <span></span>
+        <span id="leancloud_value_page_pv"></span>
+        <span>Views</span>
+    </span>
+
+    
+
+
+ 
+
+ 
+    </div>
+</div>
+
+
+    <aside class="post-side">
+        <div class="post-side__toc">
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%B2%83%E5%B0%94%E4%BB%80%E5%8F%98%E6%8D%A2%E8%A7%A3%E5%86%B3%E7%9A%84%E5%8D%B7%E7%A7%AF%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">快速沃尔什变换解决的卷积问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fwt-%E7%9A%84%E6%80%9D%E6%83%B3"><span class="toc-number">2.</span> <span class="toc-text">FWT 的思想</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E6%88%96"><span class="toc-number">2.1.</span> <span class="toc-text">按位或</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E4%B8%8E"><span class="toc-number">2.2.</span> <span class="toc-text">按位与</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96"><span class="toc-number">2.3.</span> <span class="toc-text">按位异或</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BE%85-fwt"><span class="toc-number">3.</span> <span class="toc-text">从另一个角度看待 FWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E6%88%96-1"><span class="toc-number">3.1.</span> <span class="toc-text">按位或</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E4%B8%8E-1"><span class="toc-number">3.2.</span> <span class="toc-text">按位与</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96-1"><span class="toc-number">3.3.</span> <span class="toc-text">按位异或</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fwt-%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">4.</span> <span class="toc-text">FWT 的性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#k-%E7%BB%B4-fwt"><span class="toc-number">5.</span> <span class="toc-text">K 维 FWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#max-%E8%BF%90%E7%AE%97"><span class="toc-number">5.1.</span> <span class="toc-text">max 运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#min-%E8%BF%90%E7%AE%97"><span class="toc-number">5.2.</span> <span class="toc-text">min 运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95"><span class="toc-number">5.3.</span> <span class="toc-text">不进位加法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">例题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7-p4717-%E6%A8%A1%E6%9D%BF%E5%BF%AB%E9%80%9F%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E6%B2%83%E5%B0%94%E4%BB%80%E5%8F%98%E6%8D%A2-fmtfwt"><span class="toc-number">6.1.</span> <span class="toc-text">「洛谷 P4717」
+【模板】快速莫比乌斯&#x2F;沃尔什变换 (FMT&#x2F;FWT)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7-p6097-%E6%A8%A1%E6%9D%BF%E5%AD%90%E9%9B%86%E5%8D%B7%E7%A7%AF"><span class="toc-number">6.2.</span> <span class="toc-text">「洛谷 P6097」
+【模板】子集卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%9B%E5%AE%A2-881dparity-of-tuples"><span class="toc-number">6.3.</span> <span class="toc-text">「牛客 881D」Parity of
+Tuples</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#at-abc212h-nim-counting"><span class="toc-number">6.4.</span> <span class="toc-text">「AT ABC212H」
+Nim Counting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#at-arc100e-or-plus-max"><span class="toc-number">6.5.</span> <span class="toc-text">「AT ARC100E」
+Or Plus Max</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hdu-6618-good-numbers"><span class="toc-number">6.6.</span> <span class="toc-text">「HDU 6618」 Good
+Numbers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cf-1103eradix-sum"><span class="toc-number">6.7.</span> <span class="toc-text">「CF 1103E」Radix
+sum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7-p10890%E7%83%82%E9%A2%98%E6%9D%AF-round-1%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%B3%96%E6%9E%9C%E6%A0%91"><span class="toc-number">6.8.</span> <span class="toc-text">「洛谷 P10890」【烂题杯
+Round 1】可持久化糖果树</span></a></li></ol></li></ol>
+        </div>
+    </aside>
+    <a class="btn-toc button" id="btn-toc" tabindex="0">
+        <svg viewBox="0 0 1024 1024" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M128 256h64V192H128zM320 256h576V192H320zM128 544h64v-64H128zM320 544h576v-64H320zM128 832h64v-64H128zM320 832h576v-64H320z" fill="currentColor"></path>
+        </svg>
+    </a>
+    <div class="toc-menus" id="toc-menus">
+        <div class="toc-title">文章目录</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%B2%83%E5%B0%94%E4%BB%80%E5%8F%98%E6%8D%A2%E8%A7%A3%E5%86%B3%E7%9A%84%E5%8D%B7%E7%A7%AF%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">快速沃尔什变换解决的卷积问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fwt-%E7%9A%84%E6%80%9D%E6%83%B3"><span class="toc-number">2.</span> <span class="toc-text">FWT 的思想</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E6%88%96"><span class="toc-number">2.1.</span> <span class="toc-text">按位或</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E4%B8%8E"><span class="toc-number">2.2.</span> <span class="toc-text">按位与</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96"><span class="toc-number">2.3.</span> <span class="toc-text">按位异或</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BE%85-fwt"><span class="toc-number">3.</span> <span class="toc-text">从另一个角度看待 FWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E6%88%96-1"><span class="toc-number">3.1.</span> <span class="toc-text">按位或</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E4%B8%8E-1"><span class="toc-number">3.2.</span> <span class="toc-text">按位与</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%89%E4%BD%8D%E5%BC%82%E6%88%96-1"><span class="toc-number">3.3.</span> <span class="toc-text">按位异或</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fwt-%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">4.</span> <span class="toc-text">FWT 的性质</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#k-%E7%BB%B4-fwt"><span class="toc-number">5.</span> <span class="toc-text">K 维 FWT</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#max-%E8%BF%90%E7%AE%97"><span class="toc-number">5.1.</span> <span class="toc-text">max 运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#min-%E8%BF%90%E7%AE%97"><span class="toc-number">5.2.</span> <span class="toc-text">min 运算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%BF%9B%E4%BD%8D%E5%8A%A0%E6%B3%95"><span class="toc-number">5.3.</span> <span class="toc-text">不进位加法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">例题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7-p4717-%E6%A8%A1%E6%9D%BF%E5%BF%AB%E9%80%9F%E8%8E%AB%E6%AF%94%E4%B9%8C%E6%96%AF%E6%B2%83%E5%B0%94%E4%BB%80%E5%8F%98%E6%8D%A2-fmtfwt"><span class="toc-number">6.1.</span> <span class="toc-text">「洛谷 P4717」
+【模板】快速莫比乌斯&#x2F;沃尔什变换 (FMT&#x2F;FWT)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7-p6097-%E6%A8%A1%E6%9D%BF%E5%AD%90%E9%9B%86%E5%8D%B7%E7%A7%AF"><span class="toc-number">6.2.</span> <span class="toc-text">「洛谷 P6097」
+【模板】子集卷积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%9B%E5%AE%A2-881dparity-of-tuples"><span class="toc-number">6.3.</span> <span class="toc-text">「牛客 881D」Parity of
+Tuples</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#at-abc212h-nim-counting"><span class="toc-number">6.4.</span> <span class="toc-text">「AT ABC212H」
+Nim Counting</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#at-arc100e-or-plus-max"><span class="toc-number">6.5.</span> <span class="toc-text">「AT ARC100E」
+Or Plus Max</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hdu-6618-good-numbers"><span class="toc-number">6.6.</span> <span class="toc-text">「HDU 6618」 Good
+Numbers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cf-1103eradix-sum"><span class="toc-number">6.7.</span> <span class="toc-text">「CF 1103E」Radix
+sum</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7-p10890%E7%83%82%E9%A2%98%E6%9D%AF-round-1%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96%E7%B3%96%E6%9E%9C%E6%A0%91"><span class="toc-number">6.8.</span> <span class="toc-text">「洛谷 P10890」【烂题杯
+Round 1】可持久化糖果树</span></a></li></ol></li></ol>
+    </div>
+
+
+<article class="post post__with-toc content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/znpdco/p/18172429">博客园</a></p>
+<p><a
+target="_blank" rel="noopener" href="https://znpdco.github.io/%E7%AE%97%E6%B3%95/2024/05/07/FWT.html">我的博客</a></p>
+</blockquote>
+<h2 id="快速沃尔什变换解决的卷积问题">快速沃尔什变换解决的卷积问题</h2>
+<p>快速沃尔什变换（FWT）是解决这样一类卷积问题：</p>
+<p><span class="math display">\[
+c_i=\sum_{i=j\odot k}a_jb_k
+\]</span></p>
+<p>其中，<span class="math inline">\(\odot\)</span>
+是位运算的一种。举个例子，给定数列 <span
+class="math inline">\(a,b\)</span>，求：</p>
+<p><span class="math display">\[
+c_i=\sum_{j\oplus k=i} a_jb_k
+\]</span></p>
+<h2 id="fwt-的思想">FWT 的思想</h2>
+<p>看到 FWT 的名字，我们可以联想到之前学过的 FFT（很可惜，我没有写过 FFT
+的笔记，所以没有链接），先看看 FFT 的原理：</p>
+<ol type="1">
+<li>把 <span class="math inline">\(a,b\)</span> 变换为 <span
+class="math inline">\(A,B\)</span>，<span class="math inline">\(O(n\log
+n)\)</span>；</li>
+<li>通过 <span class="math inline">\(C_i=A_iB_i\)</span> 计算，<span
+class="math inline">\(O(n)\)</span>;</li>
+<li>把 <span class="math inline">\(C\)</span> 变换回 <span
+class="math inline">\(c\)</span>，<span class="math inline">\(O(n\log
+n)\)</span>。</li>
+</ol>
+<p>综上，时间复杂度是 <span class="math inline">\(O(n\log n)\)</span>
+的。</p>
+<p>在 FFT 中，我们构造了 <span class="math inline">\(A,B\)</span> 为
+<span class="math inline">\(a,b\)</span> 的点值表示法，这么做满足 <span
+class="math inline">\(C_i=A_iB_i\)</span> 且容易变换。</p>
+<p>其实 FWT 的思想也是一样的，主要也是需要构造 <span
+class="math inline">\(A,B\)</span>，使得其满足 <span
+class="math inline">\(C_i=A_iB_i\)</span> 且可以快速变换。下面我们举
+<span class="math inline">\(\cup\)</span>（按位或）、<span
+class="math inline">\(\cap\)</span>（按位与）和 <span
+class="math inline">\(\oplus\)</span>（按位异或）为例。</p>
+<p>因为数列长度是 <span class="math inline">\(2\)</span>
+的幂会更好处理，所以下文认为数列长度为 <span
+class="math inline">\(2^n\)</span>。</p>
+<h3 id="按位或">按位或</h3>
+<p><span class="math display">\[
+c_i=\sum_{j\cup k=i} a_jb_k
+\]</span></p>
+<p>我们可以构造 <span class="math inline">\(A_i=\sum_{i\cup j=i}
+a_j\)</span>。看看为什么需要这么构造。</p>
+<p>首先，它满足 <span class="math inline">\(C_i=A_iB_i\)</span>：</p>
+<p><span class="math display">\[
+\begin{aligned}
+A_iB_i&amp;=(\sum_{i\cup j=i} a_j)(\sum_{i\cup k=i} b_k) \\
+&amp;=\sum_{i\cup j=i}\sum_{i\cup k=i}a_jb_k \\
+&amp;=\sum_{i\cup j=i}\sum_{i\cup k=i}a_jb_k \\
+&amp;=\sum_{i\cup(j\cup k)=i}a_jb_k \\
+&amp;= C_i
+\end{aligned}
+\]</span></p>
+<p>其次，它可以快速变换。举顺变换的例子。类比 FFT
+的步骤，我们采用分治的方法来处理它。假设目前考虑到第 <span
+class="math inline">\(i\)</span> 位，其中 <span
+class="math inline">\(A_0\)</span> 和 <span
+class="math inline">\(A_1\)</span> 是 <span
+class="math inline">\(i-1\)</span> 位分治的结果：</p>
+<p><span class="math display">\[
+A=\text{merge}(A_0, A_0+A_1)
+\]</span></p>
+<p>其中，<span class="math inline">\(A_0\)</span> 是数列 <span
+class="math inline">\(A\)</span> 的左半部分，<span
+class="math inline">\(A_1\)</span> 是 <span
+class="math inline">\(A\)</span> 的右半部分。<span
+class="math inline">\(\text{merge}\)</span>
+函数就是把两个数列像拼接字符串一样拼接起来。<span
+class="math inline">\(+\)</span> 则是将两个数列对应相加。</p>
+<p>这么做为什么是正确的呢？容易发现，<span
+class="math inline">\(A_0\)</span> 恰好是当前处理到的二进制位为 <span
+class="math inline">\(0\)</span> 的子数列，<span
+class="math inline">\(A_1\)</span> 则是当前处理到的二进制位为 <span
+class="math inline">\(1\)</span> 的子数列。若当前位为 <span
+class="math inline">\(0\)</span>，则只能取二进制位为 <span
+class="math inline">\(0\)</span> 的子数列 <span
+class="math inline">\(A_0\)</span> 才能使得 <span
+class="math inline">\(i\cup j=i\)</span>。而若当前位为 <span
+class="math inline">\(1\)</span>，则两种序列都能取。</p>
+<hr />
+<p>考虑逆变换，则是将加上的 <span class="math inline">\(A_0\)</span>
+减回去：</p>
+<p><span class="math display">\[
+a=\text{merge}(a_0, a_1-a_0)
+\]</span></p>
+<p>下面我们给出代码实现。容易发现顺变换和逆变换可以合并为一个函数，顺变换时
+<span class="math inline">\(\text{type}=1\)</span>，逆变换时 <span
+class="math inline">\(\text{type}=-1\)</span>。</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Or</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;	<span class="hljs-comment">// 迭代实现，常数更小</span>
+	<span class="hljs-keyword">for</span>(ll x = <span class="hljs-number">2</span>; x &lt;= n; x &lt;&lt;= <span class="hljs-number">1</span>) &#123;
+		ll k = x &gt;&gt; <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				(a[i + j + k] += a[i + j] * type) %= P; 
+			&#125;
+		&#125;
+	&#125;
+&#125;</code></pre>
+<h3 id="按位与">按位与</h3>
+<p><span class="math display">\[
+c_i=\sum_{j\cap k=i} a_jb_k
+\]</span></p>
+<p>同理构造 <span class="math inline">\(A_i=\sum_{i\cap j=i}
+a_j\)</span>。<span class="math inline">\(C_i=A_iB_i\)</span>
+的正确性不证了。</p>
+<p>容易发现，<span class="math inline">\(A_0\)</span>
+恰好是当前处理到的二进制位为 <span class="math inline">\(0\)</span>
+的子数列，<span class="math inline">\(A_1\)</span>
+则是当前处理到的二进制位为 <span class="math inline">\(1\)</span>
+的子数列。若当前位为 <span
+class="math inline">\(1\)</span>，则只能取二进制位为 <span
+class="math inline">\(1\)</span> 的子数列 <span
+class="math inline">\(A_0\)</span> 才能使得 <span
+class="math inline">\(i\cap j=i\)</span>。而若当前位为 <span
+class="math inline">\(0\)</span>，则两种序列都能取。</p>
+<p><span class="math display">\[
+A=\text{merge}(A_0+A_1, A_1)
+\]</span></p>
+<p><span class="math display">\[
+a=\text{merge}(a_0 - a_1, a_1)
+\]</span></p>
+<hr />
+<p>下面我们给出代码实现。顺变换时 <span
+class="math inline">\(\text{type}=1\)</span>，逆变换时 <span
+class="math inline">\(\text{type}=-1\)</span>。</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">And</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll x = <span class="hljs-number">2</span>; x &lt;= n; x &lt;&lt;= <span class="hljs-number">1</span>) &#123;
+		ll k = x &gt;&gt; <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				(a[i + j] += a[i + j + k] * type) %= P; 
+			&#125;
+		&#125;
+	&#125;
+&#125;</code></pre>
+<h3 id="按位异或">按位异或</h3>
+<p>发现异或有点难搞，但这怎么会难倒沃尔什大佬呢？我们引入一个新的运算符
+<span class="math inline">\(\circ\)</span>。定义 <span
+class="math inline">\(x\circ y=\text{popcnt}(x\cap y)\bmod
+2\)</span>，其中 <span class="math inline">\(\text{popcnt}\)</span>
+表示二进制下 <span class="math inline">\(1\)</span> 的个数，并重申一下
+<span class="math inline">\(\cap\)</span> 表示按位与。</p>
+<p>不用慌，我们也不需要你真正实现一个 <span
+class="math inline">\(\text{popcnt}\)</span>，它仅仅只是作为一个理解的辅助罢了。</p>
+<p>我们发现它满足 <span class="math inline">\((x\circ y)\oplus (x\circ
+z)=x\circ(y\oplus z)\)</span>。（重申一下 <span
+class="math inline">\(\oplus\)</span> 表示按位异或）</p>
+<p>感性证明：发现这个新的运算符 <span
+class="math inline">\(\circ\)</span> 其实就是 <span
+class="math inline">\(x\)</span> 与 <span
+class="math inline">\(y\)</span> 相同位数的奇偶性。若 <span
+class="math inline">\((x\circ y)\oplus (x\circ z)=0\)</span>，则 <span
+class="math inline">\(x\)</span> 与 <span
+class="math inline">\(y\)</span>、<span class="math inline">\(x\)</span>
+与 <span class="math inline">\(z\)</span> 相同位数个数奇偶性相同，所以
+<span class="math inline">\(y\oplus z\)</span> 和 <span
+class="math inline">\(x\)</span> 相同位数个数奇偶性也是相同的 ；若 <span
+class="math inline">\((x\circ y)\oplus (x\circ z)=1\)</span>，则 <span
+class="math inline">\(x\)</span> 与 <span
+class="math inline">\(y\)</span>、<span class="math inline">\(x\)</span>
+与 <span class="math inline">\(z\)</span> 相同位数个数奇偶性不同，所以
+<span class="math inline">\(y\oplus z\)</span> 和 <span
+class="math inline">\(x\)</span> 相同位数个数奇偶性也是不同的。</p>
+<p>设 <span class="math inline">\(A_i=\sum_{i\circ j=0}a_j-\sum_{i\circ
+j=1}a_j\)</span>。我们来证一下 <span
+class="math inline">\(C_i=A_iB_i\)</span> 的正确性：</p>
+<p><span class="math display">\[
+\begin{aligned}
+A_iB_i&amp;=(\sum_{i\circ j=0}a_j-\sum_{i\circ j=1}a_j)(\sum_{i\circ
+k=0}b_k-\sum_{i\circ k=1}b_k) \\
+&amp;=(\sum_{i\circ j=0}a_j\sum_{i\circ k=0}b_k+\sum_{i\circ
+j=1}a_j\sum_{i\circ k=1}b_k)-(\sum_{i\circ j=0}a_j\sum_{i\circ
+k=1}b_k+\sum_{i\circ j=1}a_j\sum_{i\circ k=0}b_k) \\
+&amp;=\sum_{(j\oplus k)\circ i=0}a_jb_k-\sum_{(j\oplus k)\circ
+i=1}a_jb_k \\
+&amp;=C_i
+\end{aligned}
+\]</span></p>
+<p>来看看怎么快速计算 <span class="math inline">\(A,B\)</span>
+的值，依旧是分治：</p>
+<p>对于 <span class="math inline">\(i\)</span> 在当前位为 <span
+class="math inline">\(0\)</span> 的子数列 <span
+class="math inline">\(A_0\)</span>，进行 <span
+class="math inline">\(\circ\)</span> 运算时发现它和 <span
+class="math inline">\(0\)</span> 计算或和 <span
+class="math inline">\(1\)</span> 计算结果都不会变（因为 <span
+class="math inline">\(0\cap 0=0,0\cap1=0\)</span>），所以 <span
+class="math inline">\(A_i=\sum_{i\circ j=0}a_j-\sum_{i\circ
+j=1}a_j\)</span> 中的 <span class="math inline">\(\sum_{i\circ
+j=1}a_j=0\)</span>。</p>
+<p>对于 <span class="math inline">\(i\)</span> 在当前位为 <span
+class="math inline">\(1\)</span> 的子数列 <span
+class="math inline">\(A_1\)</span>，进行 <span
+class="math inline">\(\circ\)</span> 运算时发现它和 <span
+class="math inline">\(0\)</span> 计算结果是 <span
+class="math inline">\(0\)</span>，和 <span
+class="math inline">\(1\)</span> 计算结果是 <span
+class="math inline">\(1\)</span>（因为 <span class="math inline">\(1\cap
+0=0,1\cap1=1\)</span>）。</p>
+<p>综上，有：</p>
+<p><span class="math display">\[
+A=\text{merge}((A_0+A_1)-0, A_0-A_1)
+\]</span></p>
+<p>也就是：</p>
+<p><span class="math display">\[
+A=\text{merge}(A_0+A_1, A_0-A_1)
+\]</span></p>
+<p>逆变换易得：</p>
+<p><span class="math display">\[
+a=\text{merge}(\frac{a_0+a_1}{2}, \frac{a_0-a_1}{2})
+\]</span></p>
+<p>给出代码，顺变换时 <span
+class="math inline">\(\text{type}=1\)</span>，逆变换时 <span
+class="math inline">\(\text{type}=\frac{1}{2}\)</span>。</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Xor</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll x = <span class="hljs-number">2</span>; x &lt;= n; x &lt;&lt;= <span class="hljs-number">1</span>) &#123;
+		ll k = x &gt;&gt; <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				(a[i + j] += a[i + j + k]) %= P; 
+				(a[i + j + k] = a[i + j] - a[i + j + k] * <span class="hljs-number">2</span>) %= P; 
+				(a[i + j] *= type) %= P;
+				(a[i + j + k] *= type) %= P;
+			&#125;
+		&#125;
+	&#125;
+&#125;</code></pre>
+<p>现在大家能去切前两道模板例题，并挑战一下后面的几道题目了。</p>
+<h2 id="从另一个角度看待-fwt">从另一个角度看待 FWT</h2>
+<p>我们设 <span class="math inline">\(c(i,j)\)</span> 是 <span
+class="math inline">\(a_j\)</span> 对 <span
+class="math inline">\(A_i\)</span> 的贡献系数。我们可以重新描述 FWT
+变换的过程：</p>
+<p><span class="math display">\[
+A_i = \sum_{j=0}^{n-1} c(i,j) a_j
+\]</span></p>
+<p>因为有：</p>
+<p><span class="math display">\[
+A_iB_i=C_i
+\]</span></p>
+<p>所以我们可以通过简单的证明得到：<span
+class="math inline">\(c(i,j)c(i,k)=c(i,j\odot k)\)</span>。其中 <span
+class="math inline">\(\odot\)</span> 是任意一种位运算。</p>
+<p>同时，<span class="math inline">\(c\)</span>
+函数还有一个重要的性质，它可以按位处理。</p>
+<p>举个例子，我们变换的时候：</p>
+<p><span class="math display">\[
+A_i = \sum_{j=0}^{n-1} c(i,j) a_j
+\]</span></p>
+<p>这么做是比较劣的，我们将其拆分：</p>
+<p><span class="math display">\[
+A_i = \sum_{j=0}^{(n-1)/2} c(i,j) a_j+\sum_{j=(n-1)/2+1}^{n-1} c(i,j)
+a_j
+\]</span></p>
+<p>考虑前面的式子和后面的式子 <span class="math inline">\(i,j\)</span>
+的区别，发现只有最高位不同。</p>
+<p>所以我们将 <span class="math inline">\(i,j\)</span> 去除最高位的值为
+<span class="math inline">\(i&#39;,j&#39;\)</span>，并记 <span
+class="math inline">\(i_0\)</span> 为 <span
+class="math inline">\(i\)</span> 的最高位。有：</p>
+<p><span class="math display">\[
+A_i = c(i_0,0)\sum_{j=0}^{(n-1)/2} c(i&#39;,j&#39;)
+a_j+c(i_0,1)\sum_{j=(n-1)/2+1}^{n-1} c(i&#39;,j&#39;) a_j
+\]</span></p>
+<p>如果 <span class="math inline">\(i_0=0\)</span>，则有：</p>
+<p><span class="math display">\[
+A_i = c(0,0)\sum_{j=0}^{(n-1)/2} c(i&#39;,j&#39;)
+a_j+c(0,1)\sum_{j=(n-1)/2+1}^{n-1} c(i&#39;,j&#39;) a_j
+\]</span></p>
+<p><span class="math inline">\(i_0=1\)</span> 则有：</p>
+<p><span class="math display">\[
+A_i = c(1,0)\sum_{j=0}^{(n-1)/2} c(i&#39;,j&#39;)
+a_j+c(1,1)\sum_{j=(n-1)/2+1}^{n-1} c(i&#39;,j&#39;) a_j
+\]</span></p>
+<p>也就是说，我们只需要：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+c(0,0) &amp; c(0,1) \\
+c(1,0) &amp; c(1,1)
+\end{bmatrix}
+\]</span></p>
+<p>四个数就可以完成变换了。我们称这个矩阵为位矩阵。</p>
+<hr />
+<p>如果我们要进行逆变换，则需要上面的位矩阵的逆矩阵。</p>
+<p>若逆矩阵为 <span
+class="math inline">\(c^{-1}\)</span>，可以通过类似操作得到原数：</p>
+<p><span class="math display">\[
+a_i = \sum_{j=0}^n c^{-1}(i,j) A_j
+\]</span></p>
+<p>逆矩阵不一定存在，比如如果有一排 <span
+class="math inline">\(0\)</span> 或者一列 <span
+class="math inline">\(0\)</span>
+那么这个矩阵就没有逆，我们在构造时需要格外小心。</p>
+<h3 id="按位或-1">按位或</h3>
+<p>我们可以构造：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 0 \\
+1 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>这样满足 <span class="math inline">\(c(i,j)c(i,k)=c(i,j\cup
+k)\)</span>。我们发现，这和我们前面推出的 <span
+class="math inline">\(A=\text{merge}(A_0, A_0+A_1)\)</span>
+一模一样！同理，下面也是一个满足这个条件的矩阵，但我们一般使用上面这个：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 \\
+1 &amp; 0
+\end{bmatrix}
+\]</span></p>
+<p>虽然下面这个矩阵也满足 <span
+class="math inline">\(c(i,j)c(i,k)=c(i,j\cup
+k)\)</span>，但这个矩阵存在一排 <span
+class="math inline">\(0\)</span>，不存在逆，所以不合法：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+0 &amp; 0 \\
+1 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>如果我们要进行逆变换，则需要对矩阵求逆，以<strong>最上面</strong>这个矩阵为例，得：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 0 \\
+-1 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>然后按照顺变换的方法，把逆变换矩阵代入即可。</p>
+<h3 id="按位与-1">按位与</h3>
+<p>我们可以构造：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 \\
+0 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>这样满足 <span class="math inline">\(c(i,j)c(i,k)=c(i,j\cap
+k)\)</span>。</p>
+<p>逆矩阵：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; -1 \\
+0 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<h3 id="按位异或-1">按位异或</h3>
+<p>我们可以构造：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 \\
+1 &amp; -1
+\end{bmatrix}
+\]</span></p>
+<p>这样满足 <span class="math inline">\(c(i,j)c(i,k)=c(i,j\oplus
+k)\)</span>。</p>
+<p>逆矩阵：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+0.5 &amp; 0.5 \\
+0.5 &amp; -0.5
+\end{bmatrix}
+\]</span></p>
+<h2 id="fwt-的性质">FWT 的性质</h2>
+<p>FWT 是线性变换。</p>
+<p>若 <span class="math inline">\(FWT(X)\)</span> 是 <span
+class="math inline">\(X\)</span> 的 FWT 变换，则有：</p>
+<p><span class="math display">\[
+FWT(A+B)=FWT(A)+FWT(B)
+\]</span></p>
+<p>以及：</p>
+<p><span class="math display">\[
+FWT(cA)=cFWT(A)
+\]</span></p>
+<p>这样就可以实现快速卷积，参考第四道例题。</p>
+<h2 id="k-维-fwt">K 维 FWT</h2>
+<p>其实位运算的本质是对一个 <span class="math inline">\(n\)</span> 维
+<span class="math inline">\(\{0,1\}\)</span>
+向量的运算。或运算就是每一维取 <span
+class="math inline">\(\max\)</span>。且运算就是每一维取 <span
+class="math inline">\(\min\)</span>。异或运算则是每一维对应相加再 <span
+class="math inline">\(\bmod 2\)</span>。</p>
+<p>位运算有个特点：向量的每一位都是独立的。</p>
+<p>我们把 <span class="math inline">\(\{0,1\}\)</span> 扩展到 <span
+class="math inline">\([0,K)\cap Z\)</span> 也就是扩展到 <span
+class="math inline">\(K\)</span> 进制，看看会得到什么？</p>
+<h3 id="max-运算">max 运算</h3>
+<p>我们将 <span class="math inline">\(\cup\)</span> 运算拓展到 <span
+class="math inline">\(K\)</span> 进制，定义 <span
+class="math inline">\(i\cup j\)</span> 表示按位取 <span
+class="math inline">\(\max\)</span>，有：</p>
+<p><span class="math display">\[
+c(i,j)c(i,k)=c(i,j\cup k)
+\]</span></p>
+<p>若 <span class="math inline">\(j=k\)</span>，那么上式又是：</p>
+<p><span class="math display">\[
+c(i,j)c(i,j)=c(i,j)
+\]</span></p>
+<p>也就是说，每一行的 <span class="math inline">\(1\)</span> 必定只能在
+<span class="math inline">\(0\)</span>
+的前面，如果在后面则不合法了。手玩一下可以发现一组合法构造：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 1 &amp; 0 \\
+1 &amp; 1 &amp; 1 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>求逆可得：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+-1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; -1 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; -1 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<h3 id="min-运算">min 运算</h3>
+<p>我们将 <span class="math inline">\(\cap\)</span> 运算拓展到 <span
+class="math inline">\(K\)</span> 进制，定义 <span
+class="math inline">\(i\cap j\)</span> 表示按位取 <span
+class="math inline">\(\min\)</span>，有：</p>
+<p><span class="math display">\[
+c(i,j)c(i,k)=c(i,j\cap k)
+\]</span></p>
+<p>若 <span class="math inline">\(j=k\)</span>，那么上式又是：</p>
+<p><span class="math display">\[
+c(i,j)c(i,j)=c(i,j)
+\]</span></p>
+<p>也就是说，每一行的 <span class="math inline">\(1\)</span> 必定只能在
+<span class="math inline">\(0\)</span>
+的后面，如果在前面则不合法了。手玩一下可以发现一组合法构造：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 0 &amp; 1 &amp; 1 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>求逆可得：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; -1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; -1 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; -1 \\
+0 &amp; 0 &amp; 0 &amp; 1
+\end{bmatrix}
+\]</span></p>
+<p>前两者用得比较少，用得比较多的是：</p>
+<h3 id="不进位加法">不进位加法</h3>
+<p>我们将 <span class="math inline">\(\oplus\)</span> 运算拓展到 <span
+class="math inline">\(K\)</span> 进制，定义 <span
+class="math inline">\(i\oplus j\)</span> 表示按位相加再 <span
+class="math inline">\(\bmod K\)</span>，有：</p>
+<p><span class="math display">\[
+c(i,j)c(i,k)=c(i,j\oplus k)
+\]</span></p>
+<p>我们构造 <span
+class="math inline">\(c(i,j)=\omega_{K}^j\)</span>，就可以满足要求了：</p>
+<p><span class="math display">\[
+\omega_{K}^j\omega_{k}^k=\omega_{K}^{(j+k)\bmod K}
+\]</span></p>
+<p>但是每一行都一样矩阵也没有逆，所以我们可以构造 <span
+class="math inline">\(c(i,j)=\omega_{K}^{(i-1)j}\)</span> 即可。</p>
+<p>有下面这个矩阵：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; \cdots &amp; 1 \\
+1 &amp; \omega_{K}^1 &amp; \omega_{K}^2 &amp; \cdots &amp;
+\omega_{K}^{k-1} \\
+1 &amp; \omega_{K}^2 &amp; \omega_{K}^4 &amp; \cdots &amp;
+\omega_{K}^{2(k-1)} \\
+1 &amp; \omega_{K}^3 &amp; \omega_{K}^6 &amp; \cdots &amp;
+\omega_{K}^{3(k-1)} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; \omega_{K}^{k-1} &amp; \omega_{K}^{2(k-1)} &amp; \cdots &amp;
+\omega_{K}^{(k-1)(k-1)}
+\end{bmatrix}
+\]</span></p>
+<p>此即为 <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Vandermonde_matrix">范德蒙德矩阵</a>，求逆可得：</p>
+<p><span class="math display">\[
+\frac{1}{K}\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; \cdots &amp; 1 \\
+1 &amp; \omega_{K}^{-1} &amp; \omega_{K}^{-2} &amp; \cdots &amp;
+\omega_{K}^{-(k-1)} \\
+1 &amp; \omega_{K}^{-2} &amp; \omega_{K}^{-4} &amp; \cdots &amp;
+\omega_{K}^{-2(k-1)} \\
+1 &amp; \omega_{K}^{-3} &amp; \omega_{K}^{-6} &amp; \cdots &amp;
+\omega_{K}^{-3(k-1)} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; \omega_{K}^{-(k-1)} &amp; \omega_{K}^{-2(k-1)} &amp; \cdots
+&amp; \omega_{K}^{-(k-1)(k-1)}
+\end{bmatrix}
+\]</span></p>
+<p>如果我们题目给出的模数是存在单位根的，我们就可以简单实现，可以参考第六道例题。</p>
+<hr />
+<p>但是<strong>单位根在模意义下可能不存在</strong>，所以我们考虑扩域，就是人为地定义一个
+<span class="math inline">\(x\)</span>，满足 <span
+class="math inline">\(x^K=1\)</span>，然后直接把 <span
+class="math inline">\(x\)</span> 代入计算，这样每个数都是一个关于 <span
+class="math inline">\(x\)</span> 的 <span
+class="math inline">\(k-1\)</span> 次多项式。我们只需要在 <span
+class="math inline">\(\pmod {x^K-1}\)</span>
+下计算即可。那么矩阵可以这么表示：</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; \cdots &amp; 1 \\
+1 &amp; x^1 &amp; x^2 &amp; \cdots &amp; x^{k-1} \\
+1 &amp; x^2 &amp; x^4 &amp; \cdots &amp; x^{2(k-1)} \\
+1 &amp; x^3 &amp; x^6 &amp; \cdots &amp; x^{3(k-1)} \\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+1 &amp; x^{k-1} &amp; x^{2(k-1)} &amp; \cdots &amp; x^{k(k-1)}
+\end{bmatrix}
+\]</span></p>
+<p>但是这么做可能会存在零因子，也就是<strong>一个数有多种表示方法</strong>，我们无法确定一个数的真实值。</p>
+<p>我们考虑不 <span class="math inline">\(\pmod {x^K-1}\)</span>
+了，我们 <span class="math inline">\(\bmod\)</span> 分圆多项式 <span
+class="math inline">\(\Phi_{K}(x)\)</span>，他满足 <span
+class="math inline">\(x\)</span> 的阶为 <span
+class="math inline">\(k\)</span>，且在 <span
+class="math inline">\(Q\)</span> 上不可约。所以我们定义上面的计算是在
+<span class="math inline">\(\pmod {\Phi_{K}(x)}\)</span>
+下进行即可。</p>
+<p>另一方面，如何求分圆多项式，这一点可以在<a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1520">因式分解</a>这道题的题解区里了解。这里给出分圆多项式的表：</p>
+<p><img
+src="https://znpdco.github.io/blogimage/2024-05-07-FWT/cyclotomic.png" /></p>
+<p>还有一个问题是，<span class="math inline">\(\bmod
+\Phi_{K}(x)\)</span> 常数大（因为 <span
+class="math inline">\(\Phi\)</span> 本身就是一个多项式）。但是因为 <span
+class="math inline">\(\Phi_{K}(x)\mid x^k-1\)</span>，我们只需要在计算时
+<span class="math inline">\(\bmod x^k -1\)</span>，最后再 <span
+class="math inline">\(\bmod \Phi_{K}(x)\)</span> 即可。</p>
+<p>具体实现参考第七道例题。</p>
+<h2 id="例题">例题</h2>
+<h3 id="洛谷-p4717-模板快速莫比乌斯沃尔什变换-fmtfwt"><a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P4717">「洛谷 P4717」
+【模板】快速莫比乌斯/沃尔什变换 (FMT/FWT)</a></h3>
+<blockquote>
+<p>求 <span class="math inline">\(\cup\)</span>、<span
+class="math inline">\(\cap\)</span>、<span
+class="math inline">\(\oplus\)</span> 的三种卷积。</p>
+<p><span class="math inline">\(n\le17\)</span></p>
+</blockquote>
+<p>这题也就是模板题了，下文直接给出代码：</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> P 998244353</span>
+<span class="hljs-type">const</span> ll N = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">18</span>;
+ll n;
+ll A[N], B[N];
+ll a[N], b[N];
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) a[i] = A[i], b[i] = B[i];
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Or</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll x = <span class="hljs-number">2</span>; x &lt;= n; x &lt;&lt;= <span class="hljs-number">1</span>) &#123;
+		ll k = x &gt;&gt; <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				(a[i + j + k] += a[i + j] * type) %= P; 
+			&#125;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">And</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll x = <span class="hljs-number">2</span>; x &lt;= n; x &lt;&lt;= <span class="hljs-number">1</span>) &#123;
+		ll k = x &gt;&gt; <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				(a[i + j] += a[i + j + k] * type) %= P; 
+			&#125;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Xor</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll x = <span class="hljs-number">2</span>; x &lt;= n; x &lt;&lt;= <span class="hljs-number">1</span>) &#123;
+		ll k = x &gt;&gt; <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				(a[i + j] += a[i + j + k]) %= P; 
+				(a[i + j + k] = a[i + j] - a[i + j + k] * <span class="hljs-number">2</span>) %= P; 
+				(a[i + j] *= type) %= P;
+				(a[i + j + k] *= type) %= P;
+			&#125;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">calc</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) (a[i] *= b[i]) %= P;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld &quot;</span>, (a[i] % P + P) % P);
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;n);
+	n = <span class="hljs-number">1</span> &lt;&lt; n;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;A[i]);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;B[i]);
+	
+	<span class="hljs-built_in">init</span>(); <span class="hljs-built_in">Or</span>(a, <span class="hljs-number">1</span>); <span class="hljs-built_in">Or</span>(b, <span class="hljs-number">1</span>); <span class="hljs-built_in">calc</span>(); <span class="hljs-built_in">Or</span>(a, P - <span class="hljs-number">1</span>); <span class="hljs-built_in">print</span>();
+	<span class="hljs-built_in">init</span>(); <span class="hljs-built_in">And</span>(a, <span class="hljs-number">1</span>); <span class="hljs-built_in">And</span>(b, <span class="hljs-number">1</span>); <span class="hljs-built_in">calc</span>(); <span class="hljs-built_in">And</span>(a, P - <span class="hljs-number">1</span>); <span class="hljs-built_in">print</span>();
+	<span class="hljs-built_in">init</span>(); <span class="hljs-built_in">Xor</span>(a, <span class="hljs-number">1</span>); <span class="hljs-built_in">Xor</span>(b, <span class="hljs-number">1</span>); <span class="hljs-built_in">calc</span>(); <span class="hljs-built_in">Xor</span>(a, <span class="hljs-number">499122177</span>); <span class="hljs-built_in">print</span>();
+&#125;</code></pre>
+<h3 id="洛谷-p6097-模板子集卷积"><a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P6097">「洛谷 P6097」
+【模板】子集卷积</a></h3>
+<blockquote>
+<p>求：</p>
+<p><span class="math display">\[
+c_k=\sum_{\substack{ {i \cap j=0}\\{i\cup j=k}}} a_i b_j
+\]</span></p>
+<p><span class="math inline">\(n\le20\)</span></p>
+</blockquote>
+<p>首先，下半部分是我们喜闻乐见的 FWT 常见形式，而上半部分我们可以看成是
+<span class="math inline">\(i\)</span> 与 <span
+class="math inline">\(j\)</span> 不交。有：</p>
+<p><span class="math display">\[
+i\cup j=0\Rightarrow
+\text{popcnt}(i)+\text{popcnt}(j)=\text{popcnt}(i\cup j)
+\]</span></p>
+<p>所以我们可以构造：</p>
+<p><span class="math display">\[
+A_{i,k}=\sum_{\substack{ {i\cup j=i}\\{\text{popcnt}(j)=k}}} a_j
+\]</span></p>
+<p>可以枚举 <span class="math inline">\(\text{popcnt}\)</span>
+的值，分开考虑。</p>
+<p>那么求 <span class="math inline">\(C\)</span> 的时候有 <span
+class="math inline">\(C_{i,k}=\sum_{j=0}^n
+A_{i,j}B_{i,k-j}\)</span>。</p>
+<p>然后就可以做了。</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> popcnt(x) __builtin_popcountll(x)</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-type">const</span> ll M = <span class="hljs-number">20</span>, N = <span class="hljs-number">1</span> &lt;&lt; M, P = <span class="hljs-number">1e9</span> + <span class="hljs-number">9</span>;
+ll n, m;
+ll a[M + <span class="hljs-number">1</span>][N], b[M + <span class="hljs-number">1</span>][N], c[M + <span class="hljs-number">1</span>][N];
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Or</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll x = <span class="hljs-number">2</span>; x &lt;= n; x &lt;&lt;= <span class="hljs-number">1</span>) &#123;
+		ll k = x &gt;&gt; <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				(a[i + j + k] += a[i + j] * type) %= P;
+			&#125;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span> ,&amp;m);
+	n = <span class="hljs-number">1</span> &lt;&lt; m;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) &#123;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;a[<span class="hljs-built_in">popcnt</span>(i)][i]);
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) &#123;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;b[<span class="hljs-built_in">popcnt</span>(i)][i]);
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123;
+		<span class="hljs-built_in">Or</span>(a[i], <span class="hljs-number">1</span>);
+		<span class="hljs-built_in">Or</span>(b[i], <span class="hljs-number">1</span>);
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123;
+		<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt;= i; j ++) &#123;
+			<span class="hljs-keyword">for</span>(ll k = <span class="hljs-number">0</span>; k &lt; n; k ++) &#123;
+				(c[i][k] += a[j][k] * b[i - j][k]) %= P;
+			&#125;
+		&#125;
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt;= m; i ++) &#123;
+		<span class="hljs-built_in">Or</span>(c[i], <span class="hljs-number">-1</span>);
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) &#123;
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld &quot;</span>, (c[<span class="hljs-built_in">popcnt</span>(i)][i] % P + P) % P);
+	&#125;
+&#125;</code></pre>
+<h3 id="牛客-881dparity-of-tuples"><a
+target="_blank" rel="noopener" href="https://ac.nowcoder.com/acm/contest/881/D">「牛客 881D」Parity of
+Tuples</a></h3>
+<blockquote>
+<p>给定 <span class="math inline">\(n\times m\)</span> 的矩阵 <span
+class="math inline">\(a\)</span>，定义 <span
+class="math inline">\(\text{cnt}(x)\)</span> 为矩阵中有多少行对于 <span
+class="math inline">\(x\)</span> 是合法的，合法的定义为这一行中每一个数
+<span class="math inline">\(a_{i,j}\cap x\)</span>
+的二进制值中<strong>都有</strong>奇数个 <span
+class="math inline">\(1\)</span>。</p>
+<p>你需要求出对于所有的 <span class="math inline">\(x\)</span>，<span
+class="math inline">\(\text{cnt}\)</span> 的取值。</p>
+<p><span class="math inline">\(n\le10^5,m\le10,x\le2^{20}\)</span></p>
+</blockquote>
+<p>再次重申，<span class="math inline">\(\cap\)</span>
+是按位与的意思。</p>
+<p>首先我们用数学公式定义一下 <span
+class="math inline">\(\text{cnt}\)</span>（因为公式复杂，所以加了 <span
+class="math inline">\(\tt large\)</span>）：</p>
+<p><span class="math display">\[
+\large \text{cnt}(x)=\frac{1}{2^m}\sum_{i=1}^n\prod_{j=1}^m
+(1-(-1)^{\text{popcnt}(a_{i,j}\cap x)})
+\]</span></p>
+<p>说明一下正确性。如果 <span
+class="math inline">\(\text{popcnt}(a_{i,j}\cap x)\)</span>
+是奇数的话，那么 <span
+class="math inline">\((-1)^{\text{popcnt}(a_{i,j}\cap x)}\)</span>
+的结果就是 <span class="math inline">\(-1\)</span>。最后 <span
+class="math inline">\(1-(-1)^{\text{popcnt}(a_{i,j}\cap x)}\)</span>
+就是 <span class="math inline">\(2\)</span>，最后会被 <span
+class="math inline">\(\frac{1}{2^m}\)</span> 除去；如果 <span
+class="math inline">\(\text{popcnt}(a_{i,j}\cap x)\)</span>
+是偶数的话，那么 <span
+class="math inline">\((-1)^{\text{popcnt}(a_{i,j}\cap x)}\)</span>
+的结果就是 <span class="math inline">\(1\)</span>。最后 <span
+class="math inline">\(1-(-1)^{\text{popcnt}(a_{i,j}\cap x)}\)</span>
+就是 <span class="math inline">\(0\)</span>，那么整行的结果都是 <span
+class="math inline">\(0\)</span>。</p>
+<p>然后我们发现它是可以展开的：</p>
+<p><span class="math display">\[
+\large \begin{aligned}
+\prod_{j=1}^m (1-(-1)^{\text{popcnt}(a_{i,j}\cap x)}) &amp;=
+(1-(-1)^{\text{popcnt}(a_{i,1}\cap
+x)})(1-(-1)^{\text{popcnt}(a_{i,2}\cap
+x)})\cdots(1-(-1)^{\text{popcnt}(a_{i,m}\cap x)}) \\
+&amp;= 1 - \sum_{a=1}^m (-1)^{\text{popcnt}(a_{i,a}\cap x)} +
+\sum_{a=1}^m\sum_{b=a+1}^m (-1)^{\text{popcnt}(a_{i,a}\cap
+x)+\text{popcnt}(a_{i,b}\cap x)} - \\
+&amp; \sum_{a=1}^m\sum_{b=a+1}^m\sum_{c=b+1}^m
+(-1)^{\text{popcnt}(a_{i,a}\cap x)+\text{popcnt}(a_{i,b}\cap
+x)+\text{popcnt}(a_{i,c}\cap x)} + \cdots
+\end{aligned}
+\]</span></p>
+<p>然后我们有一个性质：</p>
+<p><span class="math display">\[
+\large (-1)^{\sum_{i=1}^n\text{popcnt}(a_i\cap
+x)}=(-1)^{\text{popcnt}((\oplus_{i=1}^na_i)\cap x)}
+\]</span></p>
+<p>也就是 <span class="math inline">\(\sum_{i=1}^n\text{popcnt}(a_i\cap
+x)\)</span> 的奇偶性与 <span
+class="math inline">\(\text{popcnt}((\oplus_{i=1}^na_i)\cap x)\)</span>
+的相同。这点在上面的新的运算符 <span
+class="math inline">\(\circ\)</span> 的性质中有类似的体现。</p>
+<p>容易得到：</p>
+<p><span class="math display">\[
+\large\begin{aligned}
+&amp;=1 - \sum_{a=1}^m (-1)^{\text{popcnt}(a_{i,a}\cap x)} +
+\sum_{a=1}^m\sum_{b=a+1}^m (-1)^{\text{popcnt}(a_{i,a}\cap
+x)+\text{popcnt}(a_{i,b}\cap x)} - \\
+&amp; \sum_{a=1}^m\sum_{b=a+1}^m\sum_{c=b+1}^m
+(-1)^{\text{popcnt}(a_{i,a}\cap x)+\text{popcnt}(a_{i,b}\cap
+x)+\text{popcnt}(a_{i,c}\cap x)} + \cdots \\
+&amp;=1 - \sum_{a=1}^m (-1)^{\text{popcnt}(a_{i,a}\cap x)} +
+\sum_{a=1}^m\sum_{b=a+1}^m (-1)^{\text{popcnt}((a_{i,a}\oplus
+a_{i,b})\cap x)} - \\
+&amp; \sum_{a=1}^m\sum_{b=a+1}^m\sum_{c=b+1}^m
+(-1)^{\text{popcnt}((a_{i,a}\oplus a_{i,b}\oplus a_{i,c})\cap x)} +
+\cdots \\
+\end{aligned}
+\]</span></p>
+<p>我们发现一加一减的可以容斥，我们容斥计算 <span
+class="math inline">\(f_i\)</span> 表示 <span
+class="math inline">\(n\)</span> 行的所有式子中 <span
+class="math inline">\((-1)^i\)</span> 前面的系数和。</p>
+<pre><code class="hljs cpp"><span class="hljs-comment">// num 处理到第几列</span>
+<span class="hljs-comment">// x 当前的指数</span>
+<span class="hljs-comment">// mu 当前的系数（+1 or -1）</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(ll *a, ll num, ll x, ll mu)</span> </span>&#123;
+	<span class="hljs-keyword">if</span>(num &gt; m) &#123;
+		f[x] += mu;
+		<span class="hljs-keyword">return</span>;
+	&#125;
+	<span class="hljs-built_in">dfs</span>(a, num + <span class="hljs-number">1</span>, x, mu);	<span class="hljs-comment">// 不加入第 num 列，系数不变</span>
+	<span class="hljs-built_in">dfs</span>(a, num + <span class="hljs-number">1</span>, x ^ a[num], -mu);
+&#125;</code></pre>
+<p>这样我们就可以进一步化简：</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;= \sum_{i=0}^{2^k-1} f_{x\cap i}(-1)^{x\cap i}
+\end{aligned}
+\]</span></p>
+<p>我们突然发现后面这个 <span class="math inline">\((-1)^i\)</span>
+取值只有两种，当 <span class="math inline">\(x\cap i\)</span>
+是奇数时取值为 <span class="math inline">\(-1\)</span>，否则为 <span
+class="math inline">\(1\)</span>。</p>
+<p>好了，现在我们的问题转换为了求出：</p>
+<p><span class="math display">\[
+\sum_{\text{popcnt}(x\cap i)\bmod2=0} f_i-\sum_{\text{popcnt}(x\cap
+i)\bmod2=1} f_i
+\]</span></p>
+<p>这不就是 FWT 中的异或变换吗：</p>
+<p><span class="math display">\[
+A_i=\sum_{i\circ j=0}a_j-\sum_{i\circ j=1}a_j
+\]</span></p>
+<p>综上，我们发现这题就是推式子容斥之后得到 FWT 的形式。</p>
+<hr />
+<p>原题需要将输出加密：</p>
+<p><span class="math display">\[
+\bigoplus\limits_{x = 0}^{2^k - 1} (\text{cnt}(x) \times 3^x \bmod (10^9
++ 7))
+\]</span></p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-type">const</span> ll P = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> N 100010</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> M 20</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> K 21</span>
+ll n, m, k;
+ll f[<span class="hljs-number">1</span> &lt;&lt; K];
+ll a[N][M];
+<span class="hljs-comment">// num 处理到第几列</span>
+<span class="hljs-comment">// x 当前的指数</span>
+<span class="hljs-comment">// mu 当前的系数（+1 or -1）</span>
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(ll *a, ll num, ll x, ll mu)</span> </span>&#123;
+	<span class="hljs-keyword">if</span>(num &gt; m) &#123;
+		f[x] += mu;
+		<span class="hljs-keyword">return</span>;
+	&#125;
+	<span class="hljs-built_in">dfs</span>(a, num + <span class="hljs-number">1</span>, x, mu);	<span class="hljs-comment">// 不加入第 num 列，系数不变</span>
+	<span class="hljs-built_in">dfs</span>(a, num + <span class="hljs-number">1</span>, x ^ a[num], -mu);
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Xor</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll x = <span class="hljs-number">2</span>; x &lt;= (<span class="hljs-number">1</span> &lt;&lt; k); x &lt;&lt;= <span class="hljs-number">1</span>) &#123;
+		ll z = x &gt;&gt; <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; (<span class="hljs-number">1</span> &lt;&lt; k); i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; z; j ++) &#123;
+				(a[i + j] += a[i + j + z]) %= P;
+				(a[i + j + z] = a[i + j] - <span class="hljs-number">2</span> * a[i + j + z]) %= P;
+				(a[i + j] *= type) %= P;
+				(a[i + j + z] *= type) %= P;
+			&#125;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">qpow</span><span class="hljs-params">(ll x, ll y)</span> </span>&#123;
+	<span class="hljs-keyword">if</span>(y == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">if</span>(y % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> x * <span class="hljs-built_in">qpow</span>(x, y - <span class="hljs-number">1</span>) % P;
+	ll tmp = <span class="hljs-built_in">qpow</span>(x, y / <span class="hljs-number">2</span>);
+	<span class="hljs-keyword">return</span> tmp * tmp % P;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld %lld&quot;</span>, &amp;n, &amp;m, &amp;k) != EOF) &#123;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; (<span class="hljs-number">1</span> &lt;&lt; k); i ++) f[i] = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">1</span>; j &lt;= m; j ++) &#123;
+				<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;a[i][j]);
+			&#125;
+			<span class="hljs-built_in">dfs</span>(a[i], <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+		&#125;
+		<span class="hljs-built_in">Xor</span>(f, <span class="hljs-number">1</span>);
+		ll pw = <span class="hljs-number">1</span>, inv = <span class="hljs-built_in">qpow</span>(<span class="hljs-number">1</span> &lt;&lt; m, P - <span class="hljs-number">2</span>), ans = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; (<span class="hljs-number">1</span> &lt;&lt; k); i ++) &#123;
+			ans ^= f[i] * pw % P * inv % P;
+			(pw *= <span class="hljs-number">3</span>) %= P;
+		&#125;
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, ans);
+	&#125;
+&#125;</code></pre>
+<h3 id="at-abc212h-nim-counting"><a
+target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc212/tasks/abc212_h">「AT ABC212H」
+Nim Counting</a></h3>
+<blockquote>
+<p>给定两个数 <span class="math inline">\(N,K\)</span>，以及一个长度为
+<span class="math inline">\(K\)</span> 的整数数组 <span
+class="math inline">\((A_1,A_2,\cdots, A_K)\)</span>。</p>
+<p>两个人玩 Nim 游戏。</p>
+<p>现在通过以下方式生成一个游戏：</p>
+<blockquote>
+<p>任意选择一个 <span class="math inline">\(1\le M\le N\)</span>，<span
+class="math inline">\(M\)</span> 表示石子堆数。</p>
+<p>对于每一堆，其石子数是 <span class="math inline">\(A\)</span>
+中任意一个数。</p>
+</blockquote>
+<p>对于 <span class="math inline">\(\sum_{i=1}^N K^i\)</span>
+种游戏，求先手获胜的游戏数，答案对 <span
+class="math inline">\(998244353\)</span> 取模。</p>
+<p><span
+class="math inline">\(n\le2\times10^5,K\le2^{16},a_i\le2^{16}\)</span></p>
+</blockquote>
+<p>根据玩 Nim 游戏的经验，可以发现先手获胜当且仅当 <span
+class="math inline">\(\bigoplus_{i=0}^n A_i\neq 0\)</span>。</p>
+<p>所以我们定义 dp 式子 <span class="math inline">\(f_{i,j}\)</span>
+表示有 <span class="math inline">\(i\)</span> 个石堆，且石堆异或和为
+<span class="math inline">\(j\)</span> 的获胜方案数，有：</p>
+<p><span class="math display">\[
+f_{i-1,j}\to \sum_{k=1}^Kf_{i,j\oplus a_k}
+\]</span></p>
+<p>答案就是 <span class="math inline">\(\sum_{i=1}^n\sum_{j\neq0}
+f_{i,j}\)</span>。</p>
+<p>直接转移是朴素的，发现上面的式子刚好是 FWT 异或操作，也就是：</p>
+<p><span class="math display">\[
+f_{i,j}=\sum_{k\oplus x=j} f_{i-1,k}a_x
+\]</span></p>
+<p>我们定义 <span class="math inline">\(a\)</span> 是一个全是 <span
+class="math inline">\(1\)</span> 的数组即可。</p>
+<p>同时，我们发现其实不需要真的进行 <span
+class="math inline">\(n\)</span> 次卷积，其实只需要将 FWT
+变换过之后的结果 <span class="math inline">\(A\)</span>，求出 <span
+class="math inline">\(A+A^2+A^3+\cdots+A^n\)</span> 即可。</p>
+<p>上面的可以通过等比数列求和公式计算。</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> P 998244353</span>
+<span class="hljs-type">const</span> ll K = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">20</span>; 
+ll n, k, ans;
+ll f[K];
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FWT</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll x = <span class="hljs-number">2</span>; x &lt;= K; x &lt;&lt;= <span class="hljs-number">1</span>) &#123;
+		ll k = x &gt;&gt; <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; K; i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				(a[i + j] += a[i + j + k]) %= P;
+				(a[i + j + k] = a[i + j] - <span class="hljs-number">2</span> * a[i + j + k]) %= P;
+				(a[i + j] *= type) %= P;
+				(a[i + j + k] *= type) %= P;
+			&#125;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">qpow</span><span class="hljs-params">(ll x, ll y)</span> </span>&#123;
+	<span class="hljs-keyword">if</span>(y == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">if</span>(y % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> x * <span class="hljs-built_in">qpow</span>(x, y - <span class="hljs-number">1</span>) % P;
+	ll tmp = <span class="hljs-built_in">qpow</span>(x, y / <span class="hljs-number">2</span>);
+	<span class="hljs-keyword">return</span> tmp * tmp % P;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld&quot;</span>, &amp;n, &amp;k);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= k; i ++) &#123;
+		ll x;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;x);
+		f[x] ++;
+	&#125;
+	<span class="hljs-built_in">FWT</span>(f, <span class="hljs-number">1</span>);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; K; i ++) &#123;
+		<span class="hljs-keyword">if</span>(f[i] == <span class="hljs-number">1</span>) f[i] = n;
+		<span class="hljs-keyword">else</span> &#123;
+			f[i] = f[i] * (<span class="hljs-built_in">qpow</span>(f[i], n) - <span class="hljs-number">1</span>) % P * <span class="hljs-built_in">qpow</span>(f[i] - <span class="hljs-number">1</span>, P - <span class="hljs-number">2</span>) % P;
+		&#125;
+	&#125;
+	<span class="hljs-built_in">FWT</span>(f, <span class="hljs-number">499122177</span>);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt; K; i ++) &#123;
+		(ans += f[i]) %= P;
+	&#125;
+	<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, (ans % P + P) % P);
+&#125;</code></pre>
+<h3 id="at-arc100e-or-plus-max"><a
+target="_blank" rel="noopener" href="https://atcoder.jp/contests/arc100/tasks/arc100_c">「AT ARC100E」
+Or Plus Max</a></h3>
+<blockquote>
+<p>给你一个长度为 <span class="math inline">\(2^n\)</span> 的序列 <span
+class="math inline">\(a\)</span>，每个<span class="math inline">\(1\le
+K\le 2^n-1\)</span>，找出最大的 <span
+class="math inline">\(a_i+a_j\)</span>（<span class="math inline">\(i
+\cup j \le K\)</span>，<span class="math inline">\(0 \le i &lt; j &lt;
+2^n\)</span>）并输出。</p>
+<p><span class="math inline">\(n\le18\)</span></p>
+</blockquote>
+<p>就是要求 <span class="math inline">\(\max_{i\cup j=k}
+a_i+a_j\)</span>。</p>
+<p>我们维护 <span class="math inline">\(f_{i}\)</span> 表示 <span
+class="math inline">\(\max_{i\cup j=i} a_i\)</span>，<span
+class="math inline">\(g_i=\text{max2}_{i\cup j=i} a_i\)</span>，<span
+class="math inline">\(\text{max2}\)</span> 表示次大值。</p>
+<p>然后就像 FWT 的或变换一样了。</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-type">const</span> ll N = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">18</span>;
+ll n;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">node</span> &#123;
+	ll mx1, mx2;
+	<span class="hljs-built_in">node</span>(ll a = <span class="hljs-number">0</span>, ll b = <span class="hljs-number">0</span>):<span class="hljs-built_in">mx1</span>(a), <span class="hljs-built_in">mx2</span>(b) &#123;&#125;
+	<span class="hljs-keyword">friend</span> node <span class="hljs-keyword">operator</span> +(<span class="hljs-type">const</span> node &amp;x, <span class="hljs-type">const</span> node &amp;y) &#123;
+		<span class="hljs-keyword">if</span>(x.mx1 &gt; y.mx1) &#123;
+			<span class="hljs-keyword">return</span> <span class="hljs-built_in">node</span>(x.mx1, <span class="hljs-built_in">max</span>(x.mx2, y.mx1));
+		&#125;
+		<span class="hljs-keyword">return</span> <span class="hljs-built_in">node</span>(y.mx1, <span class="hljs-built_in">max</span>(y.mx2, x.mx1));
+	&#125;
+&#125; a[N];
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FWT</span><span class="hljs-params">(node *a)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll x = <span class="hljs-number">2</span>; x &lt;= n; x &lt;&lt;= <span class="hljs-number">1</span>) &#123;
+		ll k = x &gt;&gt; <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				a[i + j + k] = a[i + j] + a[i + j + k];
+			&#125;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;n);
+	n = <span class="hljs-number">1</span> &lt;&lt; n;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) &#123;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld&quot;</span>, &amp;a[i].mx1);
+	&#125;
+	<span class="hljs-built_in">FWT</span>(a);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) &#123;
+		a[i].mx1 = a[i].mx1 + a[i].mx2;
+	&#125;
+	ll ans = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt; n; i ++) &#123;
+		ans = <span class="hljs-built_in">max</span>(ans, a[i].mx1);
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, ans);
+	&#125;
+&#125;</code></pre>
+<h3 id="hdu-6618-good-numbers"><a
+target="_blank" rel="noopener" href="https://acm.hdu.edu.cn/showproblem.php?pid=6618">「HDU 6618」 Good
+Numbers</a></h3>
+<blockquote>
+<p>定义一个正整数 <span class="math inline">\(n\)</span> 是好数当且仅当
+<span class="math inline">\(n\)</span> 在 8
+进制表示下所有的数码出现的次数为 3 的倍数（出现 0 次亦可）。</p>
+<p>有多少个 <span class="math inline">\(k\)</span> 位的 8
+进制数（不含前导 0），满足这个数是好的，且是 <span
+class="math inline">\(p\)</span> 的倍数。对 <span
+class="math inline">\(10^9+9\)</span> 取模。</p>
+<p>例如：当 <span class="math inline">\(k=3,p=2\)</span> 时，好数有
+<span class="math inline">\(222,444,666\)</span> 三个。</p>
+<p><span class="math inline">\(k\le10^{18},p&lt;8\)</span></p>
+</blockquote>
+<p>考虑状压 dp，设 <span class="math inline">\(f_{i,s,j}\)</span> 表示第
+<span class="math inline">\(i\)</span> 位，<span
+class="math inline">\(8\)</span> 种数出现次数对 <span
+class="math inline">\(3\)</span> 取模的状压情况，以及数对 <span
+class="math inline">\(p\)</span> 取模的结果为 <span
+class="math inline">\(j\)</span>。</p>
+<p>答案就是 <span class="math inline">\(f_{k,0,0}\)</span>。</p>
+<p>直接暴力枚举位数转移是朴素的，瓶颈在于 <span
+class="math inline">\(k\)</span>，考虑优化掉 <span
+class="math inline">\(k\)</span>。</p>
+<p>发现我们可以使用像快速幂一样的方法，也就是倍增 dp。</p>
+<p>转移公式就是：</p>
+<p><span class="math display">\[
+f_{2i,s_1\oplus s_2,j_1+t\times j_2}\gets f_{i,s_1,j_1}f_{i,s_2,j_2}
+\]</span></p>
+<p>其中 <span class="math inline">\(t\)</span> 是转移的位数，而 <span
+class="math inline">\(\oplus\)</span> 在这里是不进位三进制加法。</p>
+<p>发现这样多了瓶颈——我们需要枚举 <span
+class="math inline">\(s_1\)</span> 和 <span
+class="math inline">\(s_2\)</span>。</p>
+<p>但是我们发现这不就是 FWT 中异或的形式吗：<span
+class="math inline">\(c_{i\oplus j}\gets a_ib_j\)</span>。考虑三进制 FWT
+加速。下面给出 FWT 的代码，<code>w1</code>
+是原根的一次方，<code>w2</code> 是原根的二次方：</p>
+<pre><code class="hljs cpp"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FWT</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span> (ll x = <span class="hljs-number">3</span>; x &lt;= N; x *= <span class="hljs-number">3</span>) &#123;
+		ll k = x / <span class="hljs-number">3</span>;
+		<span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">0</span>; i &lt; N; i += x) &#123;
+			<span class="hljs-keyword">for</span> (ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				<span class="hljs-keyword">for</span> (ll l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">3</span>; l++) tmp1[l] = a[i + j + l * k];
+				<span class="hljs-keyword">if</span> (type == <span class="hljs-number">1</span>) &#123;
+					tmp2[<span class="hljs-number">0</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] + tmp1[<span class="hljs-number">2</span>]) % P;
+					tmp2[<span class="hljs-number">1</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w1 + tmp1[<span class="hljs-number">2</span>] * w2) % P;
+					tmp2[<span class="hljs-number">2</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w2 + tmp1[<span class="hljs-number">2</span>] * w1) % P;
+				&#125; <span class="hljs-keyword">else</span> &#123;
+					tmp2[<span class="hljs-number">0</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] + tmp1[<span class="hljs-number">2</span>]) % P;
+					tmp2[<span class="hljs-number">1</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w2 + tmp1[<span class="hljs-number">2</span>] * w1) % P;
+					tmp2[<span class="hljs-number">2</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w1 + tmp1[<span class="hljs-number">2</span>] * w2) % P;
+					<span class="hljs-keyword">for</span> (ll l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">3</span>; l++) (tmp2[l] *= inv3) %= P;
+				&#125;
+				<span class="hljs-keyword">for</span> (ll l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">3</span>; l++) a[i + j + l * k] = tmp2[l];
+			&#125;
+		&#125;
+	&#125;
+&#125;</code></pre>
+<p>因为 <span class="math inline">\(1e9+9\)</span> 存在原根 <span
+class="math inline">\(2\)</span>，然后就朴素实现了，注意位矩阵： <span
+class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 \\
+1 &amp; \omega_{3}^1 &amp; \omega_{3}^2 \\
+1 &amp; \omega_{3}^2 &amp; \omega_{3}^4 \\
+\end{bmatrix}
+\]</span> 代码：</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-type">const</span> ll P = <span class="hljs-number">1e9</span> + <span class="hljs-number">9</span>;
+<span class="hljs-function">ll <span class="hljs-title">qpow</span><span class="hljs-params">(ll x, ll y)</span> </span>&#123;
+	<span class="hljs-keyword">if</span>(y == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">if</span>(y % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> x * <span class="hljs-built_in">qpow</span>(x, y - <span class="hljs-number">1</span>) % P;
+	ll tmp = <span class="hljs-built_in">qpow</span>(x, y / <span class="hljs-number">2</span>);
+	<span class="hljs-keyword">return</span> tmp * tmp % P; 
+&#125;
+<span class="hljs-type">const</span> ll G = <span class="hljs-number">2</span>;
+<span class="hljs-type">const</span> ll w1 = <span class="hljs-built_in">qpow</span>(G, (P - <span class="hljs-number">1</span>) / <span class="hljs-number">3</span>);
+<span class="hljs-type">const</span> ll w2 = <span class="hljs-built_in">qpow</span>(G, (P - <span class="hljs-number">1</span>) / <span class="hljs-number">3</span> * <span class="hljs-number">2</span>);
+<span class="hljs-type">const</span> ll inv3 = <span class="hljs-built_in">qpow</span>(<span class="hljs-number">3</span>, P - <span class="hljs-number">2</span>);
+<span class="hljs-type">const</span> ll N = <span class="hljs-number">3</span> * <span class="hljs-number">3</span> * <span class="hljs-number">3</span> * <span class="hljs-number">3</span> * <span class="hljs-number">3</span> * <span class="hljs-number">3</span> * <span class="hljs-number">3</span> * <span class="hljs-number">3</span>;
+ll n, p;
+ll tmp[<span class="hljs-number">8</span>][N], res[<span class="hljs-number">8</span>][N], one[<span class="hljs-number">8</span>][N];
+ll a[<span class="hljs-number">8</span>][N], b[<span class="hljs-number">8</span>][N];
+ll pw3[<span class="hljs-number">8</span>];
+ll tmp1[<span class="hljs-number">3</span>], tmp2[<span class="hljs-number">3</span>];
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FWT</span><span class="hljs-params">(ll *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span> (ll x = <span class="hljs-number">3</span>; x &lt;= N; x *= <span class="hljs-number">3</span>) &#123;
+		ll k = x / <span class="hljs-number">3</span>;
+		<span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">0</span>; i &lt; N; i += x) &#123;
+			<span class="hljs-keyword">for</span> (ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				<span class="hljs-keyword">for</span> (ll l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">3</span>; l++) tmp1[l] = a[i + j + l * k];
+				<span class="hljs-keyword">if</span> (type == <span class="hljs-number">1</span>) &#123;
+					tmp2[<span class="hljs-number">0</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] + tmp1[<span class="hljs-number">2</span>]) % P;
+					tmp2[<span class="hljs-number">1</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w1 + tmp1[<span class="hljs-number">2</span>] * w2) % P;
+					tmp2[<span class="hljs-number">2</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w2 + tmp1[<span class="hljs-number">2</span>] * w1) % P;
+				&#125; <span class="hljs-keyword">else</span> &#123;
+					tmp2[<span class="hljs-number">0</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] + tmp1[<span class="hljs-number">2</span>]) % P;
+					tmp2[<span class="hljs-number">1</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w2 + tmp1[<span class="hljs-number">2</span>] * w1) % P;
+					tmp2[<span class="hljs-number">2</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w1 + tmp1[<span class="hljs-number">2</span>] * w2) % P;
+					<span class="hljs-keyword">for</span> (ll l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">3</span>; l++) (tmp2[l] *= inv3) %= P;
+				&#125;
+				<span class="hljs-keyword">for</span> (ll l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">3</span>; l++) a[i + j + l * k] = tmp2[l];
+			&#125;
+		&#125;
+	&#125;
+&#125;
+ll base = <span class="hljs-number">1</span>;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(ll x)</span> </span>&#123;
+	<span class="hljs-keyword">if</span>(x == <span class="hljs-number">1</span>) &#123;
+		<span class="hljs-built_in">memset</span>(res, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> res);
+		<span class="hljs-built_in">memset</span>(tmp, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> tmp);
+		<span class="hljs-built_in">memset</span>(one, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> one);
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">8</span>; i ++) res[i % p][pw3[i]] = <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i ++) tmp[i % p][pw3[i]] = <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">8</span>; i ++) one[i % p][pw3[i]] = <span class="hljs-number">1</span>;
+		<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; p; i ++) &#123;
+			<span class="hljs-built_in">FWT</span>(tmp[i], <span class="hljs-number">1</span>);
+			<span class="hljs-built_in">FWT</span>(res[i], <span class="hljs-number">1</span>);
+			<span class="hljs-built_in">FWT</span>(one[i], <span class="hljs-number">1</span>);
+		&#125;
+		base = <span class="hljs-number">8</span> % p;
+		<span class="hljs-keyword">return</span>;
+	&#125;
+	<span class="hljs-keyword">if</span>(x % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) &#123;
+		<span class="hljs-built_in">fun</span>(x - <span class="hljs-number">1</span>);
+		<span class="hljs-built_in">memset</span>(a, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> a);
+		<span class="hljs-built_in">memset</span>(b, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> b);
+		<span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">0</span>; i &lt; p; i ++) &#123;
+			<span class="hljs-keyword">for</span> (ll j = <span class="hljs-number">0</span>; j &lt; p; j ++) &#123;
+				ll k = (i * <span class="hljs-number">8</span> + j) % p;
+				<span class="hljs-keyword">for</span> (ll x = <span class="hljs-number">0</span>; x &lt; N; x ++)
+					(a[k][x] += tmp[i][x] * one[j][x]) %= P,
+					(b[k][x] += res[i][x] * one[j][x]) %= P;
+			&#125;
+		&#125;
+		<span class="hljs-built_in">memcpy</span>(tmp, a, <span class="hljs-keyword">sizeof</span> a);
+		<span class="hljs-built_in">memcpy</span>(res, b, <span class="hljs-keyword">sizeof</span> b);
+		(base *= <span class="hljs-number">8</span>) %= P;
+		<span class="hljs-keyword">return</span>;
+	&#125;
+	<span class="hljs-built_in">fun</span>(x / <span class="hljs-number">2</span>);
+	<span class="hljs-built_in">memset</span>(a, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> a);
+	<span class="hljs-built_in">memset</span>(b, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> b);
+	<span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">0</span>; i &lt; p; i ++) &#123;
+		<span class="hljs-keyword">for</span> (ll j = <span class="hljs-number">0</span>; j &lt; p; j ++) &#123;
+			ll k = (i * base + j) % p;
+			<span class="hljs-keyword">for</span> (ll x = <span class="hljs-number">0</span>; x &lt; N; x ++)
+				(a[k][x] += tmp[i][x] * tmp[j][x]) %= P,
+				(b[k][x] += res[i][x] * tmp[j][x]) %= P;
+		&#125;
+	&#125;
+	<span class="hljs-built_in">memcpy</span>(tmp, a, <span class="hljs-keyword">sizeof</span> a);
+	<span class="hljs-built_in">memcpy</span>(res, b, <span class="hljs-keyword">sizeof</span> b);
+	(base *= base) %= p;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	pw3[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">8</span>; i ++) &#123;
+		pw3[i] = pw3[i - <span class="hljs-number">1</span>] * <span class="hljs-number">3</span>;
+	&#125;
+	<span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%lld %lld&quot;</span>, &amp;n, &amp;p) != EOF) &#123;
+		<span class="hljs-built_in">fun</span>(n);
+		<span class="hljs-built_in">FWT</span>(res[<span class="hljs-number">0</span>], <span class="hljs-number">-1</span>);
+		<span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lld\n&quot;</span>, res[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]);
+	&#125;
+&#125;</code></pre>
+<h3 id="cf-1103eradix-sum"><a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/CF1103E">「CF 1103E」Radix
+sum</a></h3>
+<blockquote>
+<p>给定一个长度为 <span class="math inline">\(n\)</span> 的序列 <span
+class="math inline">\(a_1,a_2,...,a_n\)</span>，对于每一个 <span
+class="math inline">\(p \in [0,n-1]\)</span>，求满足下列条件的整数序列
+<span class="math inline">\(i_1,i_2,...,i_n\)</span> 的方案数，对 <span
+class="math inline">\(2^{58}\)</span> 取模：</p>
+<ul>
+<li><span class="math inline">\(\forall j \in [1,n] , i_j \in
+[1,n]\)</span>；</li>
+<li><span class="math inline">\(\sum\limits_{j=1}^n a_{i_j} =
+p\)</span>，这里的加法定义为十进制不进位加法。</li>
+</ul>
+<p><span class="math inline">\(n\le10^5,a_i\le10^5\)</span></p>
+</blockquote>
+<p>我们可以想到 dp：设计状态 <span
+class="math inline">\(f_{i,s}\)</span> 表示考虑到第 <span
+class="math inline">\(i\)</span> 个数，当前加法状态为 <span
+class="math inline">\(s\)</span>。因为 FWT 变换是线性的，可以先变换为
+FWT 点值表示法，然后变成自己的 <span class="math inline">\(n\)</span>
+次幂，最后再变换回来。</p>
+<p>上面是平凡的，但是题目给出了模数 <span
+class="math inline">\(2^{58}\)</span>。发现没有单位根，所以考虑扩域。</p>
+<p>这里的分圆多项式 <span
+class="math inline">\(\Phi_{10}(x)=x^4-x^3+x^2-x+1\)</span>。</p>
+<p>然而我们发现 IFWT 时，需要除去进制 <span
+class="math inline">\(10\)</span>，然而我们发现 <span
+class="math inline">\(10\)</span> 在 <span
+class="math inline">\(2^{58}\)</span> 下没有逆元。实际上我们发现 <span
+class="math inline">\(5\)</span> 在 <span
+class="math inline">\(2^{58}\)</span> 下是有逆元的：<span
+class="math inline">\(57646075230342349\)</span>，我们只需要再除去一个
+<span class="math inline">\(2\)</span> 就可以了。设已经除以了 <span
+class="math inline">\(5\)</span> 的答案为 <span
+class="math inline">\(x\)</span>，真正的答案为 <span
+class="math inline">\(y\)</span>，也就是 <span
+class="math inline">\(2^5y\equiv x\pmod{2^{64}}\)</span>，显然，我们有
+<span class="math inline">\(y\equiv
+\frac{x}{2^5}\pmod{2^{64-5}}\)</span>，也就是 <span
+class="math inline">\(y\equiv
+\frac{x}{2^5}\pmod{2^{59}}\)</span>，所以直接将最后的答案除以 <span
+class="math inline">\(2^5\)</span> 即可。虽然出题人不知道为什么要模
+<span class="math inline">\(2^{58}\)</span>，但再取下模即可。</p>
+<p>然后就是平凡实现了：</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll unsigned long long</span>
+<span class="hljs-type">const</span> ll P = <span class="hljs-number">1ull</span> &lt;&lt; <span class="hljs-number">58</span>, N = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>;
+<span class="hljs-type">const</span> ll m = <span class="hljs-number">5</span>, K = <span class="hljs-number">10</span>;
+ll inv5;
+ll n;
+ll pw[m + <span class="hljs-number">1</span>];
+<span class="hljs-function">ll <span class="hljs-title">qpow</span><span class="hljs-params">(ll x, ll y)</span> </span>&#123;
+	<span class="hljs-keyword">if</span>(y == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">if</span>(y % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> x * <span class="hljs-built_in">qpow</span>(x, y - <span class="hljs-number">1</span>);
+	ll tmp = <span class="hljs-built_in">qpow</span>(x, y / <span class="hljs-number">2</span>);
+	<span class="hljs-keyword">return</span> tmp * tmp;
+&#125;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">poly</span> &#123;
+	ll a[<span class="hljs-number">30</span>];
+	<span class="hljs-built_in">poly</span>() &#123;<span class="hljs-built_in">memset</span>(a, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> a);&#125;
+	ll <span class="hljs-keyword">operator</span> [](ll x) <span class="hljs-type">const</span> &#123;<span class="hljs-keyword">return</span> a[x];&#125;
+	ll&amp; <span class="hljs-keyword">operator</span> [](ll x) &#123;<span class="hljs-keyword">return</span> a[x];&#125;
+	<span class="hljs-keyword">friend</span> poly <span class="hljs-keyword">operator</span> *(<span class="hljs-type">const</span> poly &amp;x, <span class="hljs-type">const</span> poly &amp;y) &#123;
+		poly z;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; K; i ++) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; K; j ++) &#123;
+				z[(i + j) % K] += x[i] * y[j];
+			&#125;
+		&#125;
+		<span class="hljs-keyword">return</span> z;
+	&#125;
+	<span class="hljs-keyword">friend</span> poly <span class="hljs-keyword">operator</span> *(<span class="hljs-type">const</span> poly &amp;x, <span class="hljs-type">const</span> ll &amp;y) &#123;
+		poly z;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; K; i ++) &#123;
+			z[i] += x[i] * y;
+		&#125;
+		<span class="hljs-keyword">return</span> z;
+	&#125;
+	<span class="hljs-keyword">friend</span> poly <span class="hljs-keyword">operator</span> +(<span class="hljs-type">const</span> poly &amp;x, <span class="hljs-type">const</span> poly &amp;y) &#123;
+		poly z;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; K; i ++) &#123;
+			z[i] += x[i] + y[i];
+		&#125;
+		<span class="hljs-keyword">return</span> z;
+	&#125;
+	<span class="hljs-function">poly <span class="hljs-title">w</span><span class="hljs-params">(ll x)</span> </span>&#123;
+		poly res;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; K; i ++) &#123;
+			res[(i + x) % K] += a[i];
+		&#125;
+		<span class="hljs-keyword">return</span> res;
+	&#125;
+&#125; T, f[N], one;
+<span class="hljs-function">poly <span class="hljs-title">qpow</span><span class="hljs-params">(poly x, ll y)</span> </span>&#123;
+	<span class="hljs-keyword">if</span>(y == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> one;
+	<span class="hljs-keyword">if</span>(y % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> x * <span class="hljs-built_in">qpow</span>(x, y - <span class="hljs-number">1</span>);
+	poly tmp = <span class="hljs-built_in">qpow</span>(x, y / <span class="hljs-number">2</span>);
+	<span class="hljs-keyword">return</span> tmp * tmp;
+&#125;
+poly tmp1[<span class="hljs-number">30</span>], tmp2[<span class="hljs-number">30</span>];
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FWT</span><span class="hljs-params">(poly *a, ll type)</span> </span>&#123;
+	<span class="hljs-keyword">for</span>(ll x = K; x &lt;= pw[m]; x *= K) &#123;
+		ll k = x / K;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; pw[m]; i += x) &#123;
+			<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				<span class="hljs-keyword">for</span>(ll l = <span class="hljs-number">0</span>; l &lt; K; l ++) tmp1[l] = a[i + j + l * k], tmp2[l] = <span class="hljs-built_in">poly</span>();
+				<span class="hljs-keyword">if</span>(type == <span class="hljs-number">1</span>) &#123;
+					<span class="hljs-keyword">for</span>(ll l = <span class="hljs-number">0</span>; l &lt; K; l ++) &#123;
+						<span class="hljs-keyword">for</span>(ll v = <span class="hljs-number">0</span>; v &lt; K; v ++) &#123;
+							tmp2[l] = tmp2[l] + tmp1[v].<span class="hljs-built_in">w</span>(l * v % K);
+						&#125;
+					&#125;
+					<span class="hljs-keyword">for</span>(ll l = <span class="hljs-number">0</span>; l &lt; K; l ++) a[i + j + l * k] = tmp2[l];
+				&#125; <span class="hljs-keyword">else</span> &#123;
+					<span class="hljs-keyword">for</span>(ll l = <span class="hljs-number">0</span>; l &lt; K; l ++) &#123;
+						<span class="hljs-keyword">for</span>(ll v = <span class="hljs-number">0</span>; v &lt; K; v ++) &#123;
+							tmp2[l] = tmp2[l] + tmp1[v].<span class="hljs-built_in">w</span>((K - (l * v % K)) % K);
+						&#125;
+					&#125;
+					<span class="hljs-keyword">for</span>(ll l = <span class="hljs-number">0</span>; l &lt; K; l ++) a[i + j + l * k] = tmp2[l] * inv5;
+				&#125;
+			&#125;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function">ll <span class="hljs-title">mod</span><span class="hljs-params">(poly x)</span></span>&#123;
+	ll n = <span class="hljs-number">4</span>;
+	<span class="hljs-keyword">for</span>(ll i = K - <span class="hljs-number">1</span>; i &gt;= n; i --)&#123;
+		ll u = x[i];
+		<span class="hljs-keyword">for</span>(ll j = <span class="hljs-number">1</span>; j &lt;= n; j ++) x[i - j] -= u * T[n - j];
+	&#125;
+	ll u = x[<span class="hljs-number">0</span>];
+	u &gt;&gt;= m;
+	<span class="hljs-keyword">return</span> u % P;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	pw[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= m; i ++) pw[i] = pw[i - <span class="hljs-number">1</span>] * K;
+	T[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>, T[<span class="hljs-number">1</span>] = <span class="hljs-number">-1</span>, T[<span class="hljs-number">2</span>] = <span class="hljs-number">1</span>, T[<span class="hljs-number">3</span>] = <span class="hljs-number">-1</span>, T[<span class="hljs-number">4</span>] = <span class="hljs-number">1</span>;	<span class="hljs-comment">// 分圆多项式phi10</span>
+	one[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+	inv5 = <span class="hljs-number">57646075230342349ull</span>;
+	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%llu&quot;</span>, &amp;n);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+		ll x;
+		<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%llu&quot;</span>, &amp;x);
+		f[x][<span class="hljs-number">0</span>] ++;
+	&#125;
+	<span class="hljs-built_in">FWT</span>(f, <span class="hljs-number">1</span>);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; pw[m]; i ++) f[i] = <span class="hljs-built_in">qpow</span>(f[i], n);
+	<span class="hljs-built_in">FWT</span>(f, <span class="hljs-number">-1</span>);
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">0</span>; i &lt; n; i ++) cout&lt;&lt;<span class="hljs-built_in">mod</span>(f[i])&lt;&lt;<span class="hljs-string">&#x27;\n&#x27;</span>;
+&#125;</code></pre>
+<h3 id="洛谷-p10890烂题杯-round-1可持久化糖果树"><a
+target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P10890">「洛谷 P10890」【烂题杯
+Round 1】可持久化糖果树</a></h3>
+<blockquote>
+<p>给出 <span class="math inline">\(n\)</span> 个 <span
+class="math inline">\(k\)</span> 维向量 <span
+class="math inline">\(m\)</span> 元组，<span
+class="math inline">\(q\)</span> 次询问，每次询问也给出一个 <span
+class="math inline">\(k\)</span> 维向量 <span
+class="math inline">\(v\)</span>，求多少个 <span
+class="math inline">\(m\)</span> 元组满足其中任何一个向量与 <span
+class="math inline">\(v\)</span> 点积为 <span
+class="math inline">\(0\)</span>，所有向量间的运算都在模 <span
+class="math inline">\(3\)</span> 意义下进行。</p>
+<ul>
+<li><span class="math inline">\(1\le n\le 10^5\)</span>，<span
+class="math inline">\(1\le m\le 4\)</span>，<span
+class="math inline">\(1\le k\le 12\)</span>，<span
+class="math inline">\(0\le q\le 10^6\)</span></li>
+</ul>
+</blockquote>
+<p>首先我们发现这道题目的 <span class="math inline">\(a_{i,j,x}\)</span>
+与每次操作的 <span class="math inline">\(z\)</span> 都可以对 <span
+class="math inline">\(3\)</span> 取模。那么第 <span
+class="math inline">\(i\)</span> 个节点的第 <span
+class="math inline">\(j\)</span>
+个小朋友的所有祈愿可以被压为一个三进制数，即定义 <span
+class="math inline">\(b_{i,j}=\sum_{x=1}^k 3^{x-1}(a_{i,j,x}\bmod
+3)\)</span>。定义 <span class="math inline">\(\oplus\)</span> 表示 <span
+class="math inline">\(3\)</span> 进制意义下的不进位按位加法，例如 <span
+class="math inline">\((120)_3\oplus (201)_3=(021)_3\)</span>。定义 <span
+class="math inline">\(\&amp;\)</span> 表示 <span
+class="math inline">\(3\)</span> 进制意义下的不进位按位乘，例如 <span
+class="math inline">\((120)_3\&amp; (201)_3=(200)_3\)</span>。定义 <span
+class="math inline">\(|x|\)</span> 表示 <span
+class="math inline">\(x\)</span>
+三进制意义下的按位和。那么原问题可以被重新表述：</p>
+<p>有 <span class="math inline">\(n\times m\)</span> 个长度为 <span
+class="math inline">\(k\)</span> 的三进制数 <span
+class="math inline">\(a_{i,j}\)</span>，每次查询为问有多少个 <span
+class="math inline">\(i\)</span> 满足对于所有的 <span
+class="math inline">\(j\)</span>，<span
+class="math inline">\(|b_{i,j}|\bmod 3=0\)</span>。</p>
+<p>考虑修改，发现修改的可持久化其实是诈骗的，你可以直接记录一下每个版本修改的值，然后每次修改直接从对应版本的值上的某一位乘上某个数。</p>
+<p>那么修改为将所有的 <span class="math inline">\(b_{i,j}\)</span> 在
+<span class="math inline">\(3\)</span>
+进制意义下不进位按位乘上某个数，即问题变为了 <span
+class="math inline">\(\sum_{i=1}^n \prod_{j=1}^m[|b_{i,j}\&amp;x|\bmod
+3=0]\)</span>。</p>
+<p>考虑单位根反演，那么有： <span class="math display">\[
+[k|n]=\frac{1}{k}\sum_{i=0}^{k-1}\omega_k^{in}
+\]</span> 则答案变成了： <span class="math display">\[
+\sum_{i=1}^n
+\prod_{j=1}^m\frac{1}{3}(1+\omega_3^{|b_{i,j}\&amp;x|}+\omega_3^{2|b_{i,j}\&amp;x|})
+\]</span> 即： <span class="math display">\[
+\frac{1}{3^m}\sum_{i=1}^n
+\prod_{j=1}^m(1+\omega_3^{|b_{i,j}\&amp;x|}+\omega_3^{2|b_{i,j}\&amp;x|})
+\]</span> 将内部连乘容斥出 <span class="math inline">\(f_i\)</span>
+表示指数为 <span class="math inline">\(i\&amp; x\)</span>
+的数的系数。答案就是：</p>
+<p><span class="math display">\[
+\sum \omega_3^{|i\cap x|}f_{i}
+\]</span></p>
+<p>现在发现它具有 FWT 的样子，我们考虑 3-FWT 的实际意义：</p>
+<p>定义 <span class="math inline">\(A_i=\sum_{|i\cap j|=0}
+a_j+\sum_{|i\cap j|=1} \omega_3^1a_j+\sum_{|i\cap j|=2}
+\omega_3^2a_j\)</span>，容易证明 <span
+class="math inline">\(A_iB_i=C_i\)</span>： <span
+class="math display">\[
+\begin{aligned}
+A_iB_i&amp;=(\sum_{|i\cap j|=0} a_j+\sum_{|i\cap j|=1}
+\omega_3^1a_j+\sum_{|i\cap j|=2} \omega_3^2a_j)(\sum_{|i\cap k|=0}
+b_k+\sum_{|i\cap k|=1} \omega_3^1b_k+\sum_{|i\cap k|=2} \omega_3^2b_k)
+\\
+&amp;=(\sum_{|i\cap j|=0}\sum_{|i\cap k|=0} a_{j}b_{k}+\sum_{|i\cap
+j|=1}\sum_{|j\cap k|=2} a_jb_k+\sum_{|i\cap j|=2}\sum_{|j\cap k|=1}
+a_{j}b_k)+ \\
+&amp; \omega_3^1(\sum_{|i\cap j|=0}\sum_{|i\cap k|=1}
+a_{j}b_{k}+\sum_{|i\cap j|=1}\sum_{|j\cap k|=0} a_jb_k+\sum_{|i\cap
+j|=2}\sum_{|j\cap k|=2} a_{j}b_k)+ \\
+&amp; \omega_3^2(\sum_{|i\cap j|=0}\sum_{|i\cap k|=2}
+a_{j}b_{k}+\sum_{|i\cap j|=1}\sum_{|j\cap k|=1} a_jb_k+\sum_{|i\cap
+j|=2}\sum_{|j\cap k|=0} a_{j}b_k) \\
+&amp;=\sum_{|(j\oplus k)\cap i|=0}a_jb_k+\sum_{|(j\oplus k)\cap
+i|=1}\omega_3^1a_jb_k+\sum_{|(j\oplus k)\cap i|=2}\omega_3^2a_jb_k \\
+&amp;=C_i
+\end{aligned}
+\]</span> 考虑快速计算 <span
+class="math inline">\(A_i\)</span>，使用分治，假设当前考虑到第 <span
+class="math inline">\(x\)</span> 位，如果这一位是 <span
+class="math inline">\(0\)</span>，有 <span
+class="math inline">\(0\cap0=0\cap1=0\cap2=0\)</span>；如果这一位是
+<span class="math inline">\(1\)</span>，有 <span
+class="math inline">\(1\cap0=0，1\cap1=1，1\cap2=2\)</span>；如果这一位是
+<span class="math inline">\(2\)</span>，有 <span
+class="math inline">\(2\cap0=0,2\cap1=2,2\cap2=1\)</span>。</p>
+<p>类似 FWT 地，有： <span class="math display">\[
+A_i=merge(A_0+A_1+A_2,A_0+\omega_3^1A_1+\omega_3^2A_2,A_0+\omega_3^2A_1+\omega_3^1A_2)
+\]</span> 同理地得出位矩阵： <span class="math display">\[
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 \\
+1 &amp; \omega_{3}^1 &amp; \omega_{3}^2 \\
+1 &amp; \omega_{3}^2 &amp; \omega_{3}^4 \\
+\end{bmatrix}
+\]</span> 这就是 3-FWT 的转移位矩阵，所以我们只需要对容斥后的 <span
+class="math inline">\(f\)</span> 计算一次 3-FWT 就可以得出答案了。</p>
+<p>可持久化容易实现，这里不予说明。</p>
+<p>注意到在 <span class="math inline">\(10^9+9\)</span> 下 <span
+class="math inline">\(3\)</span> 具有单位根，所以我们在 <span
+class="math inline">\(10^9+9\)</span> 意义下计算就好了。</p>
+<p>时间复杂度由容斥与 3-FWT 组合，瓶颈在于容斥。</p>
+<pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> ll long long</span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-comment">// 省略IO</span>
+<span class="hljs-type">const</span> ll P = <span class="hljs-number">1e9</span> + <span class="hljs-number">9</span>;
+<span class="hljs-type">const</span> ll N = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>;
+<span class="hljs-type">const</span> ll M = <span class="hljs-number">6</span>;
+<span class="hljs-type">const</span> ll K = <span class="hljs-number">21</span>;
+<span class="hljs-function">ll <span class="hljs-title">qpow</span><span class="hljs-params">(ll x, ll y)</span> </span>&#123;
+	<span class="hljs-keyword">if</span>(y == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">if</span>(y % <span class="hljs-number">2</span> == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> x * <span class="hljs-built_in">qpow</span>(x, y - <span class="hljs-number">1</span>) % P;
+	ll tmp = <span class="hljs-built_in">qpow</span>(x, y / <span class="hljs-number">2</span>);
+	<span class="hljs-keyword">return</span> tmp * tmp % P;
+&#125;
+<span class="hljs-type">const</span> ll G = <span class="hljs-number">13</span>;
+<span class="hljs-type">const</span> ll w1 = <span class="hljs-built_in">qpow</span>(G, (P - <span class="hljs-number">1</span>) / <span class="hljs-number">3</span>);
+<span class="hljs-type">const</span> ll w2 = <span class="hljs-built_in">qpow</span>(G, (P - <span class="hljs-number">1</span>) / <span class="hljs-number">3</span> * <span class="hljs-number">2</span>);
+<span class="hljs-type">const</span> ll inv3 = <span class="hljs-built_in">qpow</span>(<span class="hljs-number">3</span>, P - <span class="hljs-number">2</span>);
+ll tmp1[<span class="hljs-number">3</span>], tmp2[<span class="hljs-number">3</span>], pw3[K];
+ll num1[K], num2[K];
+ll n, m, k, q, X;
+ll f[<span class="hljs-number">1000010</span>];
+ll a[N][M];
+ll ver[<span class="hljs-number">1000010</span>];
+ll root;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">base3</span> &#123;
+	<span class="hljs-type">int</span> num[K];
+	<span class="hljs-built_in">base3</span>(<span class="hljs-type">int</span> x = <span class="hljs-number">0</span>) &#123;
+		<span class="hljs-built_in">memset</span>(num, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> num);
+		<span class="hljs-type">int</span> len = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">while</span>(x) &#123;
+			num[++ len] = x % <span class="hljs-number">3</span>;
+			x /= <span class="hljs-number">3</span>;
+		&#125;
+	&#125;
+	<span class="hljs-keyword">friend</span> base3 <span class="hljs-keyword">operator</span> ^(<span class="hljs-type">const</span> base3 &amp;x, <span class="hljs-type">const</span> base3 &amp;y) &#123;
+		base3 z;
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; K; i ++) &#123;
+			z.num[i] = (x.num[i] + y.num[i]) % <span class="hljs-number">3</span>;
+		&#125;
+		<span class="hljs-keyword">return</span> z;
+	&#125;
+	<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">to_int</span><span class="hljs-params">()</span> </span>&#123;
+		<span class="hljs-type">int</span> x = <span class="hljs-number">0</span>;
+		<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt; K; i ++) &#123;
+			x += pw3[i - <span class="hljs-number">1</span>] * num[i];
+		&#125;
+		<span class="hljs-keyword">return</span> x;
+	&#125;
+&#125; b[M];
+<span class="hljs-function">ll <span class="hljs-title">Change</span><span class="hljs-params">(ll x, ll y, ll z)</span> </span>&#123;
+	ll len = <span class="hljs-number">0</span>;
+	<span class="hljs-keyword">while</span>(x) &#123;
+		num1[++ len] = x % <span class="hljs-number">3</span>;
+		x /= <span class="hljs-number">3</span>;
+	&#125;
+	<span class="hljs-keyword">for</span>(ll i = <span class="hljs-number">1</span>; i &lt;= len; i ++) &#123;
+		<span class="hljs-keyword">if</span>(i == y) num1[i] = (num1[i] * z) % <span class="hljs-number">3</span>;
+		x += pw3[i - <span class="hljs-number">1</span>] * num1[i];
+		num1[i] = <span class="hljs-number">0</span>;
+	&#125;
+	<span class="hljs-keyword">return</span> x;
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(ll num, base3 x)</span> </span>&#123;
+	<span class="hljs-keyword">if</span>(num &gt; m) &#123;
+		f[x.<span class="hljs-built_in">to_int</span>()]++;
+		<span class="hljs-keyword">return</span>;
+	&#125;
+    <span class="hljs-built_in">dfs</span>(num + <span class="hljs-number">1</span>, x);
+    <span class="hljs-built_in">dfs</span>(num + <span class="hljs-number">1</span>, x ^ b[num]);
+    <span class="hljs-built_in">dfs</span>(num + <span class="hljs-number">1</span>, x ^ b[num] ^ b[num]);
+&#125;
+<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">FWT</span><span class="hljs-params">(ll *a, ll type, ll len)</span> </span>&#123;
+	<span class="hljs-keyword">for</span> (ll x = <span class="hljs-number">3</span>; x &lt;= len; x *= <span class="hljs-number">3</span>) &#123;
+		ll k = x / <span class="hljs-number">3</span>;
+		<span class="hljs-keyword">for</span> (ll i = <span class="hljs-number">0</span>; i &lt; len; i += x) &#123;
+			<span class="hljs-keyword">for</span> (ll j = <span class="hljs-number">0</span>; j &lt; k; j ++) &#123;
+				<span class="hljs-keyword">for</span> (ll l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">3</span>; l++) tmp1[l] = a[i + j + l * k];
+				<span class="hljs-keyword">if</span> (type == <span class="hljs-number">1</span>) &#123;
+					tmp2[<span class="hljs-number">0</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] + tmp1[<span class="hljs-number">2</span>]) % P;
+					tmp2[<span class="hljs-number">1</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w1 + tmp1[<span class="hljs-number">2</span>] * w2) % P;
+					tmp2[<span class="hljs-number">2</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w2 + tmp1[<span class="hljs-number">2</span>] * w1) % P;
+				&#125; <span class="hljs-keyword">else</span> &#123;
+					tmp2[<span class="hljs-number">0</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] + tmp1[<span class="hljs-number">2</span>]) % P;
+					tmp2[<span class="hljs-number">1</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w2 + tmp1[<span class="hljs-number">2</span>] * w1) % P;
+					tmp2[<span class="hljs-number">2</span>] = (tmp1[<span class="hljs-number">0</span>] + tmp1[<span class="hljs-number">1</span>] * w1 + tmp1[<span class="hljs-number">2</span>] * w2) % P;
+					<span class="hljs-keyword">for</span> (ll l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">3</span>; l++) (tmp2[l] *= inv3) %= P;
+				&#125;
+				<span class="hljs-keyword">for</span> (ll l = <span class="hljs-number">0</span>; l &lt; <span class="hljs-number">3</span>; l++) a[i + j + l * k] = tmp2[l];
+			&#125;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+	<span class="hljs-built_in">read</span>(n), <span class="hljs-built_in">read</span>(m), <span class="hljs-built_in">read</span>(k), <span class="hljs-built_in">read</span>(X);
+	pw3[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;
+	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= k; i ++) &#123;
+		root = root * <span class="hljs-number">3</span> + <span class="hljs-number">1</span>;
+		pw3[i] = pw3[i - <span class="hljs-number">1</span>] * <span class="hljs-number">3</span>;
+	&#125;
+	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++) &#123;
+		<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; j ++) &#123;
+			<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> x = <span class="hljs-number">1</span>; x &lt;= k; x ++) &#123;
+				ll tmp = (X + <span class="hljs-number">1ll</span> * X * i + (X ^ (<span class="hljs-number">1ll</span> * j * x + <span class="hljs-number">1ll</span> * i * i))) % <span class="hljs-number">1000000000</span>;
+				tmp %= <span class="hljs-number">3</span>;
+				a[i][j] += pw3[x - <span class="hljs-number">1</span>] * tmp;
+			&#125;
+			b[j] = <span class="hljs-built_in">base3</span>(a[i][j]);
+		&#125;
+		<span class="hljs-built_in">dfs</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">base3</span>());
+	&#125;
+	ll inv = <span class="hljs-built_in">qpow</span>(<span class="hljs-built_in">qpow</span>(<span class="hljs-number">3</span>, m), P - <span class="hljs-number">2</span>);
+	<span class="hljs-built_in">FWT</span>(f, <span class="hljs-number">1</span>, pw3[k]);
+	ver[<span class="hljs-number">0</span>] = root;
+	ll ans = f[ver[<span class="hljs-number">0</span>]] * inv % P;
+	<span class="hljs-built_in">read</span>(q);
+	<span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= q; i ++) &#123;
+		<span class="hljs-type">int</span> x = (X ^ i) % i, y = (X ^ i) % k + <span class="hljs-number">1</span>, z = (X + (X ^ i)) % <span class="hljs-number">3</span>;
+		ver[i] = <span class="hljs-built_in">Change</span>(ver[x], y, z);
+		ans ^= (f[ver[i]] * inv % P);
+	&#125;
+	<span class="hljs-built_in">write</span>(ans);
+&#125;</code></pre>
+
+    </div>
+    
+    <div class="post__license">
+        <p>
+            <strong>本文作者：</strong>ZnPdCo
+        </p>
+        <p>
+            <strong>
+                本文链接：
+            </strong>
+            <a href="https://znpdco.fun/2024/05/07/FWT/">https://znpdco.fun/2024/05/07/FWT/</a>
+        </p>
+        
+            <strong>
+                <p>本页面的全部内容在 <a
+target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">CC BY-SA
+4.0</a> 和 <a target="_blank" rel="noopener" href="https://github.com/zTrix/sata-license">SATA</a>
+协议之条款下提供，附加条款亦可能应用</p>
+
+            </strong>
+        
+    </div>
+ 
+    <div class="post-footer__meta"><p>更新于 2025-02-26</p></div> 
+    <div class="post-entry__tags"><a href="/tags/%E7%AE%97%E6%B3%95/" class="post-tags__link button"># 算法</a><a href="/tags/%E5%8E%9F%E5%88%9B/" class="post-tags__link button"># 原创</a><a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" class="post-tags__link button"># 多项式</a></div> 
+</article>
+
+
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2024/07/26/deploy/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            上一篇
+                        </div>
+                        <div class="nav__title">
+                            使用 Github Actions 自动部署 Hexo 博客
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2024/05/02/simplex/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            下一篇
+                        </div>
+                        <div class="nav__title">
+                            单纯形算法学习笔记
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
+        </div>
+    </div>
+
+
+
+    <div class="post__comments post__with-toc content-card" id="comment">
+        
+    <h4>评论</h4>
+    
+    
+    
+    
+    
+    <div id="giscus_container">
+        <script src="https://giscus.app/client.js"
+                data-repo="ZnPdCo/blog"
+                data-repo-id="R_kgDOMa--Lg"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMa--Ls4ChMbA"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="bottom"
+                data-theme="light"
+                data-lang="zh-CN"
+                data-loading="lazy"
+                crossorigin="anonymous" async></script>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+
+    </div>
+
+
+
+</main>
+
+            <footer class="footer">
+     
+    <a href="#" class="button" id="b2t" aria-label="回到顶部" title="回到顶部">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="32" height="32">
+            <path d="M233.376 722.752L278.624 768 512 534.624 745.376 768l45.248-45.248L512 444.128zM192 352h640V288H192z" fill="currentColor"></path>
+        </svg>
+    </a>
+
+    
+
+
+    
+    
+        <span id="leancloud_container_site_uv" hidden>
+            <span></span>
+            <span id="leancloud_value_site_uv"></span>
+            <span>Viewers</span>
+            
+                <span>　|</span>
+            
+        </span>
+    
+    
+        <span id="leancloud_container_site_pv" hidden>
+            <span></span>
+            <span id="leancloud_value_site_pv"></span>
+            <span>Views</span>
+            
+        </span>
+    
+
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2024&nbsp;-&nbsp;2025 <a href="/">ZnPdCo</a>
+        </p>
+    
+    
+        
+            <script src="/js/switch-giscus-theme.js"></script>
+
+        
+            <script src="/js/domain-name-expired.js"></script>
+
+        
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+</footer>
+
+        </div>
+         
+
+ 
+
+ 
+
+ 
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement('script');
+            hm.src = 'https://hm.baidu.com/hm.js?8c53e0f2b54686993b0e5d57bd182795';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
+
+    
+    <script>
+        (function () {
+            function getRecord(Counter, target) {
+                return new Promise(function (resolve, reject) {
+                    Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({target})))
+                        .then(response => response.json())
+                        .then(({results}) => {
+                            if (results && results.length > 0) {
+                                var record = results[0];
+                                resolve(record);
+                            } else {
+                                Counter('post', '/classes/Counter', {
+                                        target, time: 0
+                                    })
+                                    .then(response => response.json())
+                                    .then(record => {
+                                        resolve(record);
+                                    }).catch(error => {
+                                        console.error('Failed to create', error);
+                                        reject(error);
+                                    });
+                            }
+                        }).catch(error => {
+                            console.error('LeanCloud Counter Error', error);
+                            reject(error);
+                        });
+                })
+            }
+        
+            function buildIncrement(objectId) {
+                return {
+                    "method": "PUT",
+                    "path": `/1.1/classes/Counter/${ objectId }`,
+                    "body": {
+                        "time": {
+                            '__op': 'Increment',
+                            'amount': 1
+                        }
+                    }
+                }
+            }
+        
+            function increment(Counter, incrArr) {
+                return new Promise(function (resolve, reject) {
+                    Counter('post', '/batch', {
+                        "requests": incrArr
+                    }).then((res) => {
+                        resolve(res);
+                    }).catch(error => {
+                        console.error('Failed to save visitor count', error);
+                        reject(error);
+                    });
+                });
+            }
+        
+            function validUV() {
+                var key = 'LeanCloud_UV_Flag';
+                var flag = localStorage.getItem(key);
+                if (flag) {
+                    if (new Date().getTime() - parseInt(flag) <= 86400000) {
+                        return false;
+                    }
+                }
+                localStorage.setItem(key, new Date().getTime().toString());
+                return true;
+            }
+        
+            function addCount(Counter) {
+                var enableIncr = 'leancloud' === 'leancloud';
+                var getterArr = [];
+                var incrArr = [];
+                var pvCtn = document.querySelector('#leancloud_container_site_pv');
+                if (pvCtn || enableIncr) {
+                    var pvGetter = getRecord(Counter, 'site-pv').then((record) => {
+                        incrArr.push(buildIncrement(record.objectId))
+                        var ele = document.querySelector('#leancloud_value_site_pv');
+                        if (ele) {
+                            ele.innerText = record.time + 1;
+                            if (pvCtn) {
+                                pvCtn.style.display = 'inline';
+                            }
+                        }
+                    });
+                    getterArr.push(pvGetter);
+                }
+                var uvCtn = document.querySelector('#leancloud_container_site_uv');
+                if (uvCtn || enableIncr) {
+                    var uvGetter = getRecord(Counter, 'site-uv').then((record) => {
+                        var vuv = validUV();
+                        vuv && incrArr.push(buildIncrement(record.objectId))
+                        var ele = document.querySelector('#leancloud_value_site_uv');
+                        if (ele) {
+                            ele.innerText = record.time + (vuv ? 1 : 0);
+                            if (uvCtn) {
+                                uvCtn.style.display = 'inline';
+                            }
+                        }
+                    });
+                    getterArr.push(uvGetter);
+                }
+                if ('true' === 'true') {
+                    var viewCtn = document.querySelector('#leancloud_container_page_pv');
+                    if (viewCtn || enableIncr) {
+                        var target = decodeURI('/2024/05/07/FWT/');
+                        var viewGetter = getRecord(Counter, target).then((record) => {
+                            incrArr.push(buildIncrement(record.objectId))
+                            if (viewCtn) {
+                                var ele = document.querySelector('#leancloud_value_page_pv');
+                                if (ele) {
+                                    ele.innerText = (record.time || 0) + 1;
+                                    viewCtn.style.display = 'inline';
+                                }
+                            }
+                        });
+                        getterArr.push(viewGetter);
+                    }
+                }
+                if (enableIncr) {
+                    Promise.all(getterArr).then(() => {
+                        incrArr.length > 0 && increment(Counter, incrArr);
+                    })
+                }
+            }
+        
+            var app_id = 'QGAAFBaahLaMvkUXbO64dyon-MdYXbMMI';
+            var app_key = 'v7wkDYJg1n8gZzbY9bYqV7W5';
+            var server_url = '';
+        
+            function fetchData(api_server) {
+                var Counter = (method, url, data) => {
+                    return fetch(`${ api_server }/1.1${ url }`, {
+                        method,
+                        headers: {
+                                'X-LC-Id': app_id,
+                                'X-LC-Key': app_key,
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(data)
+                    });
+                };
+                addCount(Counter);
+            }
+            var api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${ app_id.slice(0, 8).toLowerCase() }.api.lncldglobal.com`;
+            if (api_server) {
+                fetchData(api_server);
+            } else {
+                fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+                    .then(response => response.json())
+                    .then(({api_server}) => {
+                        fetchData('https://' + api_server);
+                    });
+            }
+        })();
+    </script>
+
+ 
+
+
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.css">
+
+    
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.4.1/dist/jquery.fancybox.min.js"></script>
+
+    <script>
+        let lazyloadT = Boolean('false'),
+            auto_fancybox = Boolean('false')
+        if (auto_fancybox) {
+            $(".post__content").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        } else {
+            $(".post__content").find("fancybox").find('img').each(function () {
+                var element = document.createElement("a");
+                $(element).attr("data-fancybox", "gallery");
+                $(element).attr("href", $(this).attr("src"));
+                if (lazyloadT) {
+                    $(element).attr("href", $(this).attr("data-srcset"));
+                }
+                $(this).wrap(element);
+            });
+        }
+    </script>
+ 
+
+
+    <script>
+        if (typeof MathJax === 'undefined') {
+            window.MathJax = {
+                loader: {
+                    source: {
+                        '[tex]/amsCd': '[tex]/amscd',
+                        '[tex]/AMScd': '[tex]/amscd'
+                    }
+                },
+                tex: {
+                    inlineMath: {'[+]': [['$', '$']]},
+                    tags: 'ams'
+                },
+                options: {
+                    renderActions: {
+                        findScript: [10, doc => {
+                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                                const display = !!node.type.match(/; *mode=display/);
+                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                                const text = document.createTextNode('');
+                                node.parentNode.replaceChild(text, node);
+                                math.start = {node: text, delim: '', n: 0};
+                                math.end = {node: text, delim: '', n: 0};
+                                doc.math.push(math);
+                            });
+                        }, '', false],
+                        insertedScript: [200, () => {
+                            document.querySelectorAll('mjx-container').forEach(node => {
+                                let target = node.parentNode;
+                                if (target.nodeName.toLowerCase() === 'li') {
+                                    target.parentNode.classList.add('has-jax');
+                                }
+                            });
+                        }, '', false]
+                    }
+                }
+            };
+            (function () {
+                var script = document.createElement('script');
+                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
+                script.defer = true;
+                document.head.appendChild(script);
+            })();
+        } else {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+        }
+    </script>
+ 
+
+ 
+
+ 
+
+ 
+
+
+    
+
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+
+    </body>
+</html>
